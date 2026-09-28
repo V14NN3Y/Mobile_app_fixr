@@ -80,6 +80,9 @@ const registry = {
 
 export type IconName = keyof typeof registry;
 
+/** Tous les noms d'icônes disponibles — utile pour le catalogue de développement. */
+export const ICON_NAMES = Object.keys(registry) as IconName[];
+
 export type IconProps = {
   name: IconName;
   /**
