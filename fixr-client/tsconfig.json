@@ -3,6 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "noUncheckedIndexedAccess": true,
+    // Sans ceci, describe/it/expect/jest ne sont pas vus comme globaux (l'inclusion
+    // automatique de node_modules/@types/* ne s'est pas déclenchée pour ce projet) ;
+    // les autres @types/* (react, node…) restent résolus normalement via leurs imports.
+    "types": ["jest"],
     "paths": {
       "@/*": ["./src/*"],
       "@/assets/*": ["./assets/*"]
