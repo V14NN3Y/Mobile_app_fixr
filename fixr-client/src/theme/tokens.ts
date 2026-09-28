@@ -37,18 +37,28 @@ export const colors = {
 
     warning: '#7A4F0C',
     warningSoft: '#FBF1DE',
+    warningInk: '#5C3B08', // texte sur warningSoft
 
     danger: '#B02E28',
     dangerSoft: '#FBE7E5',
     dangerBorder: '#C2362F',
+    dangerPressed: '#8E2520', // maquette : bouton destructif pressé
+    dangerInk: '#8E2520', // texte sur dangerSoft
+    fieldErrorBg: '#FFF8F7', // fond de champ en erreur
+    onDanger: '#FFFFFF', // texte/icône sur danger plein (bouton destructif)
 
     rating: '#E0A21B',
     online: '#2EA067',
     disabledBg: '#E3E0D8',
+    skeletonBase: '#EEECE6',
+    skeletonHighlight: '#F7F6F2',
     scrim: 'rgba(18,22,31,0.45)',
     toastBg: '#12161F',
     toastText: '#FFFFFF',
+    toastSuccess: '#7FE0AA',
+    toastAction: '#F0A070',
     offlineBg: '#3B3F46',
+    offlineText: '#FFFFFF',
   },
   dark: {
     bg: '#0E1215',
@@ -79,18 +89,28 @@ export const colors = {
 
     warning: '#E6B04A',
     warningSoft: '#332812',
+    warningInk: '#F0C978',
 
     danger: '#F07A72',
     dangerSoft: '#3A1B19',
     dangerBorder: '#F07A72',
+    dangerPressed: '#D9635C',
+    dangerInk: '#F4A19A',
+    fieldErrorBg: '#2A1513',
+    onDanger: '#1A0D06', // danger sombre = teinte claire → encre foncée (comme onAccent)
 
     rating: '#F2B93B',
     online: '#4CC38A',
     disabledBg: '#2A3238',
+    skeletonBase: '#1E252B',
+    skeletonHighlight: '#2A3238',
     scrim: 'rgba(0,0,0,0.6)',
     toastBg: '#F2F1EC',
     toastText: '#12161F',
+    toastSuccess: '#1D6B45',
+    toastAction: '#9A3F14',
     offlineBg: '#2A3238',
+    offlineText: '#F2F1EC',
   },
 } as const;
 

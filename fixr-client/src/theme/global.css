@@ -1,4 +1,4 @@
-/* Généré depuis src/theme/tokens.ts — ne pas éditer à la main. */
+/* Généré depuis src/theme/tokens.ts par scripts/generate-theme.mjs — ne pas éditer à la main. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,19 +27,30 @@
   --color-success-ink: 29 107 69;
   --color-warning: 122 79 12;
   --color-warning-soft: 251 241 222;
+  --color-warning-ink: 92 59 8;
   --color-danger: 176 46 40;
   --color-danger-soft: 251 231 229;
   --color-danger-border: 194 54 47;
+  --color-danger-pressed: 142 37 32;
+  --color-danger-ink: 142 37 32;
+  --color-field-error-bg: 255 248 247;
+  --color-on-danger: 255 255 255;
   --color-rating: 224 162 27;
   --color-online: 46 160 103;
   --color-disabled-bg: 227 224 216;
+  --color-skeleton-base: 238 236 230;
+  --color-skeleton-highlight: 247 246 242;
   --color-toast-bg: 18 22 31;
   --color-toast-text: 255 255 255;
+  --color-toast-success: 127 224 170;
+  --color-toast-action: 240 160 112;
   --color-offline-bg: 59 63 70;
+  --color-offline-text: 255 255 255;
 }
 
-/* Mode sombre : suit le système. Pour le choix manuel Clair/Sombre/Système (Paramètres),
-   utiliser colorScheme.set() de NativeWind — vérifier la syntaxe dans la doc de la version installée. */
+/* Mode sombre. NativeWind résout prefers-color-scheme à partir de son propre
+   colorScheme : colorScheme.set('light' | 'dark' | 'system') depuis src/theme/ThemeProvider.tsx
+   fait donc bien rebasculer ces variables. */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg: 14 18 21;
@@ -65,14 +76,24 @@
     --color-success-ink: 111 211 160;
     --color-warning: 230 176 74;
     --color-warning-soft: 51 40 18;
+    --color-warning-ink: 240 201 120;
     --color-danger: 240 122 114;
     --color-danger-soft: 58 27 25;
     --color-danger-border: 240 122 114;
+    --color-danger-pressed: 217 99 92;
+    --color-danger-ink: 244 161 154;
+    --color-field-error-bg: 42 21 19;
+    --color-on-danger: 26 13 6;
     --color-rating: 242 185 59;
     --color-online: 76 195 138;
     --color-disabled-bg: 42 50 56;
+    --color-skeleton-base: 30 37 43;
+    --color-skeleton-highlight: 42 50 56;
     --color-toast-bg: 242 241 236;
     --color-toast-text: 18 22 31;
+    --color-toast-success: 29 107 69;
+    --color-toast-action: 154 63 20;
     --color-offline-bg: 42 50 56;
+    --color-offline-text: 242 241 236;
   }
 }
