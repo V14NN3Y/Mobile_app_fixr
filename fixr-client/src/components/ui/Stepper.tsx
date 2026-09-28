@@ -24,7 +24,9 @@ export function Stepper({ steps, currentIndex, testID }: StepperProps) {
         const current = i === currentIndex;
         return (
           <View key={i} className="flex-1 gap-1.5">
-            <View className={cn('h-1 rounded-full', done || current ? 'bg-primary' : 'bg-border')} />
+            <View
+              className={cn('h-1 rounded-full', done || current ? 'bg-primary' : 'bg-border')}
+            />
             <Text
               variant="label"
               tone={current ? 'default' : done ? 'secondary' : 'tertiary'}

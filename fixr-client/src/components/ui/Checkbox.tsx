@@ -18,7 +18,13 @@ export type CheckboxProps = {
   testID?: string;
 };
 
-export function Checkbox({ checked, onChange, disabled = false, accessibilityLabel, testID }: CheckboxProps) {
+export function Checkbox({
+  checked,
+  onChange,
+  disabled = false,
+  accessibilityLabel,
+  testID,
+}: CheckboxProps) {
   const { colors } = useTheme();
 
   return (
@@ -37,13 +43,15 @@ export function Checkbox({ checked, onChange, disabled = false, accessibilityLab
       className={cn(
         'h-5 w-5 items-center justify-center rounded-[6px] border-2',
         disabled
-          ? 'bg-surface-muted border-border-subtle'
+          ? 'border-border-subtle bg-surface-muted'
           : checked
-            ? 'bg-primary border-primary'
-            : 'bg-surface border-border-strong',
+            ? 'border-primary bg-primary'
+            : 'border-border-strong bg-surface',
       )}
     >
-      {checked ? <Icon name="check" size={14} color={disabled ? colors.textDisabled : colors.onPrimary} /> : null}
+      {checked ? (
+        <Icon name="check" size={14} color={disabled ? colors.textDisabled : colors.onPrimary} />
+      ) : null}
     </Pressable>
   );
 }

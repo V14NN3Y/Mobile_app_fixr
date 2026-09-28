@@ -26,10 +26,7 @@ export const Sheet = forwardRef<BottomSheetModal, SheetProps>(function Sheet(
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
-  const animationConfigs = useMemo(
-    () => ({ duration: motion.duration.sheet }),
-    [],
-  );
+  const animationConfigs = useMemo(() => ({ duration: motion.duration.sheet }), []);
 
   return (
     <BottomSheetModal

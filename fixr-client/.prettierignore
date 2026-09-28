@@ -1,0 +1,13 @@
+node_modules
+.expo
+dist
+package-lock.json
+design/
+docs/
+*.md
+android
+ios
+
+# Fichiers du kit de démarrage, jamais modifiés par Claude Code : laissés tels quels.
+src/mocks/data.ts
+src/types/domain.ts

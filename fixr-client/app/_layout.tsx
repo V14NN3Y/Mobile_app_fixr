@@ -5,7 +5,10 @@
  */
 import '@/theme/global.css';
 
-import { BricolageGrotesque_600SemiBold, BricolageGrotesque_700Bold } from '@expo-google-fonts/bricolage-grotesque';
+import {
+  BricolageGrotesque_600SemiBold,
+  BricolageGrotesque_700Bold,
+} from '@expo-google-fonts/bricolage-grotesque';
 import {
   Manrope_500Medium,
   Manrope_600SemiBold,

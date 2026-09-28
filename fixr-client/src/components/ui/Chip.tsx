@@ -64,7 +64,7 @@ export function Chip({
       accessibilityState={onPress ? { disabled, selected: variant !== 'default' } : undefined}
       className={cn(
         'h-[38px] flex-row items-center gap-1.5 rounded-full border-[1.5px] px-3.5',
-        disabled ? 'bg-surface-muted border-border-subtle' : containerClass[variant],
+        disabled ? 'border-border-subtle bg-surface-muted' : containerClass[variant],
       )}
     >
       {icon ? <Icon name={icon} size={14} color={iconColor ?? fg} /> : null}

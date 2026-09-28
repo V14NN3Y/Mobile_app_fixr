@@ -15,7 +15,13 @@ export type RadioProps = {
   testID?: string;
 };
 
-export function Radio({ selected, onSelect, disabled = false, accessibilityLabel, testID }: RadioProps) {
+export function Radio({
+  selected,
+  onSelect,
+  disabled = false,
+  accessibilityLabel,
+  testID,
+}: RadioProps) {
   return (
     <Pressable
       testID={testID}

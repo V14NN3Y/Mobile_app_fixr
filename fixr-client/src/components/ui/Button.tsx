@@ -138,7 +138,10 @@ export function Button(props: ButtonProps) {
         destructive: colors.onDanger,
       }[variant];
 
-  const spinnerTrack = withAlpha(fgColor, variant === 'secondary' || variant === 'tertiary' ? 0.15 : 0.35);
+  const spinnerTrack = withAlpha(
+    fgColor,
+    variant === 'secondary' || variant === 'tertiary' ? 0.15 : 0.35,
+  );
 
   const label = iconOnly ? undefined : children;
   const textStyle = [{ color: fgColor }, labelSizeStyle[size]];

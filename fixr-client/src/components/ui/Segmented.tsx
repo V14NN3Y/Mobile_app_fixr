@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { Pressable, View, type LayoutChangeEvent } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { cn } from '@/lib/cn';
 import { elevation, motion } from '@/theme/tokens';
 
 import { Text } from './Text';
@@ -20,7 +19,12 @@ export type SegmentedProps<T extends string> = {
   testID?: string;
 };
 
-export function Segmented<T extends string>({ options, value, onChange, testID }: SegmentedProps<T>) {
+export function Segmented<T extends string>({
+  options,
+  value,
+  onChange,
+  testID,
+}: SegmentedProps<T>) {
   const [width, setWidth] = useState(0);
   const index = Math.max(
     0,

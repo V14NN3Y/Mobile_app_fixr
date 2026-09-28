@@ -44,20 +44,34 @@ export type AvatarProps = {
   testID?: string;
 };
 
-export function Avatar({ initials, seed, size = 52, online = false, stacked = false, testID }: AvatarProps) {
+export function Avatar({
+  initials,
+  seed,
+  size = 52,
+  online = false,
+  stacked = false,
+  testID,
+}: AvatarProps) {
   const { categoryTints } = useTheme();
   const tint = categoryTints[tintFor(seed ?? initials)];
 
   return (
     <View testID={testID} style={{ width: size, height: size }} className="relative">
       <View
-        className={cn('h-full w-full items-center justify-center rounded-full', stacked && 'border-2 border-surface')}
+        className={cn(
+          'h-full w-full items-center justify-center rounded-full',
+          stacked && 'border-2 border-surface',
+        )}
         style={{ backgroundColor: tint.bg }}
       >
         <Text
           tone="inherit"
           className="font-body-extrabold"
-          style={{ color: tint.ink, fontSize: fontSizeFor[size], lineHeight: fontSizeFor[size] + 2 }}
+          style={{
+            color: tint.ink,
+            fontSize: fontSizeFor[size],
+            lineHeight: fontSizeFor[size] + 2,
+          }}
         >
           {initials}
         </Text>

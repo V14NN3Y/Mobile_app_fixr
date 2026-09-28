@@ -23,14 +23,20 @@ const registry = {
   home: { paths: ['M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'] },
   search: { paths: ['M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-3.5-3.5'] },
   calendar: {
-    paths: ['M6 5h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 10h18M8 3v4M16 3v4'],
+    paths: [
+      'M6 5h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 10h18M8 3v4M16 3v4',
+    ],
   },
   message: { paths: ['M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z'] },
   user: { paths: ['M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0'] },
   alert: { paths: ['M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0'] },
   location: { paths: ['M12 21s-7-6.2-7-12a7 7 0 1 1 14 0c0 5.8-7 12-7 12z'] },
   verified: { paths: ['M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6zM8.5 12l2.5 2.5 4.5-5'] },
-  call: { paths: ['M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2'] },
+  call: {
+    paths: [
+      'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2',
+    ],
+  },
   photo: {
     paths: ['M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z'],
   },
@@ -57,7 +63,9 @@ const registry = {
   // UI générique
   mail: { rects: [{ x: 3, y: 5, width: 18, height: 14, rx: 3 }], paths: ['m4 7 8 6 8-6'] },
   wifiOff: {
-    paths: ['M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19v.01M3 3l18 18'],
+    paths: [
+      'M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19v.01M3 3l18 18',
+    ],
   },
   star: {
     filled: true,
@@ -119,7 +127,13 @@ export function Icon({ name, color, size = 24, strokeWidth = 1.8 }: IconProps) {
   );
 
   return (
-    <Svg width={size} height={size} viewBox="0 0 24 24" accessibilityElementsHidden importantForAccessibility="no">
+    <Svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      accessibilityElementsHidden
+      importantForAccessibility="no"
+    >
       {spec.rects?.map((r, i) => (
         <Rect
           key={`r${i}`}

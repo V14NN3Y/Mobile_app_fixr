@@ -19,7 +19,13 @@ export type SwitchProps = {
 const KNOB_OFFSET_ON = 23;
 const KNOB_OFFSET_OFF = 3;
 
-export function Switch({ value, onValueChange, disabled = false, accessibilityLabel, testID }: SwitchProps) {
+export function Switch({
+  value,
+  onValueChange,
+  disabled = false,
+  accessibilityLabel,
+  testID,
+}: SwitchProps) {
   const progress = useDerivedValue(
     () => withTiming(value ? 1 : 0, { duration: motion.duration.base }),
     [value],
@@ -32,8 +38,7 @@ export function Switch({ value, onValueChange, disabled = false, accessibilityLa
   const knobStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateX:
-          KNOB_OFFSET_OFF + progress.value * (KNOB_OFFSET_ON - KNOB_OFFSET_OFF),
+        translateX: KNOB_OFFSET_OFF + progress.value * (KNOB_OFFSET_ON - KNOB_OFFSET_OFF),
       },
     ],
   }));
@@ -54,9 +59,15 @@ export function Switch({ value, onValueChange, disabled = false, accessibilityLa
     >
       <Animated.View
         style={trackStyle}
-        className={cn('h-7 w-12 justify-center rounded-full', value ? 'bg-primary' : 'bg-border-strong')}
+        className={cn(
+          'h-7 w-12 justify-center rounded-full',
+          value ? 'bg-primary' : 'bg-border-strong',
+        )}
       >
-        <Animated.View style={knobStyle} className="absolute h-[22px] w-[22px] rounded-full bg-surface" />
+        <Animated.View
+          style={knobStyle}
+          className="absolute h-[22px] w-[22px] rounded-full bg-surface"
+        />
       </Animated.View>
     </Pressable>
   );

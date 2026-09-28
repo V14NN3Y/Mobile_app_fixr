@@ -20,9 +20,20 @@ export type CardProps = ViewProps & {
   testID?: string;
 };
 
-export function Card({ children, elevation = 'none', onPress, className, testID, style, ...rest }: CardProps) {
+export function Card({
+  children,
+  elevation = 'none',
+  onPress,
+  className,
+  testID,
+  style,
+  ...rest
+}: CardProps) {
   const shadowStyle = elevation === 'none' ? undefined : elevationTokens[elevation];
-  const baseClassName = cn('gap-3 rounded-xl border border-border-subtle bg-surface p-3.5', className);
+  const baseClassName = cn(
+    'gap-3 rounded-xl border border-border-subtle bg-surface p-3.5',
+    className,
+  );
 
   if (onPress) {
     return (

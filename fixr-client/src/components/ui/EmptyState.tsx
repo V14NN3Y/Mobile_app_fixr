@@ -23,7 +23,14 @@ export type EmptyStateProps = {
   testID?: string;
 };
 
-export function EmptyState({ icon, title, description, action, children, testID }: EmptyStateProps) {
+export function EmptyState({
+  icon,
+  title,
+  description,
+  action,
+  children,
+  testID,
+}: EmptyStateProps) {
   const { colors } = useTheme();
 
   return (
@@ -31,11 +38,7 @@ export function EmptyState({ icon, title, description, action, children, testID 
       <View className="h-16 w-16 items-center justify-center rounded-xl bg-primary-soft">
         <Icon name={icon} size={30} color={colors.primary} />
       </View>
-      <Text
-        variant="label"
-        className="text-center"
-        style={{ fontSize: 16, lineHeight: 22 }}
-      >
+      <Text variant="label" className="text-center" style={{ fontSize: 16, lineHeight: 22 }}>
         {title}
       </Text>
       {description ? (

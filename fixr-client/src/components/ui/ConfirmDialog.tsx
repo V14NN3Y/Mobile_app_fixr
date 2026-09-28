@@ -39,7 +39,13 @@ export function ConfirmDialog({
   const { colors } = useTheme();
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel} testID={testID}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onCancel}
+      testID={testID}
+    >
       <Pressable
         onPress={onCancel}
         className="flex-1 items-center justify-center px-5"

@@ -20,7 +20,11 @@ export type SpinnerProps = {
   trackColor?: string;
 };
 
-export function Spinner({ size = 18, color = '#FFFFFF', trackColor = 'rgba(255,255,255,0.35)' }: SpinnerProps) {
+export function Spinner({
+  size = 18,
+  color = '#FFFFFF',
+  trackColor = 'rgba(255,255,255,0.35)',
+}: SpinnerProps) {
   const rotation = useSharedValue(0);
 
   useEffect(() => {
@@ -30,7 +34,11 @@ export function Spinner({ size = 18, color = '#FFFFFF', trackColor = 'rgba(255,2
       if (reduced) {
         rotation.value = 0;
       } else {
-        rotation.value = withRepeat(withTiming(360, { duration: 700, easing: Easing.linear }), -1, false);
+        rotation.value = withRepeat(
+          withTiming(360, { duration: 700, easing: Easing.linear }),
+          -1,
+          false,
+        );
       }
     });
     return () => {

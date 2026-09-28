@@ -26,7 +26,18 @@ export type TextFieldProps = Omit<TextInputProps, 'style' | 'placeholderTextColo
 };
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(function TextField(
-  { label, hint, error, icon, disabled = false, containerClassName, testID, onFocus, onBlur, ...inputProps },
+  {
+    label,
+    hint,
+    error,
+    icon,
+    disabled = false,
+    containerClassName,
+    testID,
+    onFocus,
+    onBlur,
+    ...inputProps
+  },
   ref,
 ) {
   const { colors } = useTheme();
@@ -50,7 +61,10 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
           <View
             pointerEvents="none"
             className="absolute -inset-1"
-            style={{ borderRadius: radius.lg + 4, backgroundColor: withAlpha(colors.primary, 0.12) }}
+            style={{
+              borderRadius: radius.lg + 4,
+              backgroundColor: withAlpha(colors.primary, 0.12),
+            }}
           />
         ) : null}
 
@@ -58,12 +72,12 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
           className={cn(
             'h-input flex-row items-center gap-2.5 rounded-lg border-[1.5px] px-3.5',
             disabled
-              ? 'bg-surface-muted border-surface-muted'
+              ? 'border-surface-muted bg-surface-muted'
               : hasError
-                ? 'bg-field-error-bg border-danger-border'
+                ? 'border-danger-border bg-field-error-bg'
                 : focused
-                  ? 'bg-surface border-primary'
-                  : 'bg-surface border-border-strong',
+                  ? 'border-primary bg-surface'
+                  : 'border-border-strong bg-surface',
           )}
         >
           {icon ? <Icon name={icon} size={20} color={iconColor} /> : null}

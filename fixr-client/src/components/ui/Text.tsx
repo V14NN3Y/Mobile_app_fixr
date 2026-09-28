@@ -8,15 +8,7 @@ import { Text as RNText, type TextProps as RNTextProps } from 'react-native';
 import { cn } from '@/lib/cn';
 
 export type TextVariant =
-  | 'display'
-  | 'title1'
-  | 'title2'
-  | 'title3'
-  | 'bodyLg'
-  | 'body'
-  | 'label'
-  | 'caption'
-  | 'micro';
+  'display' | 'title1' | 'title2' | 'title3' | 'bodyLg' | 'body' | 'label' | 'caption' | 'micro';
 
 export type TextTone = 'default' | 'secondary' | 'tertiary' | 'disabled' | 'inherit';
 

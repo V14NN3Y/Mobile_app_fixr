@@ -35,8 +35,7 @@ const colors = {
 
 const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 const isHex = (v) => /^#[0-9A-Fa-f]{6}$/.test(v);
-const rgb = (hex) =>
-  [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(' ');
+const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(' ');
 
 const hexKeys = Object.keys(colors.light).filter(
   (k) => isHex(colors.light[k]) && isHex(colors.dark[k]),
@@ -45,9 +44,7 @@ const skipped = Object.keys(colors.light).filter((k) => !hexKeys.includes(k));
 
 /* ---------- global.css ---------- */
 const vars = (scheme, indent) =>
-  hexKeys
-    .map((k) => `${indent}--color-${kebab(k)}: ${rgb(colors[scheme][k])};`)
-    .join('\n');
+  hexKeys.map((k) => `${indent}--color-${kebab(k)}: ${rgb(colors[scheme][k])};`).join('\n');
 
 const css = `/* Généré depuis src/theme/tokens.ts par scripts/generate-theme.mjs — ne pas éditer à la main. */
 @tailwind base;
@@ -72,12 +69,12 @@ writeFileSync(new URL('../src/theme/global.css', import.meta.url), css);
 /* ---------- tailwind.config.js ---------- */
 const NUM = /^\s{2}(\w+):\s*(\d+)/gm;
 const space = pairs(block('space', 'export const space = {'), /(\d+):\s*(\d+)/g);
-const radius = pairs(
-  block('radius', 'export const radius = {'),
-  /^\s{2}'?([\w.]+)'?:\s*(\d+)/gm,
-);
+const radius = pairs(block('radius', 'export const radius = {'), /^\s{2}'?([\w.]+)'?:\s*(\d+)/gm);
 const size = pairs(block('size', 'export const size = {'), NUM);
-const fonts = pairs(block('fonts', 'export const fonts = {'), STR.source ? /^\s{2}(\w+):\s*'([^']+)'/gm : null);
+const fonts = pairs(
+  block('fonts', 'export const fonts = {'),
+  STR.source ? /^\s{2}(\w+):\s*'([^']+)'/gm : null,
+);
 
 const typo = {};
 for (const m of block('typography', 'export const typography = {').matchAll(
@@ -93,10 +90,7 @@ for (const m of block('typography', 'export const typography = {').matchAll(
 
 const q = (s) => `'${s}'`;
 const colorLines = hexKeys
-  .map(
-    (k) =>
-      `        ${q(kebab(k))}: 'rgb(var(--color-${kebab(k)}) / <alpha-value>)',`,
-  )
+  .map((k) => `        ${q(kebab(k))}: 'rgb(var(--color-${kebab(k)}) / <alpha-value>)',`)
   .join('\n');
 const fontFamilyLines = Object.entries(fonts)
   .map(([k, v]) => `        ${q(kebab(k))}: [${q(v)}],`)

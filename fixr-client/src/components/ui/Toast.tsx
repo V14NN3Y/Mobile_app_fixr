@@ -4,7 +4,7 @@
  * File d'attente simple (un toast affiché à la fois), annonce lecteur d'écran à l'apparition.
  */
 import { create } from 'zustand';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { AccessibilityInfo, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
@@ -95,7 +95,11 @@ function ToastCard({ item, onDone }: { item: ToastItem; onDone: () => void }) {
       className="mx-5 flex-row items-center gap-2.5 rounded-2xl px-4 py-3.5"
     >
       {item.icon ? <Icon name={item.icon} size={18} color={colors.toastSuccess} /> : null}
-      <Text tone="inherit" style={{ color: colors.toastText }} className="flex-1 font-body-bold text-label">
+      <Text
+        tone="inherit"
+        style={{ color: colors.toastText }}
+        className="flex-1 font-body-bold text-label"
+      >
         {item.message}
       </Text>
       {item.action ? (
@@ -120,23 +124,19 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const queue = useToastStore((s) => s.queue);
   const shift = useToastStore((s) => s.shift);
   const insets = useSafeAreaInsets();
-  const [current, setCurrent] = useState<ToastItem | null>(null);
+  // Pas d'état miroir : shift() retire l'élément affiché de la file dès qu'il est fait,
+  // queue[0] désigne donc toujours le toast courant sans effet de bord supplémentaire.
+  const current = queue[0] ?? null;
 
-  useEffect(() => {
-    if (!current && queue.length > 0) {
-      setCurrent(queue[0] ?? null);
-    }
-  }, [queue, current]);
-
-  const handleDone = () => {
-    setCurrent(null);
-    shift();
-  };
+  const handleDone = () => shift();
 
   return (
     <View className="flex-1">
       {children}
-      <View pointerEvents="box-none" style={{ position: 'absolute', left: 0, right: 0, bottom: insets.bottom + 12 }}>
+      <View
+        pointerEvents="box-none"
+        style={{ position: 'absolute', left: 0, right: 0, bottom: insets.bottom + 12 }}
+      >
         {current ? <ToastCard key={current.id} item={current} onDone={handleDone} /> : null}
       </View>
     </View>

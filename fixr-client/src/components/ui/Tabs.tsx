@@ -44,7 +44,10 @@ export function Tabs<T extends string>({ options, value, onChange, testID }: Tab
       {tabWidth > 0 ? (
         <Animated.View
           pointerEvents="none"
-          style={[indicatorStyle, { position: 'absolute', bottom: -1, left: 0, width: tabWidth, height: 3 }]}
+          style={[
+            indicatorStyle,
+            { position: 'absolute', bottom: -1, left: 0, width: tabWidth, height: 3 },
+          ]}
           className="rounded-t-[3px] bg-primary"
         />
       ) : null}
@@ -58,7 +61,12 @@ export function Tabs<T extends string>({ options, value, onChange, testID }: Tab
             accessibilityState={{ selected }}
             className="flex-1 items-center py-3"
           >
-            <Text variant="caption" tone={selected ? 'default' : 'tertiary'} className="font-body-bold" numberOfLines={1}>
+            <Text
+              variant="caption"
+              tone={selected ? 'default' : 'tertiary'}
+              className="font-body-bold"
+              numberOfLines={1}
+            >
               {option.label}
             </Text>
           </Pressable>

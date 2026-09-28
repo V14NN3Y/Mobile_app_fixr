@@ -13,7 +13,13 @@ import { Text } from './Text';
 
 const STAR_PATH = 'm12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z';
 
-function Star({ size, filled, color, emptyFill, emptyStroke }: {
+function Star({
+  size,
+  filled,
+  color,
+  emptyFill,
+  emptyStroke,
+}: {
   size: number;
   filled: boolean;
   color: string;
@@ -43,7 +49,14 @@ export type RatingInputProps = {
 };
 
 /** 5 étoiles interactives, 40 px par défaut. */
-export function RatingInput({ value, onChange, size = 40, label, disabled = false, testID }: RatingInputProps) {
+export function RatingInput({
+  value,
+  onChange,
+  size = 40,
+  label,
+  disabled = false,
+  testID,
+}: RatingInputProps) {
   const { colors } = useTheme();
 
   return (
@@ -73,7 +86,11 @@ export function RatingInput({ value, onChange, size = 40, label, disabled = fals
           </Pressable>
         ))}
       </View>
-      {label ? <Text variant="bodyLg" className="font-body-bold">{label}</Text> : null}
+      {label ? (
+        <Text variant="bodyLg" className="font-body-bold">
+          {label}
+        </Text>
+      ) : null}
     </View>
   );
 }

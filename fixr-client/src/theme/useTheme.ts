@@ -7,7 +7,7 @@
 import { useColorScheme } from 'nativewind';
 
 import { useThemeStore, type ThemePreference } from './store';
-import tokens, { type ColorScheme } from './tokens';
+import { categoryTints, colors, type ColorScheme } from './tokens';
 
 export function useTheme() {
   const { colorScheme } = useColorScheme();
@@ -19,8 +19,8 @@ export function useTheme() {
     scheme,
     preference,
     setPreference,
-    colors: tokens.colors[scheme],
-    categoryTints: tokens.categoryTints[scheme],
+    colors: colors[scheme],
+    categoryTints: categoryTints[scheme],
   };
 }
 

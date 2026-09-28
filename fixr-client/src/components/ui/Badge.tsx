@@ -17,11 +17,12 @@ export type BadgeProps =
   | { mode: 'status'; status: BookingStatus; testID?: string }
   | { mode: 'verification'; level: VerificationLevel; testID?: string };
 
-const verificationContent: Record<VerificationLevel, { label: string; bg: string; text: string }> = {
-  identity: { label: '1 · Identité vérifiée', bg: 'bg-primary-soft', text: 'text-primary' },
-  skills: { label: '2 · Compétences vérifiées', bg: 'bg-primary', text: 'text-on-primary' },
-  pro: { label: '3 · Pro certifié', bg: 'bg-text', text: 'text-surface' },
-};
+const verificationContent: Record<VerificationLevel, { label: string; bg: string; text: string }> =
+  {
+    identity: { label: '1 · Identité vérifiée', bg: 'bg-primary-soft', text: 'text-primary' },
+    skills: { label: '2 · Compétences vérifiées', bg: 'bg-primary', text: 'text-on-primary' },
+    pro: { label: '3 · Pro certifié', bg: 'bg-text', text: 'text-surface' },
+  };
 
 export function Badge(props: BadgeProps) {
   const { mode, testID } = props;

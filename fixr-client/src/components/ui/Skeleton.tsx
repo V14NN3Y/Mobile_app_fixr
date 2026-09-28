@@ -62,14 +62,23 @@ export function Skeleton({ width = '100%', height = 16, rounded = 8, testID }: S
       onLayout={(e: LayoutChangeEvent) => setLayoutWidth(e.nativeEvent.layout.width)}
       accessibilityElementsHidden
       importantForAccessibility="no"
-      style={{ width, height, borderRadius: rounded, overflow: 'hidden', backgroundColor: colors.skeletonBase }}
+      style={{
+        width,
+        height,
+        borderRadius: rounded,
+        overflow: 'hidden',
+        backgroundColor: colors.skeletonBase,
+      }}
     >
       {!reduceMotion && layoutWidth > 0 ? (
         <AnimatedGradient
           colors={[colors.skeletonBase, colors.skeletonHighlight, colors.skeletonBase]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={[gradientStyle, { position: 'absolute', top: 0, bottom: 0, width: layoutWidth * 0.6 }]}
+          style={[
+            gradientStyle,
+            { position: 'absolute', top: 0, bottom: 0, width: layoutWidth * 0.6 },
+          ]}
         />
       ) : null}
     </View>

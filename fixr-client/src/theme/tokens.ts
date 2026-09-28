@@ -155,7 +155,18 @@ export const statusTone = {
 } as const satisfies Record<string, { bg: ColorToken; fg: ColorToken; label: string }>;
 
 /** Espacements (base 4). Marge d'écran = space[5] (20). */
-export const space = { 0: 0, 1: 4, 2: 8, 3: 12, 4: 16, 5: 20, 6: 24, 8: 32, 10: 40, 12: 48 } as const;
+export const space = {
+  0: 0,
+  1: 4,
+  2: 8,
+  3: 12,
+  4: 16,
+  5: 20,
+  6: 24,
+  8: 32,
+  10: 40,
+  12: 48,
+} as const;
 
 export const radius = {
   sm: 8, // puces, vignettes
@@ -204,9 +215,27 @@ export const typography = {
 
 /** Ombres (iOS) + elevation (Android). */
 export const elevation = {
-  e1: { shadowColor: '#12161F', shadowOpacity: 0.06, shadowRadius: 10, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
-  e2: { shadowColor: '#12161F', shadowOpacity: 0.16, shadowRadius: 17, shadowOffset: { width: 0, height: 14 }, elevation: 6 },
-  e3: { shadowColor: '#12161F', shadowOpacity: 0.3, shadowRadius: 30, shadowOffset: { width: 0, height: 24 }, elevation: 12 },
+  e1: {
+    shadowColor: '#12161F',
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 2,
+  },
+  e2: {
+    shadowColor: '#12161F',
+    shadowOpacity: 0.16,
+    shadowRadius: 17,
+    shadowOffset: { width: 0, height: 14 },
+    elevation: 6,
+  },
+  e3: {
+    shadowColor: '#12161F',
+    shadowOpacity: 0.3,
+    shadowRadius: 30,
+    shadowOffset: { width: 0, height: 24 },
+    elevation: 12,
+  },
 } as const;
 
 /** Mouvement. Courbes au format Reanimated Easing.bezier(x1, y1, x2, y2). */
@@ -220,5 +249,16 @@ export const motion = {
   tileScale: 0.95,
 } as const;
 
-export const theme = { colors, categoryTints, statusTone, space, radius, size, fonts, typography, elevation, motion };
+export const theme = {
+  colors,
+  categoryTints,
+  statusTone,
+  space,
+  radius,
+  size,
+  fonts,
+  typography,
+  elevation,
+  motion,
+};
 export default theme;

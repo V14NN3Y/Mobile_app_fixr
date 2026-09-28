@@ -33,7 +33,15 @@ import { useToast } from '@/components/ui/Toast';
 import type { BookingStatus } from '@/types/domain';
 import { useTheme, type ThemePreference } from '@/theme/useTheme';
 
-function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
+function Section({
+  title,
+  subtitle,
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+}) {
   return (
     <View className="gap-3 rounded-2xl border border-border-subtle bg-surface p-5">
       <View className="flex-row items-baseline justify-between gap-2">
@@ -79,7 +87,9 @@ export default function Catalogue() {
 
   const [chipSelected, setChipSelected] = useState(true);
   const [segmentedValue, setSegmentedValue] = useState<'list' | 'map'>('list');
-  const [tabsValue, setTabsValue] = useState<'upcoming' | 'ongoing' | 'done' | 'cancelled'>('upcoming');
+  const [tabsValue, setTabsValue] = useState<'upcoming' | 'ongoing' | 'done' | 'cancelled'>(
+    'upcoming',
+  );
   const [switchOn, setSwitchOn] = useState(true);
   const [checked, setChecked] = useState(true);
   const [radioValue, setRadioValue] = useState<'relevance' | 'top_rated'>('relevance');
@@ -116,7 +126,7 @@ export default function Catalogue() {
         <Section title="Texte" subtitle="<Text variant />">
           <Text variant="display">Trouvez un artisan fiable</Text>
           <Text variant="title1">De quoi avez-vous besoin ?</Text>
-          <Text variant="title2">L'artisan est en route</Text>
+          <Text variant="title2">L’artisan est en route</Text>
           <Text variant="title3">Recommandés pour vous</Text>
           <Text variant="bodyLg">Comparez les notes, les avis et les disponibilités.</Text>
           <Text variant="body">Plombier depuis 2017, je travaille surtout à Fidjrossè.</Text>
@@ -145,7 +155,7 @@ export default function Catalogue() {
         </Section>
 
         <Section title="Boutons" subtitle="<Button variant size loading disabled />">
-          <Label>Primaire — presser pour voir l'état pressé</Label>
+          <Label>Primaire — presser pour voir l’état pressé</Label>
           <Row>
             <Button variant="primary" onPress={() => show('Confirmé')}>
               Confirmer
@@ -204,14 +214,29 @@ export default function Catalogue() {
             <Button variant="primary" size="sm" onPress={() => {}}>
               Taille 40
             </Button>
-            <Button variant="secondary" icon="message" iconOnly accessibilityLabel="Message" onPress={() => {}} />
+            <Button
+              variant="secondary"
+              icon="message"
+              iconOnly
+              accessibilityLabel="Message"
+              onPress={() => {}}
+            />
           </Row>
         </Section>
 
         <Section title="Champs" subtitle="<TextField label hint error icon disabled />">
-          <TextField label="Défaut" placeholder="Ex. Fuite sous l'évier" />
-          <TextField label="Avec icône et aide" icon="mail" placeholder="nom@exemple.com" hint="Nous ne partageons jamais votre e-mail." />
-          <TextField label="Erreur" defaultValue="aurore@gmail" error="Adresse incomplète — ex. nom@gmail.com" />
+          <TextField label="Défaut" placeholder="Ex. Fuite sous l’évier" />
+          <TextField
+            label="Avec icône et aide"
+            icon="mail"
+            placeholder="nom@exemple.com"
+            hint="Nous ne partageons jamais votre e-mail."
+          />
+          <TextField
+            label="Erreur"
+            defaultValue="aurore@gmail"
+            error="Adresse incomplète — ex. nom@gmail.com"
+          />
           <TextField label="Désactivé" defaultValue="+229 01 97 45 12 36" disabled />
         </Section>
 
@@ -220,7 +245,7 @@ export default function Catalogue() {
             <Chip variant="selected">Tout</Chip>
             <Chip>Service</Chip>
             <Chip variant="filter" removable onRemove={() => setChipSelected(false)}>
-              Aujourd'hui
+              Aujourd’hui
             </Chip>
             <Chip icon="star" iconColor="#E0A21B">
               4+
@@ -253,8 +278,17 @@ export default function Catalogue() {
 
         <Section title="Sélection" subtitle="<Switch /> <Checkbox /> <Radio />">
           <Row>
-            <Switch value={switchOn} onValueChange={setSwitchOn} accessibilityLabel="Interrupteur" />
-            <Switch value={false} onValueChange={() => {}} disabled accessibilityLabel="Interrupteur désactivé" />
+            <Switch
+              value={switchOn}
+              onValueChange={setSwitchOn}
+              accessibilityLabel="Interrupteur"
+            />
+            <Switch
+              value={false}
+              onValueChange={() => {}}
+              disabled
+              accessibilityLabel="Interrupteur désactivé"
+            />
           </Row>
           <Row>
             <Checkbox checked={checked} onChange={setChecked} accessibilityLabel="Case à cocher" />
@@ -262,8 +296,16 @@ export default function Catalogue() {
             <Checkbox checked disabled onChange={() => {}} accessibilityLabel="Case désactivée" />
           </Row>
           <Row>
-            <Radio selected={radioValue === 'relevance'} onSelect={() => setRadioValue('relevance')} accessibilityLabel="Pertinence" />
-            <Radio selected={radioValue === 'top_rated'} onSelect={() => setRadioValue('top_rated')} accessibilityLabel="Mieux notés" />
+            <Radio
+              selected={radioValue === 'relevance'}
+              onSelect={() => setRadioValue('relevance')}
+              accessibilityLabel="Pertinence"
+            />
+            <Radio
+              selected={radioValue === 'top_rated'}
+              onSelect={() => setRadioValue('top_rated')}
+              accessibilityLabel="Mieux notés"
+            />
           </Row>
         </Section>
 
@@ -284,7 +326,15 @@ export default function Catalogue() {
             <Avatar initials="KA" size={72} />
             <Avatar initials="MS" size={52} online />
             <Avatar initials="CA" size={40} />
-            <AvatarStack items={[{ initials: 'FA' }, { initials: 'YH' }, { initials: 'RB' }, { initials: 'PL' }]} max={3} />
+            <AvatarStack
+              items={[
+                { initials: 'FA' },
+                { initials: 'YH' },
+                { initials: 'RB' },
+                { initials: 'PL' },
+              ]}
+              max={3}
+            />
           </Row>
         </Section>
 
@@ -339,7 +389,7 @@ export default function Catalogue() {
           <EmptyState
             icon="calendar"
             title="Aucune réservation à venir"
-            description="Décrivez votre besoin, on s'occupe du reste."
+            description="Décrivez votre besoin, on s’occupe du reste."
             action={{ label: 'Décrire mon besoin', onPress: () => {} }}
           />
         </Section>
@@ -347,11 +397,14 @@ export default function Catalogue() {
         <Section title="Bandeaux" subtitle="<Banner tone />">
           <Banner tone="info">Les artisans répondent en 25 min en moyenne.</Banner>
           <Banner tone="warning">En attente de votre validation (48 h)</Banner>
-          <Banner tone="error">Impossible d'envoyer la photo. Réessayez.</Banner>
+          <Banner tone="error">Impossible d’envoyer la photo. Réessayez.</Banner>
           <Banner tone="offline">Hors connexion · affichage des données enregistrées</Banner>
         </Section>
 
-        <Section title="Toasts, dialogue, panneau" subtitle="useToast() · <ConfirmDialog /> · <Sheet />">
+        <Section
+          title="Toasts, dialogue, panneau"
+          subtitle="useToast() · <ConfirmDialog /> · <Sheet />"
+        >
           <Row>
             <Button variant="secondary" size="md" onPress={() => show('Adresse enregistrée')}>
               Toast simple
@@ -359,7 +412,9 @@ export default function Catalogue() {
             <Button
               variant="secondary"
               size="md"
-              onPress={() => show('Adresse enregistrée', { action: { label: 'Annuler', onPress: () => {} } })}
+              onPress={() =>
+                show('Adresse enregistrée', { action: { label: 'Annuler', onPress: () => {} } })
+              }
             >
               Toast + action
             </Button>
@@ -382,11 +437,19 @@ export default function Catalogue() {
             <View className="gap-1">
               <View className="flex-row items-center justify-between border-b border-border-subtle py-2.5">
                 <Text variant="label">Pertinence</Text>
-                <Radio selected={radioValue === 'relevance'} onSelect={() => setRadioValue('relevance')} accessibilityLabel="Pertinence" />
+                <Radio
+                  selected={radioValue === 'relevance'}
+                  onSelect={() => setRadioValue('relevance')}
+                  accessibilityLabel="Pertinence"
+                />
               </View>
               <View className="flex-row items-center justify-between py-2.5">
                 <Text variant="label">Mieux notés</Text>
-                <Radio selected={radioValue === 'top_rated'} onSelect={() => setRadioValue('top_rated')} accessibilityLabel="Mieux notés" />
+                <Radio
+                  selected={radioValue === 'top_rated'}
+                  onSelect={() => setRadioValue('top_rated')}
+                  accessibilityLabel="Mieux notés"
+                />
               </View>
             </View>
           </Sheet>
@@ -394,13 +457,20 @@ export default function Catalogue() {
 
         <Section title="Progression" subtitle="<Stepper /> <ProgressBar />">
           <Label>Étapes de demande</Label>
-          <Stepper steps={['1 · Besoin', '2 · Adresse', '3 · Date', '4 · Confirmer']} currentIndex={1} />
+          <Stepper
+            steps={['1 · Besoin', '2 · Adresse', '3 · Date', '4 · Confirmer']}
+            currentIndex={1}
+          />
           <Label>Continue</Label>
           <ProgressBar value={62} />
         </Section>
 
         <Section title="Notation" subtitle="<RatingInput /> <RatingDisplay />">
-          <RatingInput value={rating} onChange={setRating} label={rating >= 4 ? 'Très bien' : 'Correct'} />
+          <RatingInput
+            value={rating}
+            onChange={setRating}
+            label={rating >= 4 ? 'Très bien' : 'Correct'}
+          />
           <View className="flex-row items-center justify-between border-t border-border-subtle pt-3">
             <Text variant="label">Ponctualité</Text>
             <RatingDisplay value={5} />
