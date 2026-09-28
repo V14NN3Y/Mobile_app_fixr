@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>FIXR — Bibliothèque de composants</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+input{font:inherit;color:inherit}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.box{background:#fff;border:1px solid #ECE9E2;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.bt{display:flex;justify-content:space-between;align-items:baseline}
+.bt b{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:20px;letter-spacing:-0.02em}
+.bt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9A3F14;font-weight:700}
+.cap{font-size:11px;font-weight:800;color:#656B77;letter-spacing:.05em;text-transform:uppercase}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 18px;border-radius:14px;font-weight:700;font-size:15px;white-space:nowrap}
+.bp{background:#0B4F6C;color:#fff}.bs{background:#fff;color:#12161F;border:1.5px solid #D9D5CC}.bt3{color:#0B4F6C}.bd{background:#B02E28;color:#fff}
+.spin{width:18px;height:18px;border-radius:9px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;animation:rt .7s linear infinite}
+.spin-d{border-color:rgba(18,22,31,.15);border-top-color:#12161F}
+@keyframes rt{to{transform:rotate(360deg)}}
+.lbl{font-size:13px;font-weight:700}
+.field{height:52px;border-radius:14px;background:#fff;border:1.5px solid #D9D5CC;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:15px;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:999px;background:#fff;border:1.5px solid #E3E0D8;font-size:14px;font-weight:700;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
+.av{border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+.card{background:#fff;border-radius:20px;border:1px solid #ECE9E2;padding:14px;display:flex;flex-direction:column;gap:12px}
+.sk{background:linear-gradient(90deg,#EEECE6 0%,#F7F6F2 50%,#EEECE6 100%);background-size:200% 100%;animation:sk 1.2s linear infinite;border-radius:8px}
+@keyframes sk{to{background-position:-200% 0}}
+.b-me{align-self:flex-end;background:#0B4F6C;color:#fff;border-radius:18px 18px 6px 18px;padding:10px 14px;font-size:14px;font-weight:500;max-width:80%}
+.b-th{align-self:flex-start;background:#F6F5F1;border-radius:18px 18px 18px 6px;padding:10px 14px;font-size:14px;font-weight:500;max-width:80%}
+.dot{width:7px;height:7px;border-radius:4px;background:#8A8F99;animation:bo 1s ease-in-out infinite}
+@keyframes bo{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-3px);opacity:1}}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:700;color:#656B77;position:relative;padding-top:10px}
+</style>
+</helmet>
+<div style="width: 1600px; height: 2960px; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; padding: 56px 64px; display: flex; flex-direction: column; gap: 32px">
+  <header style="display: flex; justify-content: space-between; align-items: flex-end">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span class="mono" style="font-size: 12px; font-weight: 700; color: #C8531D">FIXR DESIGN SYSTEM · 1.0</span>
+      <h1 class="disp" style="margin: 0; font-size: 52px; line-height: 56px; font-weight: 700">Bibliothèque de composants</h1>
+      <p style="margin: 0; font-size: 17px; color: #4A515E; font-weight: 500">Les mêmes briques sur chaque écran. Nom de composant React Native en orange.</p>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start">
+
+    <section class="box" style="grid-column: span 2">
+      <div class="bt"><b>Boutons</b><span>&lt;Button variant size loading disabled /&gt;</span></div>
+      <div style="display: grid; grid-template-columns: 110px repeat(4, minmax(0, 1fr)); gap: 12px; align-items: center">
+        <span></span><span class="cap">Défaut</span><span class="cap">Pressé</span><span class="cap">Chargement</span><span class="cap">Désactivé</span>
+        <span class="cap">Primaire</span><span class="btn bp">Confirmer</span><span class="btn bp" style="background: #083B51; transform: scale(.98)">Confirmer</span><span class="btn bp" style="opacity: .9"><span class="spin"></span>Envoi…</span><span class="btn" style="background: #E3E0D8; color: #7A808B">Confirmer</span>
+        <span class="cap">Secondaire</span><span class="btn bs">Se connecter</span><span class="btn bs" style="border-color: #12161F; background: #F6F5F1">Se connecter</span><span class="btn bs"><span class="spin spin-d"></span>Chargement</span><span class="btn bs" style="color: #9A9FA8; border-color: #ECE9E2">Se connecter</span>
+        <span class="cap">Tertiaire</span><span class="btn bt3">Voir le profil</span><span class="btn bt3" style="background: #E3EEF2">Voir le profil</span><span class="btn bt3"><span class="spin spin-d" style="border-top-color: #0B4F6C"></span></span><span class="btn" style="color: #9A9FA8">Voir le profil</span>
+        <span class="cap">Destructif</span><span class="btn bd">Annuler la réservation</span><span class="btn bd" style="background: #8E2520">Annuler la réservation</span><span class="btn bd"><span class="spin"></span>Annulation…</span><span class="btn" style="background: #F2D9D7; color: #B07A77">Annuler</span>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center">
+        <span class="cap" style="width: 110px">Icône / tailles</span>
+        <span class="btn bs" style="width: 52px; padding: 0" aria-label="Message"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>
+        <span class="btn bp" style="height: 44px; font-size: 14px; border-radius: 12px">Demander · md 44</span>
+        <span class="btn bp" style="height: 40px; font-size: 14px; border-radius: 12px; padding: 0 14px">+ Demande · sm 40</span>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Champs</b><span>&lt;TextField state /&gt;</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Défaut</span><div class="field" style="color: #8A8F99">Ex. Fuite sous l’évier</div></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Focus + icône</span><div class="field" style="border-color: #0B4F6C; box-shadow: 0 0 0 4px rgba(11,79,108,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#656B77" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>aurore.tchibozo@gmail.com<span style="width: 2px; height: 20px; background: #0B4F6C"></span></div></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl">Erreur</span><div class="field" style="border-color: #C2362F; background: #FFF8F7">aurore@gmail</div><span style="font-size: 13px; font-weight: 600; color: #B02E28">Adresse incomplète — ex. nom@gmail.com</span></div>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span class="lbl" style="color: #8A8F99">Désactivé</span><div class="field" style="background: #F2F0EB; border-color: #F2F0EB; color: #8A8F99">+229 01 97 45 12 36</div></div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Puces, filtres, onglets</b><span>&lt;Chip /&gt; &lt;Segmented /&gt; &lt;Tabs /&gt;</span></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="chip" style="background: #12161F; border-color: #12161F; color: #fff">Tout</span><span class="chip">Service</span><span class="chip" style="background: #E3EEF2; border-color: #0B4F6C; color: #0B4F6C">Aujourd’hui ✕</span><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#E0A21B"/></svg>4+</span></div>
+      <div style="display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: #ECE9E2"><span style="flex: 1; height: 38px; border-radius: 10px; background: #fff; box-shadow: 0 1px 3px rgba(18,22,31,.12); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">Liste</span><span style="flex: 1; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #4A515E">Carte</span></div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid #E3E0D8; font-size: 13px; font-weight: 700; color: #656B77; text-align: center">
+        <span style="padding: 12px 0; color: #12161F; box-shadow: inset 0 -3px 0 #0B4F6C">À venir</span><span style="padding: 12px 0">En cours</span><span style="padding: 12px 0">Terminées</span><span style="padding: 12px 0">Annulées</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 14px; font-weight: 700">Interrupteur</span><div style="display: flex; gap: 10px"><span style="width: 48px; height: 28px; border-radius: 14px; background: #0B4F6C; position: relative"><span style="position: absolute; top: 3px; left: 23px; width: 22px; height: 22px; border-radius: 11px; background: #fff"></span></span><span style="width: 48px; height: 28px; border-radius: 14px; background: #D9D5CC; position: relative"><span style="position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 11px; background: #fff"></span></span></div></div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Badges &amp; avatars</b><span>&lt;StatusBadge /&gt; &lt;Avatar /&gt;</span></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <span class="badge" style="background: #FBF1DE; color: #7A4F0C">● En attente</span><span class="badge" style="background: #E3EEF2; color: #0B4F6C">● Confirmée</span><span class="badge" style="background: #FBECE3; color: #9A3F14">● En route</span><span class="badge" style="background: #E3EEF2; color: #0B4F6C">● En cours</span><span class="badge" style="background: #E3F2EA; color: #1D6B45">● Terminée</span><span class="badge" style="background: #ECE9E2; color: #4A515E">● Annulée</span>
+      </div>
+      <span class="cap">Niveaux de vérification</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <span class="badge" style="background: #E3EEF2; color: #0B4F6C">1 · Identité vérifiée</span><span class="badge" style="background: #0B4F6C; color: #fff">2 · Compétences vérifiées</span><span class="badge" style="background: #12161F; color: #fff">3 · Pro certifié</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px">
+        <div class="av" style="width: 72px; height: 72px; background: #FBECE3; color: #9A3F14; font-size: 24px">KA</div>
+        <div style="position: relative"><div class="av" style="width: 52px; height: 52px; background: #E3F2EA; color: #1D6B45">MS</div><span style="position: absolute; right: 0; bottom: 0; width: 14px; height: 14px; border-radius: 7px; background: #2EA067; border: 2.5px solid #fff"></span></div>
+        <div class="av" style="width: 40px; height: 40px; background: #EEE7F7; color: #5B3A8C; font-size: 13px">CA</div>
+        <div style="display: flex"><div class="av" style="width: 32px; height: 32px; background: #DFF1F1; color: #0F5E5E; font-size: 11px; border: 2px solid #fff">FA</div><div class="av" style="width: 32px; height: 32px; background: #FBF1DE; color: #7A4F0C; font-size: 11px; border: 2px solid #fff; margin-left: -8px">YH</div><div class="av" style="width: 32px; height: 32px; background: #ECE9E2; color: #12161F; font-size: 11px; border: 2px solid #fff; margin-left: -8px">+9</div></div>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Carte artisan</b><span>&lt;ArtisanCard /&gt;</span></div>
+      <div class="card">
+        <div style="display: flex; gap: 12px">
+          <div class="av" style="width: 56px; height: 56px; background: #FBECE3; color: #9A3F14; font-size: 18px">KA</div>
+          <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 3px"><div style="display: flex; justify-content: space-between"><b style="font-size: 16px">Koffi Agbodjan</b><span style="font-size: 14px; font-weight: 800">★ 4,9 <span style="color: #656B77; font-weight: 600">(212)</span></span></div><span style="font-size: 13px; color: #4A515E; font-weight: 600">Plombier · 9 ans</span><span style="font-size: 13px; color: #656B77; font-weight: 600">Fidjrossè · 1,2 km</span></div>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="badge" style="background: #E3F2EA; color: #1D6B45">Dispo aujourd’hui</span><span class="badge" style="background: #E3EEF2; color: #0B4F6C">Pro certifié</span><span class="badge" style="background: #F2F0EB">Dès 5 000 FCFA</span></div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><span class="btn" style="height: 44px; background: #F2F0EB; font-size: 14px">Voir le profil</span><span class="btn bp" style="height: 44px; font-size: 14px">Demander</span></div>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Carte réservation</b><span>&lt;BookingCard /&gt;</span></div>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between"><span class="badge" style="background: #FBECE3; color: #9A3F14">● En route</span><span style="font-size: 12px; font-weight: 700; color: #656B77">FX-24817</span></div>
+        <div style="display: flex; gap: 12px; align-items: center"><div class="av" style="width: 46px; height: 46px; background: #FBECE3; color: #9A3F14">KA</div><div style="display: flex; flex-direction: column"><b style="font-size: 16px">Fuite sous l’évier</b><span style="font-size: 13px; color: #656B77; font-weight: 600">Koffi Agbodjan · Plombier</span></div></div>
+        <div style="border-top: 1px solid #F0EEE8; padding-top: 10px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; color: #4A515E"><span>Aujourd’hui · 14:00 – 16:00</span><span>Maison · Haie Vive, Cotonou</span><span style="display: flex; justify-content: space-between">Prix estimé<b style="color: #12161F">15 000 – 25 000 FCFA</b></span></div>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Cartes catégorie</b><span>&lt;CategoryTile /&gt;</span></div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 0 10px; border-radius: 16px; border: 1px solid {{c.border}}; font-size: 11px; font-weight: 700; background: #fff"><span style="width: 44px; height: 44px; border-radius: 14px; background: {{c.bg}}; color: {{c.ink}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{c.d}}"/></svg></span>{{c.label}}</div>
+        </sc-for>
+      </div>
+      <span style="font-size: 12px; color: #656B77; font-weight: 600">Sélection : contour pétrole + échelle 0,95 au toucher.</span>
+      <div style="height: 88px; border-radius: 18px; background: #DFF1F1; color: #0F5E5E; padding: 14px; display: flex; flex-direction: column; justify-content: space-between"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4.9 7l14.2 10M4.9 17 19.1 7"/></svg><span style="display: flex; justify-content: space-between"><b style="font-size: 15px">Climatisation</b><span style="font-size: 12px; font-weight: 700">22 pros</span></span></div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Progression</b><span>&lt;Stepper /&gt; &lt;MissionProgress /&gt;</span></div>
+      <span class="cap">Étapes de demande</span>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; font-size: 12px; font-weight: 700; color: #656B77">
+        <span style="display: flex; flex-direction: column; gap: 6px; color: #4A515E"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>1 · Besoin</span><span style="display: flex; flex-direction: column; gap: 6px; color: #0B4F6C; font-weight: 800"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>2 · Adresse</span><span style="display: flex; flex-direction: column; gap: 6px"><span style="height: 4px; border-radius: 2px; background: #E3E0D8"></span>3 · Date</span><span style="display: flex; flex-direction: column; gap: 6px"><span style="height: 4px; border-radius: 2px; background: #E3E0D8"></span>4 · Confirmer</span>
+      </div>
+      <span class="cap">Mission</span>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px"><span style="height: 6px; border-radius: 3px; background: #0B4F6C"></span><span style="height: 6px; border-radius: 3px; background: #C8531D"></span><span style="height: 6px; border-radius: 3px; background: #ECE9E2"></span><span style="height: 6px; border-radius: 3px; background: #ECE9E2"></span><span style="height: 6px; border-radius: 3px; background: #ECE9E2"></span></div>
+      <span class="cap">Continue</span>
+      <div style="height: 8px; border-radius: 4px; background: #ECE9E2"><div style="width: 62%; height: 100%; border-radius: 4px; background: #0B4F6C"></div></div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Timeline de mission</b><span>&lt;MissionTimeline /&gt;</span></div>
+      <sc-for list="{{tl}}" as="s" hint-placeholder-count="6">
+        <div style="display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; align-items: flex-start">
+          <span style="width: 24px; height: 24px; border-radius: 12px; background: {{s.bg}}; border: 2px solid {{s.bd}}; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 800">{{s.mark}}</span>
+          <span style="display: flex; flex-direction: column; margin-top: 1px"><b style="font-size: 14px; color: {{s.ink}}">{{s.label}}</b><span style="font-size: 12px; color: #656B77; font-weight: 600">{{s.time}}</span></span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Chat</b><span>&lt;ChatBubble /&gt; &lt;QuickReplies /&gt;</span></div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="align-self: center; font-size: 12px; font-weight: 700; color: #144D31; background: #E3F2EA; border-radius: 999px; padding: 5px 12px">✓ Mission confirmée · 13:10</span>
+        <span class="b-th">Je passe Cadjèhoun, j’arrive dans 10 min.</span>
+        <span class="b-me">Parfait, le portail est ouvert.</span>
+        <span style="align-self: flex-end; font-size: 11px; font-weight: 700; color: #656B77">14:05 · Envoyé → Reçu → <span style="color: #0B4F6C">Lu ✓✓</span></span>
+        <span class="b-th" style="display: flex; gap: 4px; padding: 14px 16px"><span class="dot"></span><span class="dot" style="animation-delay: .15s"></span><span class="dot" style="animation-delay: .3s"></span></span>
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="chip" style="height: 34px; font-size: 12px; border-color: #C9DEE6; color: #0B4F6C">Où êtes-vous ?</span><span class="chip" style="height: 34px; font-size: 12px; border-color: #C9DEE6; color: #0B4F6C">Pouvez-vous confirmer l’heure ?</span></div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Notation</b><span>&lt;RatingInput /&gt;</span></div>
+      <div style="display: flex; gap: 6px" aria-hidden="true"><sc-for list="{{five}}" as="f" hint-placeholder-count="5"><svg width="40" height="40" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="{{f.fill}}" stroke="{{f.stroke}}" stroke-width="1.2" stroke-linejoin="round"/></svg></sc-for></div>
+      <b style="font-size: 15px">Très bien</b>
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; border-top: 1px solid #F0EEE8; padding-top: 12px">Ponctualité<span style="color: #E0A21B; letter-spacing: 2px">★★★★★</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700">Communication<span style="letter-spacing: 2px"><span style="color: #E0A21B">★★★★</span><span style="color: #E3E0D8">★</span></span></div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Date &amp; créneau</b><span>&lt;DateStrip /&gt; &lt;SlotPicker /&gt;</span></div>
+      <div style="display: flex; gap: 8px">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
+          <span style="width: 58px; height: 76px; border-radius: 16px; background: {{d.bg}}; color: {{d.ink}}; border: 1.5px solid {{d.bd}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 12px; font-weight: 700">{{d.dow}}</span><span class="disp" style="font-size: 20px; font-weight: 700">{{d.n}}</span></span>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <span style="height: 60px; border-radius: 14px; border: 1.5px solid #0B4F6C; background: #E3EEF2; padding: 0 14px; display: flex; flex-direction: column; justify-content: center"><b style="font-size: 15px">09:00 – 11:00</b><span style="font-size: 12px; font-weight: 700; color: #1D6B45">4 artisans dispo</span></span>
+        <span style="height: 60px; border-radius: 14px; border: 1.5px solid #E3E0D8; padding: 0 14px; display: flex; flex-direction: column; justify-content: center"><b style="font-size: 15px">16:00 – 18:00</b><span style="font-size: 12px; font-weight: 700; color: #9A3F14">Dernier artisan dispo</span></span>
+        <span style="height: 60px; border-radius: 14px; background: #F2F0EB; color: #8A8F99; padding: 0 14px; display: flex; flex-direction: column; justify-content: center"><b style="font-size: 15px">18:00 – 20:00</b><span style="font-size: 12px; font-weight: 700">Complet</span></span>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Skeletons &amp; état vide</b><span>&lt;Skeleton /&gt; &lt;EmptyState /&gt;</span></div>
+      <div class="card" style="gap: 10px"><div style="display: flex; gap: 12px"><div class="sk" style="width: 52px; height: 52px; border-radius: 999px"></div><div style="flex-grow: 1; display: flex; flex-direction: column; gap: 8px; padding-top: 4px"><div class="sk" style="height: 14px; width: 70%"></div><div class="sk" style="height: 12px; width: 45%"></div></div></div><div class="sk" style="height: 40px; border-radius: 12px"></div></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 10px 0">
+        <span style="width: 64px; height: 64px; border-radius: 20px; background: #E3EEF2; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0B4F6C" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <b style="font-size: 16px">Aucune réservation à venir</b><span style="font-size: 13px; color: #4A515E; font-weight: 600">Décrivez votre besoin, on s’occupe du reste.</span>
+        <span class="btn bp" style="height: 44px; font-size: 14px">Décrire mon besoin</span>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Toasts &amp; alertes</b><span>&lt;Toast /&gt; &lt;Banner /&gt;</span></div>
+      <div style="background: #12161F; color: #fff; border-radius: 16px; padding: 14px 16px; display: flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 700; box-shadow: 0 12px 30px rgba(18,22,31,.25)"><span style="color: #7FE0AA">✓</span><span style="flex-grow: 1">Adresse enregistrée</span><span style="color: #F0A070; font-weight: 800">Annuler</span></div>
+      <div style="background: #FBE7E5; color: #8E2520; border-radius: 14px; padding: 12px 14px; font-size: 14px; font-weight: 700">Impossible d’envoyer la photo. Réessayez.</div>
+      <div style="background: #FBF1DE; color: #5C3B08; border-radius: 14px; padding: 12px 14px; font-size: 14px; font-weight: 700">En attente de votre validation (48 h)</div>
+      <div style="background: #E3EEF2; color: #0A3D53; border-radius: 14px; padding: 12px 14px; font-size: 14px; font-weight: 700">Les artisans répondent en 25 min en moyenne.</div>
+      <div style="background: #3B3F46; color: #fff; border-radius: 14px; padding: 12px 14px; font-size: 14px; font-weight: 700; display: flex; gap: 8px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19v.01M3 3l18 18"/></svg>Hors connexion · affichage des données enregistrées</div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Bottom sheet &amp; modale</b><span>&lt;Sheet /&gt; &lt;ConfirmDialog /&gt;</span></div>
+      <div style="height: 260px; border-radius: 20px; background: #3B3F46; position: relative; overflow: hidden">
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; background: #fff; border-radius: 22px 22px 0 0; padding: 10px 18px 18px; display: flex; flex-direction: column; gap: 6px">
+          <span style="width: 40px; height: 5px; border-radius: 3px; background: #D9D5CC; align-self: center"></span>
+          <b class="disp" style="font-size: 18px">Trier par</b>
+          <span style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; padding: 10px 0; border-bottom: 1px solid #F0EEE8">Pertinence<span style="width: 20px; height: 20px; border-radius: 10px; border: 6px solid #0B4F6C"></span></span>
+          <span style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; padding: 10px 0">Mieux notés<span style="width: 20px; height: 20px; border-radius: 10px; border: 2px solid #B9B4A9"></span></span>
+        </div>
+      </div>
+      <div style="border-radius: 20px; border: 1px solid #ECE9E2; padding: 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 24px 60px rgba(18,22,31,.14)">
+        <b class="disp" style="font-size: 18px">Annuler cette réservation ?</b>
+        <span style="font-size: 13px; color: #4A515E; font-weight: 600">Christelle sera prévenue immédiatement.</span>
+        <span class="btn bd" style="height: 46px">Oui, annuler</span><span class="btn bs" style="height: 46px">Garder ma réservation</span>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="bt"><b>Barre de navigation</b><span>&lt;TabBar badges /&gt;</span></div>
+      <div style="border-radius: 20px; border: 1px solid #ECE9E2; overflow: hidden">
+        <div style="height: 88px; background: #fff; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 0 4px 30px">
+          <span class="tab" style="color: #0B4F6C"><span style="position: absolute; top: 0; width: 28px; height: 3px; border-radius: 0 0 3px 3px; background: #0B4F6C"></span><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</span>
+          <span class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher</span>
+          <span class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span style="position: absolute; top: 4px; left: calc(50% + 4px); min-width: 19px; height: 19px; border-radius: 10px; background: #C8531D; color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; border: 2px solid #fff">1</span>Réservations</span>
+          <span class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span style="position: absolute; top: 4px; left: calc(50% + 4px); min-width: 19px; height: 19px; border-radius: 10px; background: #C8531D; color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; border: 2px solid #fff">2</span>Messages</span>
+          <span class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</span>
+        </div>
+      </div>
+      <span style="font-size: 12px; color: #656B77; font-weight: 600; line-height: 18px">Hauteur 54 + safe area. Onglet actif : couleur primary, icône pleine, repère 3 px. Badge accent, bordure 2 px surface.</span>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":2960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const cats = [
+      { label: 'Plomberie', bg: '#E3EEF2', ink: '#0B4F6C', d: 'M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z', border: '#0B4F6C' },
+      { label: 'Électricité', bg: '#FBF1DE', ink: '#7A4F0C', d: 'M13 2 4 14h7l-1 8 9-12h-7z', border: '#ECE9E2' },
+      { label: 'Nettoyage', bg: '#E3F2EA', ink: '#1D6B45', d: 'M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z', border: '#ECE9E2' },
+      { label: 'Serrurerie', bg: '#EEE7F7', ink: '#5B3A8C', d: 'M10.6 13.4A4.5 4.5 0 1 1 4.2 19.8a4.5 4.5 0 0 1 6.4-6.4zM10.6 13.4 20 4M17 7l3 3', border: '#ECE9E2' }
+    ];
+    const tl = [['Demande envoyée', '25 sept. · 18:02', 'done'], ['Artisan trouvé', '25 sept. · 18:40', 'done'], ['Intervention confirmée', '26 sept. · 09:15', 'done'], ['Artisan en route', 'Arrivée ~14:12', 'cur'], ['Intervention en cours', '—', 'todo'], ['Intervention terminée', '—', 'todo']]
+      .map(([label, time, st]) => ({ label, time, mark: st === 'done' ? '✓' : '', bg: st === 'done' ? '#1D7A4E' : st === 'cur' ? '#C8531D' : '#fff', bd: st === 'done' ? '#1D7A4E' : st === 'cur' ? '#C8531D' : '#D9D5CC', ink: st === 'todo' ? '#656B77' : '#12161F' }));
+    const five = [1, 2, 3, 4, 5].map((n) => ({ fill: n <= 4 ? '#E0A21B' : '#fff', stroke: n <= 4 ? '#E0A21B' : '#C9C4B8' }));
+    const days = [['Lun', '28', 'low'], ['Mar', '29', 'on'], ['Mer', '30', 'off'], ['Jeu', '1', 'ok'], ['Ven', '2', 'ok']].map(([dow, n, st]) => ({ dow, n,
+      bg: st === 'on' ? '#0B4F6C' : st === 'off' ? '#F2F0EB' : '#fff', ink: st === 'on' ? '#fff' : st === 'off' ? '#8A8F99' : '#12161F', bd: st === 'on' ? '#0B4F6C' : st === 'off' ? '#F2F0EB' : '#E3E0D8' }));
+    return { cats, tl, five, days };
+  }
+}
+</script>
+</body>
+</html>

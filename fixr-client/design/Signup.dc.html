@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Création de compte</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+input{font:inherit;color:inherit}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 20px;border-radius:14px;font-weight:700;font-size:16px;transition:transform .12s ease,background .2s ease}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-dis{background:#E3E0D8;color:#7A808B;cursor:not-allowed}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#12161F}
+.lbl{font-size:13px;font-weight:700}
+.f{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field{height:52px;border-radius:14px;background:#fff;border:1.5px solid #D9D5CC;display:flex;align-items:center;gap:10px;padding:0 14px;transition:border-color .15s,box-shadow .15s}
+.field:focus-within{border-color:#0B4F6C;box-shadow:0 0 0 4px rgba(11,79,108,.12)}
+.field input{border:0;outline:0;background:transparent;flex-grow:1;min-width:0;font-size:16px;font-weight:600;height:100%}
+.chk{width:24px;height:24px;border-radius:7px;border:1.5px solid #B9B4A9;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,border-color .15s}
+.chk-on{background:#0B4F6C;border-color:#0B4F6C}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; display: flex; flex-direction: column; padding: 54px 0 34px">
+  <header style="height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px">
+    <a href="Onboarding3.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+    <a href="Login.dc.html" style="height: 44px; padding: 0 12px; display: flex; align-items: center; font-weight: 700; font-size: 15px">Se connecter</a>
+  </header>
+  <form style="flex-grow: 1; padding: 4px 24px 0; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px">
+      <h1 class="disp" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 700">Créez votre compte</h1>
+      <p style="margin: 0; font-size: 15px; line-height: 22px; color: #4A515E; font-weight: 500">Moins d’une minute pour trouver votre premier artisan.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <div class="f"><label for="pn" class="lbl">Prénom</label><div class="field"><input id="pn" autocomplete="given-name" value="Aurore"></div></div>
+      <div class="f"><label for="nm" class="lbl">Nom</label><div class="field"><input id="nm" autocomplete="family-name" value="Tchibozo"></div></div>
+    </div>
+    <div class="f"><label for="tl" class="lbl">Téléphone</label>
+      <div class="field"><span style="font-weight: 700; font-size: 15px; padding-right: 10px; border-right: 1px solid #E3E0D8; height: 28px; display: flex; align-items: center">+229</span><input id="tl" type="tel" autocomplete="tel" value="01 97 45 12 36"></div>
+    </div>
+    <div class="f"><label for="em" class="lbl">Adresse e-mail</label>
+      <div class="field"><input id="em" type="email" autocomplete="email" value="aurore.tchibozo@gmail.com"></div>
+    </div>
+    <div class="f"><label for="pw" class="lbl">Mot de passe</label>
+      <div class="field"><input id="pw" type="password" autocomplete="new-password" value="Cotonou#2026"></div>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="flex-grow: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px">
+          <span style="height: 4px; border-radius: 2px; background: #1D7A4E"></span><span style="height: 4px; border-radius: 2px; background: #1D7A4E"></span><span style="height: 4px; border-radius: 2px; background: #1D7A4E"></span><span style="height: 4px; border-radius: 2px; background: #E3E0D8"></span>
+        </div>
+        <span style="font-size: 12px; font-weight: 700; color: #1D6B45">Solide</span>
+      </div>
+    </div>
+    <button type="button" onClick="{{toggle}}" role="checkbox" aria-checked="{{accepted}}" style="display: flex; gap: 12px; align-items: flex-start; text-align: left; min-height: 44px; padding-top: 4px">
+      <span class="{{chkClass}}"><sc-if value="{{accepted}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></sc-if></span>
+      <span style="font-size: 14px; line-height: 20px; color: #4A515E; font-weight: 600">J’accepte les <span style="color: #0B4F6C; font-weight: 800">conditions d’utilisation</span> et la <span style="color: #0B4F6C; font-weight: 800">politique de confidentialité</span> de FIXR.</span>
+    </button>
+  </form>
+  <footer style="padding: 12px 24px 0">
+    <sc-if value="{{accepted}}" hint-placeholder-val="{{ false }}"><a href="Otp.dc.html" class="btn btn-p">Créer mon compte</a></sc-if>
+    <sc-if value="{{notAccepted}}" hint-placeholder-val="{{ true }}"><span class="btn btn-dis" aria-disabled="true">Créer mon compte</span></sc-if>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { accepted: false }; }
+  renderVals() {
+    const a = this.state.accepted;
+    return { accepted: a, notAccepted: !a, chkClass: 'chk' + (a ? ' chk-on' : ''), toggle: () => this.setState({ accepted: !a }) };
+  }
+}
+</script>
+</body>
+</html>

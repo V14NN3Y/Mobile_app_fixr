@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mission en cours — mode sombre</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#0E1215}
+*{box-sizing:border-box}
+a{color:#5FB3D4;text-decoration:none}a:hover{color:#86C7E0}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.ibw{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#161B20;color:#F2F1EC;border:1px solid #2A3238}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 16px;border-radius:14px;font-weight:700;font-size:15px}
+.mini{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#B7BCC4;min-height:54px;justify-content:center;border-radius:14px}
+.mini:hover{color:#F2F1EC;background:#1E252B}
+.dash{stroke-dasharray:8 8;animation:da 1.2s linear infinite}
+@keyframes da{to{stroke-dashoffset:-32}}
+.mv{animation:mv 14s linear infinite alternate}
+@keyframes mv{0%{left:60px;top:300px}40%{left:170px;top:290px}100%{left:176px;top:190px}}
+.halo{animation:ha 1.8s ease-out infinite}
+@keyframes ha{0%{box-shadow:0 0 0 0 rgba(240,138,88,.55)}100%{box-shadow:0 0 0 16px rgba(240,138,88,0)}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #0E1215; color: #F2F1EC; font-family: Manrope, system-ui, sans-serif">
+  <svg width="390" height="480" viewBox="0 0 390 480" style="position: absolute; left: 0; top: 0" aria-label="Carte du trajet de l’artisan">
+    <rect width="390" height="480" fill="#12171C"/>
+    <path d="M300 -10 C 290 80, 330 110, 400 120 V-10z" fill="#15241C"/>
+    <path d="M200 330h80v70h-80zM20 120h70v60H20z" fill="#172019"/>
+    <g stroke="#232B33" stroke-width="14" stroke-linecap="round" fill="none"><path d="M-10 300 L400 290"/><path d="M60 -10 L60 490"/><path d="M180 -10 L170 490"/><path d="M-10 160 L400 150"/></g>
+    <g stroke="#1E252D" stroke-width="6" stroke-linecap="round" fill="none"><path d="M-10 230 L400 220"/><path d="M-10 400 L400 390"/><path d="M300 -10 L300 490"/><path d="M120 -10 L115 490"/><path d="M240 -10 L236 490"/></g>
+    <path d="M60 440 L60 300 L170 290 L178 160 L300 152" stroke="#5FB3D4" stroke-opacity=".25" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path class="dash" d="M60 440 L60 300 L170 290 L178 160 L300 152" stroke="#5FB3D4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <g font-family="Manrope, system-ui, sans-serif" font-size="11" font-weight="700" fill="#5A626C"><text x="190" y="210">HAIE VIVE</text><text x="72" y="470">FIDJROSSÈ</text></g>
+  </svg>
+  <div style="position: absolute; left: 300px; top: 152px; transform: translate(-50%,-100%)" aria-label="Votre domicile">
+    <div style="background: #F2F1EC; color: #0E1215; border-radius: 12px; padding: 6px 10px; font-size: 12px; font-weight: 800">Chez vous</div>
+    <div style="width: 10px; height: 10px; background: #F2F1EC; transform: rotate(45deg); margin: -5px auto 0; border-radius: 2px"></div>
+  </div>
+  <div class="mv" style="position: absolute; left: 170px; top: 290px; transform: translate(-50%,-50%)" aria-label="Position de Koffi">
+    <div class="halo" style="width: 44px; height: 44px; border-radius: 22px; background: #F08A58; border: 3px solid #0E1215; display: flex; align-items: center; justify-content: center; color: #1A0D06; font-weight: 800; font-size: 13px">KA</div>
+  </div>
+  <header style="position: absolute; left: 16px; right: 16px; top: 54px; display: flex; justify-content: space-between">
+    <a href="HomeDark.dc.html" class="ibw" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+    <span style="height: 44px; padding: 0 14px; border-radius: 14px; background: #161B20; border: 1px solid #2A3238; display: flex; align-items: center; font-size: 13px; font-weight: 800">FX-24817 · Plomberie</span>
+    <a href="#aide" class="ibw" aria-label="Aide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg></a>
+  </header>
+
+  <section style="position: absolute; left: 0; right: 0; bottom: 0; top: 376px; background: #161B20; border-top: 1px solid #2A3238; border-radius: 28px 28px 0 0; padding: 10px 20px 30px; display: flex; flex-direction: column; gap: 12px">
+    <div style="width: 40px; height: 5px; border-radius: 3px; background: #3A434C; margin: 0 auto"></div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; font-weight: 800; color: #F4A77E; display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: currentColor"></span>EN ROUTE</span>
+        <h1 class="disp" style="margin: 0; font-size: 24px; line-height: 29px; font-weight: 700">L’artisan est en route</h1>
+        <span style="font-size: 14px; font-weight: 600; color: #B7BCC4">Arrivée estimée 14:12 · à 3,6 km</span>
+      </div>
+      <div style="text-align: right"><span class="disp" style="font-size: 34px; line-height: 36px; font-weight: 700">12</span><span style="font-size: 14px; font-weight: 800"> min</span></div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px"><span style="height: 6px; border-radius: 3px; background: #5FB3D4"></span><span style="height: 6px; border-radius: 3px; background: #F08A58"></span><span style="height: 6px; border-radius: 3px; background: #2A3238"></span><span style="height: 6px; border-radius: 3px; background: #2A3238"></span><span style="height: 6px; border-radius: 3px; background: #2A3238"></span></div>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; font-size: 11px; font-weight: 700; color: #8C939D"><span>Confirmée</span><span style="color: #F2F1EC">En route</span><span>Sur place</span><span>Travaux</span><span>Terminé</span></div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: #15301F">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6FD3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+      <span style="flex-grow: 1; font-size: 13px; font-weight: 700; color: #B9E8CF; line-height: 18px">Code de mission à donner à Koffi à son arrivée</span>
+      <span class="disp" style="font-size: 22px; font-weight: 700; letter-spacing: .12em; color: #B9E8CF">4721</span>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center">
+      <div style="width: 48px; height: 48px; border-radius: 999px; background: #3A2217; color: #F4A77E; display: flex; align-items: center; justify-content: center; font-weight: 800">KA</div>
+      <div style="flex-grow: 1; display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 800">Koffi Agbodjan</span><span style="font-size: 13px; color: #8C939D; font-weight: 600">★ 4,9 · Moto bleue · AB 4521 RB</span></div>
+      <a href="tel:+22901000000" aria-label="Appeler Koffi" style="width: 48px; height: 48px; border-radius: 14px; background: #1E252B; display: flex; align-items: center; justify-content: center; color: #F2F1EC"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+    </div>
+    <a href="Chat.dc.html" class="btn" style="background: #5FB3D4; color: #04232F">Contacter l’artisan</a>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: auto">
+      <a href="BookingDetail.dc.html" class="mini">Modifier</a>
+      <button class="mini">Partager le suivi</button>
+      <a href="#aide" class="mini">Besoin d’aide</a>
+    </div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

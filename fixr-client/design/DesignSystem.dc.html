@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>FIXR — Design system, fondations</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.sec{display:flex;flex-direction:column;gap:18px}
+.sh{display:flex;align-items:baseline;gap:14px}
+.sh b{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:26px;letter-spacing:-0.02em}
+.sh span{font-size:14px;color:#4A515E;font-weight:600}
+.num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;color:#C8531D}
+.tok{display:grid;grid-template-columns:minmax(0,1.3fr) 56px 56px minmax(0,1.6fr);gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid #ECE9E2;font-size:13px;font-weight:600}
+.sw{height:36px;border-radius:10px;border:1px solid rgba(18,22,31,.08);display:flex;align-items:flex-end;padding:3px 5px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9px;font-weight:700}
+.card{background:#fff;border:1px solid #ECE9E2;border-radius:20px;padding:22px}
+.ty{display:grid;grid-template-columns:150px minmax(0,1fr) 170px;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid #F0EEE8}
+.ty .m{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#656B77;font-weight:500}
+.ic{width:56px;height:56px;border-radius:14px;background:#fff;border:1px solid #ECE9E2;display:flex;align-items:center;justify-content:center;color:#12161F}
+</style>
+</helmet>
+<div style="width: 1600px; height: 2760px; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; padding: 56px 64px; display: flex; flex-direction: column; gap: 44px">
+
+  <header style="display: grid; grid-template-columns: minmax(0, 1fr) 600px; gap: 40px; align-items: end">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span class="num">FIXR DESIGN SYSTEM · 1.0</span>
+      <h1 class="disp" style="margin: 0; font-size: 52px; line-height: 56px; font-weight: 700">Fondations</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 26px; color: #4A515E; font-weight: 500; max-width: 640px">Un bleu pétrole pour la confiance, une terre cuite pour la chaleur et l’action, des neutres sable pour la proximité. Chaque valeur existe en clair et en sombre sous le même nom de token.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 15px">Rassurer d’abord</b><span style="font-size: 13px; color: #4A515E; font-weight: 600; line-height: 19px">Vérification, prix et statut toujours visibles.</span></div>
+      <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 15px">Une action principale</b><span style="font-size: 13px; color: #4A515E; font-weight: 600; line-height: 19px">Un seul bouton pétrole par écran.</span></div>
+      <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 15px">Lisible par tous</b><span style="font-size: 13px; color: #4A515E; font-weight: 600; line-height: 19px">Textes ≥ 13 px, contrastes AA, cibles 44 px.</span></div>
+      <div class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 4px"><b style="font-size: 15px">Local et concret</b><span style="font-size: 13px; color: #4A515E; font-weight: 600; line-height: 19px">Quartiers, repères, FCFA, Mobile Money.</span></div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="sh"><span class="num">01</span><b>Logo &amp; icône</b><span>Deux barres croisées : l’outil et la main tendue.</span></div>
+    <div style="display: grid; grid-template-columns: 260px 260px minmax(0, 1fr); gap: 20px">
+      <div class="card" style="display: flex; align-items: center; justify-content: center; gap: 16px; height: 170px">
+        <svg width="84" height="84" viewBox="0 0 40 40" aria-label="Icône FIXR claire"><rect width="40" height="40" rx="12" fill="#0B4F6C"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#fff" transform="rotate(45 20 20)"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#E07A45" transform="rotate(-45 20 20)"/></svg>
+      </div>
+      <div class="card" style="display: flex; align-items: center; justify-content: center; gap: 16px; height: 170px; background: #0E1215; border-color: #0E1215">
+        <svg width="84" height="84" viewBox="0 0 40 40" aria-label="Icône FIXR sombre"><rect width="40" height="40" rx="12" fill="#F6F5F1"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#0B4F6C" transform="rotate(45 20 20)"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#E07A45" transform="rotate(-45 20 20)"/></svg>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 40px; height: 170px; padding: 0 40px">
+        <div style="display: flex; align-items: center; gap: 12px"><svg width="48" height="48" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#0B4F6C"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#fff" transform="rotate(45 20 20)"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#E07A45" transform="rotate(-45 20 20)"/></svg><span class="disp" style="font-size: 44px; font-weight: 700; letter-spacing: -0.04em">fixr</span></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A515E; font-weight: 600; line-height: 19px"><span>Mot-symbole en Bricolage Grotesque 700, minuscules, approche −4 %.</span><span>Zone de protection : ½ hauteur de l’icône.</span><span>Icône d’app : rayon 30 % (squircle iOS / adaptive Android).</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span class="num">02</span><b>Couleurs — tokens</b><span>Même nom, deux valeurs. Colonnes : clair · sombre.</span></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px">
+      <div>
+        <sc-for list="{{left}}" as="t" hint-placeholder-count="9">
+          <div class="tok"><span class="mono" style="font-size: 12px; font-weight: 700">{{t.name}}</span><span class="sw" style="background: {{t.l}}; color: {{t.lInk}}">{{t.l}}</span><span class="sw" style="background: {{t.d}}; color: {{t.dInk}}">{{t.d}}</span><span style="color: #4A515E">{{t.use}}</span></div>
+        </sc-for>
+      </div>
+      <div>
+        <sc-for list="{{right}}" as="t" hint-placeholder-count="9">
+          <div class="tok"><span class="mono" style="font-size: 12px; font-weight: 700">{{t.name}}</span><span class="sw" style="background: {{t.l}}; color: {{t.lInk}}">{{t.l}}</span><span class="sw" style="background: {{t.d}}; color: {{t.dInk}}">{{t.d}}</span><span style="color: #4A515E">{{t.use}}</span></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+      <sc-for list="{{cats}}" as="c" hint-placeholder-count="8">
+        <div style="height: 64px; border-radius: 14px; background: {{c.bg}}; color: {{c.ink}}; display: flex; flex-direction: column; justify-content: center; padding: 0 14px; font-size: 13px; font-weight: 800">{{c.label}}<span class="mono" style="font-size: 10px; font-weight: 500">{{c.bg}} / {{c.ink}}</span></div>
+      </sc-for>
+    </div>
+    <span style="font-size: 13px; color: #656B77; font-weight: 600">Teintes de catégorie : fond doux + encre foncée (contraste ≥ 4,5:1). Jamais utilisées pour une action.</span>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><span class="num">03</span><b>Typographie</b><span>Bricolage Grotesque pour les titres · Manrope pour le texte et l’interface.</span></div>
+    <div class="card" style="padding: 8px 24px">
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">display</span><span class="disp" style="font-size: 32px; line-height: 38px; font-weight: 700">Trouvez un artisan fiable</span><span class="m">Bricolage 700 · 32/38</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">title-1</span><span class="disp" style="font-size: 28px; line-height: 34px; font-weight: 700">De quoi avez-vous besoin ?</span><span class="m">Bricolage 700 · 28/34</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">title-2</span><span class="disp" style="font-size: 22px; line-height: 28px; font-weight: 700">L’artisan est en route</span><span class="m">Bricolage 700 · 22/28</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">title-3</span><span class="disp" style="font-size: 18px; line-height: 23px; font-weight: 700">Recommandés pour vous</span><span class="m">Bricolage 700 · 18/23</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">body-lg</span><span style="font-size: 16px; line-height: 24px; font-weight: 500">Comparez les notes, les avis et les disponibilités.</span><span class="m">Manrope 500 · 16/24</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">body</span><span style="font-size: 15px; line-height: 22px; font-weight: 500">Plombier depuis 2017, je travaille surtout à Fidjrossè.</span><span class="m">Manrope 500 · 15/22</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">label</span><span style="font-size: 14px; line-height: 20px; font-weight: 700">Numéro de téléphone</span><span class="m">Manrope 700 · 14/20</span></div>
+      <div class="ty"><span class="mono" style="font-size: 12px; font-weight: 700">caption</span><span style="font-size: 13px; line-height: 18px; font-weight: 600; color: #656B77">Plombier · Fidjrossè · 1,2 km</span><span class="m">Manrope 600 · 13/18</span></div>
+      <div class="ty" style="border-bottom: 0"><span class="mono" style="font-size: 12px; font-weight: 700">micro</span><span style="font-size: 11px; line-height: 14px; font-weight: 800; letter-spacing: .04em">EN ROUTE · FX-24817</span><span class="m">Manrope 800 · 11/14</span></div>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+    <div class="sec">
+      <div class="sh"><span class="num">04</span><b>Espacements</b></div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{space}}" as="s" hint-placeholder-count="9">
+          <div style="display: grid; grid-template-columns: 70px 36px minmax(0, 1fr); gap: 10px; align-items: center; font-size: 13px; font-weight: 700"><span class="mono" style="font-size: 12px">{{s.name}}</span><span style="color: #656B77">{{s.v}}</span><span style="height: 12px; width: {{s.w}}; border-radius: 3px; background: #0B4F6C"></span></div>
+        </sc-for>
+        <span style="font-size: 12px; color: #656B77; font-weight: 600; margin-top: 4px">Base 4 px · marges d’écran 20 px · gouttière cartes 12 px</span>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sh"><span class="num">05</span><b>Rayons &amp; élévation</b></div>
+      <div class="card" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <sc-for list="{{radii}}" as="r" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 6px; align-items: center"><span style="width: 64px; height: 64px; border-radius: {{r.v}}; background: #E3EEF2; border: 2px solid #0B4F6C"></span><span class="mono" style="font-size: 11px; font-weight: 700">{{r.name}}</span><span style="font-size: 11px; color: #656B77; font-weight: 600; text-align: center">{{r.use}}</span></div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <div style="height: 70px; border-radius: 16px; background: #fff; box-shadow: 0 6px 20px rgba(18,22,31,.06); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700" class="mono">elev-1</div>
+        <div style="height: 70px; border-radius: 16px; background: #fff; box-shadow: 0 14px 34px rgba(18,22,31,.16); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700" class="mono">elev-2</div>
+        <div style="height: 70px; border-radius: 16px; background: #fff; box-shadow: 0 24px 60px rgba(18,22,31,.30); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700" class="mono">elev-3</div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sh"><span class="num">06</span><b>Mouvement</b></div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; font-weight: 600; color: #4A515E">
+        <div style="display: flex; justify-content: space-between"><span class="mono" style="font-size: 12px; font-weight: 700; color: #12161F">duration.press</span><span>120 ms · échelle 0,98</span></div>
+        <div style="display: flex; justify-content: space-between"><span class="mono" style="font-size: 12px; font-weight: 700; color: #12161F">duration.base</span><span>200 ms · états, onglets</span></div>
+        <div style="display: flex; justify-content: space-between"><span class="mono" style="font-size: 12px; font-weight: 700; color: #12161F">duration.sheet</span><span>320 ms · sheets, modales</span></div>
+        <div style="display: flex; justify-content: space-between"><span class="mono" style="font-size: 12px; font-weight: 700; color: #12161F">duration.enter</span><span>450 ms · cartes (+40 ms/élément)</span></div>
+        <div style="display: flex; justify-content: space-between"><span class="mono" style="font-size: 12px; font-weight: 700; color: #12161F">ease.standard</span><span class="mono" style="font-size: 11px">cubic-bezier(.2,.8,.2,1)</span></div>
+        <div style="display: flex; justify-content: space-between"><span class="mono" style="font-size: 12px; font-weight: 700; color: #12161F">ease.spring</span><span class="mono" style="font-size: 11px">cubic-bezier(.2,1.4,.4,1)</span></div>
+        <span style="padding-top: 8px; border-top: 1px solid #F0EEE8; line-height: 19px">Réduire les animations : fondu seul, aucune boucle (pulsations, pointillés) si « réduire les mouvements » est actif.</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px">
+    <div class="sec">
+      <div class="sh"><span class="num">07</span><b>Iconographie</b><span>Grille 24, trait 1,8, extrémités arrondies</span></div>
+      <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{icons}}" as="i" hint-placeholder-count="16">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{i.d}}"/></svg></span><span style="font-size: 11px; font-weight: 700; color: #4A515E">{{i.n}}</span></div>
+        </sc-for>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sh"><span class="num">08</span><b>Plateforme &amp; accessibilité</b></div>
+      <div class="card" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; font-size: 13px; line-height: 19px; font-weight: 600; color: #4A515E">
+        <div><b style="color: #12161F; display: block; font-size: 14px">Largeurs</b>Référence 390 × 844. Testé 360 (Android compact), 375, 414. Contenu fluide, marges fixes 20 px.</div>
+        <div><b style="color: #12161F; display: block; font-size: 14px">Safe areas</b>Haut 47–59 px selon l’appareil, bas 34 px (indicateur). Barre d’onglets 54 + safe area.</div>
+        <div><b style="color: #12161F; display: block; font-size: 14px">Cibles tactiles</b>44 × 44 minimum, boutons principaux 52 px, espacement 8 px entre cibles.</div>
+        <div><b style="color: #12161F; display: block; font-size: 14px">Contrastes</b>Texte ≥ 4,5:1 (text-tertiary 4,9:1 sur bg). Statuts : couleur + libellé + icône.</div>
+        <div><b style="color: #12161F; display: block; font-size: 14px">Clavier</b>inputMode adapté (tel, numeric, email), enterKeyHint « suivant », pied de page au-dessus du clavier.</div>
+        <div><b style="color: #12161F; display: block; font-size: 14px">Texte dynamique</b>Jusqu’à 130 % sans troncature des actions ; titres sur 2 lignes max.</div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":2760}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const lum = (h) => { const n = parseInt(h.slice(1), 16); const r = n >> 16, g = (n >> 8) & 255, b = n & 255; return (0.299 * r + 0.587 * g + 0.114 * b) / 255; };
+    const tk = (name, l, d, use) => ({ name, l, d, use, lInk: lum(l) > 0.55 ? '#12161F' : '#fff', dInk: lum(d) > 0.55 ? '#12161F' : '#fff' });
+    const left = [
+      tk('bg', '#F6F5F1', '#0E1215', 'Fond d’écran'),
+      tk('surface', '#FFFFFF', '#161B20', 'Cartes, sheets, champs'),
+      tk('surface.muted', '#F2F0EB', '#1E252B', 'Boutons secondaires, puces'),
+      tk('border', '#E3E0D8', '#2A3238', 'Contours, séparateurs'),
+      tk('text', '#12161F', '#F2F1EC', 'Titres, texte principal'),
+      tk('text.secondary', '#4A515E', '#B7BCC4', 'Paragraphes'),
+      tk('text.tertiary', '#656B77', '#8C939D', 'Méta, aides'),
+      tk('primary', '#0B4F6C', '#5FB3D4', 'Action principale, liens'),
+      tk('primary.soft', '#E3EEF2', '#12303D', 'Sélection, badges info')
+    ];
+    const right = [
+      tk('on.primary', '#FFFFFF', '#04232F', 'Texte sur primary'),
+      tk('accent', '#C8531D', '#F08A58', 'Urgence, en route, badges'),
+      tk('accent.soft', '#FBECE3', '#3A2217', 'Carte « Décrire mon besoin »'),
+      tk('success', '#1D7A4E', '#4CC38A', 'Vérifié, terminé, dispo'),
+      tk('success.soft', '#E3F2EA', '#15301F', 'Fonds de succès'),
+      tk('warning', '#7A4F0C', '#E6B04A', 'En attente, peu de dispo'),
+      tk('warning.soft', '#FBF1DE', '#332812', 'Bandeaux d’attente'),
+      tk('danger', '#B02E28', '#F07A72', 'Erreurs, annulation'),
+      tk('rating', '#E0A21B', '#F2B93B', 'Étoiles uniquement')
+    ];
+    const cats = [['Plomberie', '#E3EEF2', '#0B4F6C'], ['Électricité', '#FBF1DE', '#7A4F0C'], ['Climatisation', '#DFF1F1', '#0F5E5E'], ['Peinture', '#FBECE3', '#9A3F14'], ['Menuiserie', '#F1E9E0', '#6B4A2B'], ['Serrurerie', '#EEE7F7', '#5B3A8C']].map(([label, bg, ink]) => ({ label, bg, ink }));
+    const space = [['space.1', 4], ['space.2', 8], ['space.3', 12], ['space.4', 16], ['space.5', 20], ['space.6', 24], ['space.8', 32], ['space.10', 40], ['space.12', 48]].map(([name, v]) => ({ name, v: v + '', w: (v * 4) + 'px' }));
+    const radii = [['r.sm', '8px', 'Puces, vignettes'], ['r.md', '12px', 'Petits boutons'], ['r.lg', '14px', 'Boutons, champs'], ['r.xl', '20px', 'Cartes'], ['r.2xl', '28px', 'Sheets'], ['r.full', '999px', 'Avatars, pills']].map(([name, v, use]) => ({ name, v, use }));
+    const icons = [
+      ['Accueil', 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'], ['Recherche', 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-3.5-3.5'],
+      ['Agenda', 'M6 5h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 10h18M8 3v4M16 3v4'], ['Message', 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z'],
+      ['Profil', 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0'], ['Alerte', 'M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0'],
+      ['Lieu', 'M12 21s-7-6.2-7-12a7 7 0 1 1 14 0c0 5.8-7 12-7 12z'], ['Vérifié', 'M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6zM8.5 12l2.5 2.5 4.5-5'],
+      ['Plomberie', 'M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z'], ['Électricité', 'M13 2 4 14h7l-1 8 9-12h-7z'],
+      ['Clim', 'M12 2v20M4.9 7l14.2 10M4.9 17 19.1 7'], ['Réparation', 'M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z'],
+      ['Appel', 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2'], ['Photo', 'M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z'],
+      ['Horloge', 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2'], ['Signaler', 'M5 21V4h11l-2 4 2 4H5']
+    ].map(([n, d]) => ({ n, d }));
+    return { left, right, cats, space, radii, icons };
+  }
+}
+</script>
+</body>
+</html>

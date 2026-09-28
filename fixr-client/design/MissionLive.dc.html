@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mission en cours</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.ibw{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;color:#12161F;box-shadow:0 4px 14px rgba(18,22,31,.14)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 16px;border-radius:14px;font-weight:700;font-size:15px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-s{background:#F2F0EB;color:#12161F}.btn-s:hover{color:#12161F;background:#E8E5DE}
+.mini{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#4A515E;min-height:54px;justify-content:center;border-radius:14px}
+.mini:hover{color:#12161F;background:#F6F5F1}
+.mk{position:absolute;transform:translate(-50%,-50%);transition:left 2.2s linear,top 2.2s linear}
+.halo{animation:ha 1.8s ease-out infinite}
+@keyframes ha{0%{box-shadow:0 0 0 0 rgba(200,83,29,.5)}100%{box-shadow:0 0 0 16px rgba(200,83,29,0)}}
+.dash{stroke-dasharray:8 8;animation:da 1.2s linear infinite}
+@keyframes da{to{stroke-dashoffset:-32}}
+.seg{height:6px;border-radius:3px;transition:background .5s}
+.swap{animation:sw .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes sw{from{opacity:0;transform:translateY(6px)}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #EDEAE2; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <svg width="390" height="480" viewBox="0 0 390 480" style="position: absolute; left: 0; top: 0" aria-label="Carte du trajet de l’artisan">
+    <rect width="390" height="480" fill="#EDEAE2"/>
+    <path d="M300 -10 C 290 80, 330 110, 400 120 V-10z" fill="#CFE3D3"/>
+    <path d="M200 330h80v70h-80zM20 120h70v60H20z" fill="#DFE9D7"/>
+    <g stroke="#fff" stroke-width="14" stroke-linecap="round" fill="none"><path d="M-10 300 L400 290"/><path d="M60 -10 L60 490"/><path d="M180 -10 L170 490"/><path d="M-10 160 L400 150"/></g>
+    <g stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".9"><path d="M-10 230 L400 220"/><path d="M-10 400 L400 390"/><path d="M300 -10 L300 490"/><path d="M120 -10 L115 490"/><path d="M240 -10 L236 490"/></g>
+    <path d="M60 440 L60 300 L170 290 L178 160 L300 152" stroke="#0B4F6C" stroke-opacity=".22" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path class="dash" d="M60 440 L60 300 L170 290 L178 160 L300 152" stroke="#0B4F6C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <g font-family="Manrope, system-ui, sans-serif" font-size="11" font-weight="700" fill="#8A8F99"><text x="190" y="210">HAIE VIVE</text><text x="72" y="470">FIDJROSSÈ</text></g>
+  </svg>
+  <div style="position: absolute; left: 300px; top: 152px; transform: translate(-50%,-100%)" aria-label="Votre domicile">
+    <div style="background: #12161F; color: #fff; border-radius: 12px; padding: 6px 10px; font-size: 12px; font-weight: 800; display: flex; align-items: center; gap: 6px; box-shadow: 0 6px 14px rgba(18,22,31,.25)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Chez vous</div>
+    <div style="width: 10px; height: 10px; background: #12161F; transform: rotate(45deg); margin: -5px auto 0; border-radius: 2px"></div>
+  </div>
+  <div class="mk" style="left: {{mx}}; top: {{my}}" aria-label="Position de Koffi">
+    <div class="halo" style="width: 44px; height: 44px; border-radius: 22px; background: #C8531D; border: 3px solid #fff; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 13px; box-shadow: 0 6px 16px rgba(154,63,20,.35)">KA</div>
+  </div>
+
+  <header style="position: absolute; left: 16px; right: 16px; top: 54px; display: flex; justify-content: space-between">
+    <a href="Home.dc.html" class="ibw" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+    <span style="height: 44px; padding: 0 14px; border-radius: 14px; background: #fff; box-shadow: 0 4px 14px rgba(18,22,31,.14); display: flex; align-items: center; font-size: 13px; font-weight: 800">FX-24817 · Plomberie</span>
+    <a href="#aide" class="ibw" aria-label="Aide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg></a>
+  </header>
+
+  <section aria-live="polite" style="position: absolute; left: 0; right: 0; bottom: 0; top: 376px; background: #fff; border-radius: 28px 28px 0 0; box-shadow: 0 -10px 30px rgba(18,22,31,.10); padding: 10px 20px 30px; display: flex; flex-direction: column; gap: 12px">
+    <div style="width: 40px; height: 5px; border-radius: 3px; background: #D9D5CC; margin: 0 auto"></div>
+    <div class="swap" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; font-weight: 800; color: {{stageInk}}; display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 4px; background: currentColor"></span>{{stageTag}}</span>
+        <h1 class="disp" style="margin: 0; font-size: 24px; line-height: 29px; font-weight: 700">{{title}}</h1>
+        <span style="font-size: 14px; font-weight: 600; color: #4A515E">{{subtitle}}</span>
+      </div>
+      <sc-if value="{{showEta}}" hint-placeholder-val="{{ true }}">
+        <div style="text-align: right; flex-shrink: 0"><span class="disp" style="font-size: 34px; line-height: 36px; font-weight: 700">{{eta}}</span><span style="font-size: 14px; font-weight: 800"> min</span></div>
+      </sc-if>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="{{stepNow}}" aria-label="Progression de la mission">
+        <sc-for list="{{segs}}" as="s" hint-placeholder-count="5"><span class="seg" style="background: {{s.bg}}"></span></sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; font-size: 11px; font-weight: 700; color: #656B77">
+        <sc-for list="{{segs}}" as="s" hint-placeholder-count="5"><span style="color: {{s.ink}}">{{s.label}}</span></sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{showCode}}" hint-placeholder-val="{{ false }}">
+      <div class="swap" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: #E3F2EA">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D6B45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+        <span style="flex-grow: 1; font-size: 13px; font-weight: 700; color: #144D31; line-height: 18px">Code de mission à donner à Koffi à son arrivée</span>
+        <span class="disp" style="font-size: 22px; font-weight: 700; letter-spacing: .12em; color: #144D31">4721</span>
+      </div>
+    </sc-if>
+
+    <div style="display: flex; gap: 12px; align-items: center">
+      <div style="width: 48px; height: 48px; border-radius: 999px; background: #FBECE3; color: #9A3F14; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0">KA</div>
+      <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px">
+        <span style="font-size: 15px; font-weight: 800">Koffi Agbodjan</span>
+        <span style="font-size: 13px; color: #656B77; font-weight: 600">★ 4,9 · Moto bleue · AB 4521 RB</span>
+      </div>
+      <a href="tel:+22901000000" aria-label="Appeler Koffi" style="width: 48px; height: 48px; border-radius: 14px; background: #F2F0EB; display: flex; align-items: center; justify-content: center; color: #12161F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+    </div>
+
+    <sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}">
+      <a href="Chat.dc.html" class="btn btn-p"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Contacter l’artisan</a>
+    </sc-if>
+    <sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+      <a href="Report.dc.html" class="btn btn-p swap">Voir le rapport d’intervention</a>
+    </sc-if>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: auto">
+      <a href="BookingDetail.dc.html" class="mini"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Modifier</a>
+      <button class="mini"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>Partager le suivi</button>
+      <a href="#aide" class="mini"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg>Besoin d’aide</a>
+    </div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tick: 0 }; }
+  componentDidMount() { this.t = setInterval(() => { if (this.state.tick < 20) this.setState({ tick: this.state.tick + 1 }); }, 2400); }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    const tick = this.state.tick;
+    const eta = Math.max(0, 12 - tick);
+    const stage = eta > 0 ? 'road' : tick < 14 ? 'here' : tick < 19 ? 'work' : 'done';
+    const P = [[60, 440], [60, 300], [170, 290], [178, 160], [300, 152]];
+    const lens = []; let total = 0;
+    for (let i = 1; i < P.length; i++) { const l = Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]); lens.push(l); total += l; }
+    let d = total * Math.min(1, (0.38 + 0.62 * (12 - eta) / 12)), x = P[0][0], y = P[0][1];
+    for (let i = 0; i < lens.length; i++) { if (d <= lens[i]) { const r = d / lens[i]; x = P[i][0] + (P[i + 1][0] - P[i][0]) * r; y = P[i][1] + (P[i + 1][1] - P[i][1]) * r; break; } d -= lens[i]; x = P[i + 1][0]; y = P[i + 1][1]; }
+    if (stage !== 'road') { x = 300; y = 176; }
+    const nowIdx = { road: 1, here: 2, work: 3, done: 4 }[stage];
+    const labels = ['Confirmée', 'En route', 'Sur place', 'Travaux', 'Terminé'];
+    const segs = labels.map((label, i) => ({ label, bg: i < nowIdx ? '#0B4F6C' : i === nowIdx ? '#C8531D' : '#ECE9E2', ink: i === nowIdx ? '#12161F' : '#656B77' }));
+    if (stage === 'done') segs.forEach((s) => { s.bg = '#1D7A4E'; });
+    const T = {
+      road: ['EN ROUTE', '#9A3F14', 'L’artisan est en route', 'Arrivée estimée ' + '14:' + String(12 - Math.min(12, tick) + tick).padStart(2, '0') + ' · à ' + (eta * 0.3).toFixed(1).replace('.', ',') + ' km'],
+      here: ['SUR PLACE', '#1D6B45', 'Koffi est arrivé', 'Il est devant votre portail · 14:12'],
+      work: ['EN COURS', '#0B4F6C', 'Intervention en cours', 'Démarrée à 14:15 · recherche de la fuite'],
+      done: ['TERMINÉE', '#1D6B45', 'Intervention terminée', 'Le rapport d’intervention est disponible']
+    }[stage];
+    return {
+      mx: x + 'px', my: y + 'px', eta, showEta: stage === 'road', showCode: stage === 'here' || stage === 'road',
+      stageTag: T[0], stageInk: T[1], title: T[2], subtitle: T[3], segs, stepNow: nowIdx + 1,
+      done: stage === 'done', notDone: stage !== 'done'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Profil artisan — états</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#E4E1D9}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.col{display:flex;flex-direction:column;gap:16px}
+.lab{display:flex;flex-direction:column;gap:4px;height:60px}
+.lab b{font-size:18px;font-family:'Bricolage Grotesque',system-ui,sans-serif}
+.lab span{font-size:14px;color:#4A515E;font-weight:600}
+.ph{width:390px;height:844px;border-radius:28px;overflow:hidden;background:#F6F5F1;position:relative;box-shadow:0 20px 50px rgba(18,22,31,.14);display:flex;flex-direction:column;padding:54px 20px 34px;gap:16px}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #ECE9E2;color:#12161F}
+.card{background:#fff;border-radius:20px;border:1px solid #ECE9E2;padding:16px}
+.tag{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 18px;border-radius:14px;font-weight:700;font-size:16px}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{color:#fff}
+.btn-s{background:#fff;color:#12161F;border:1.5px solid #D9D5CC}
+.btn-dis{background:#E3E0D8;color:#7A808B}
+.hd{display:flex;gap:14px;align-items:center}
+.av{width:72px;height:72px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;flex-shrink:0}
+.h2{margin:0;font-size:17px;font-weight:700}
+.muted{font-size:14px;color:#4A515E;font-weight:600;line-height:20px}
+.row{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #F0EEE8}
+.sk{background:linear-gradient(90deg,#EEECE6 0%,#F7F6F2 50%,#EEECE6 100%);background-size:200% 100%;animation:sk 1.2s linear infinite;border-radius:8px}
+@keyframes sk{to{background-position:-200% 0}}
+</style>
+</helmet>
+<div style="width: 1760px; height: 1004px; background: #E4E1D9; padding: 40px; display: grid; grid-template-columns: repeat(4, 390px); gap: 40px; font-family: Manrope, system-ui, sans-serif; color: #12161F">
+
+  <div class="col">
+    <div class="lab"><b>Artisan indisponible</b><span>Alternative proposée, action principale redirigée.</span></div>
+    <div class="ph">
+      <a href="Results.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div class="hd">
+        <div class="av" style="background: #FBECE3; color: #9A3F14; filter: grayscale(.4)">KA</div>
+        <div style="display: flex; flex-direction: column; gap: 4px"><span class="disp" style="font-size: 22px; font-weight: 700">Koffi Agbodjan</span><span class="muted">Plombier · ★ 4,9 (212)</span><span class="tag" style="background: #ECE9E2; color: #4A515E; align-self: flex-start">Indisponible</span></div>
+      </div>
+      <div role="status" style="border-radius: 16px; background: #FBF1DE; padding: 14px; display: flex; gap: 12px; align-items: flex-start">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4F0C" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 15px; color: #5C3B08">De retour le lundi 5 octobre</strong><span style="font-size: 14px; color: #6B4A12; font-weight: 600; line-height: 20px">Koffi est en congé. Nous pouvons vous prévenir dès son retour.</span>
+          <button style="align-self: flex-start; height: 40px; font-weight: 800; color: #5C3B08; text-decoration: underline; font-size: 14px">Me prévenir</button></div>
+      </div>
+      <h2 class="h2 disp">Disponibles aujourd’hui, même qualité</h2>
+      <div class="card" style="padding: 4px 14px">
+        <div class="row"><div class="av" style="width: 44px; height: 44px; font-size: 15px; background: #E3F2EA; color: #1D6B45">SH</div><div style="flex-grow: 1; display: flex; flex-direction: column"><strong style="font-size: 15px">Sèdjro Houénou</strong><span style="font-size: 13px; color: #656B77; font-weight: 600">★ 4,7 · 2,8 km · Dispo 16h</span></div><a href="ArtisanProfile.dc.html" style="font-weight: 800; font-size: 14px; min-height: 44px; display: flex; align-items: center">Voir</a></div>
+        <div class="row" style="border-bottom: 0"><div class="av" style="width: 44px; height: 44px; font-size: 15px; background: #FBF1DE; color: #7A4F0C">DT</div><div style="flex-grow: 1; display: flex; flex-direction: column"><strong style="font-size: 15px">Dieudonné Tossou</strong><span style="font-size: 13px; color: #656B77; font-weight: 600">★ 4,8 · 2,4 km · Dispo 18h</span></div><a href="ArtisanProfile.dc.html" style="font-weight: 800; font-size: 14px; min-height: 44px; display: flex; align-items: center">Voir</a></div>
+      </div>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+        <a href="Results.dc.html" class="btn btn-p">Voir les artisans disponibles</a>
+        <span class="btn btn-dis" aria-disabled="true" style="height: 44px; font-size: 14px">Demander à Koffi · indisponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="lab"><b>Profil incomplet</b><span>Données manquantes signalées sans alarmer.</span></div>
+    <div class="ph">
+      <a href="Results.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div class="hd">
+        <div class="av" style="background: #E9EBEF; color: #3A4250">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px"><span class="disp" style="font-size: 22px; font-weight: 700">Rachidi Bello</span><span class="muted">Électricien · Porto-Novo</span>
+          <div style="display: flex; gap: 6px"><span class="tag" style="background: #E3EEF2; color: #0B4F6C">Identité vérifiée</span><span class="tag" style="background: #FBECE3; color: #9A3F14">Nouveau</span></div></div>
+      </div>
+      <div style="border-radius: 16px; background: #E3EEF2; padding: 14px; display: flex; gap: 12px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B4F6C" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg>
+        <span style="font-size: 14px; line-height: 20px; color: #0A3D53; font-weight: 600">Nouveau sur FIXR : son identité a été vérifiée, ses premiers avis arriveront après ses missions.</span>
+      </div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 6px"><h2 class="h2 disp">À propos</h2><span class="muted" style="color: #656B77; font-style: italic">L’artisan n’a pas encore rédigé de présentation.</span></div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 10px"><h2 class="h2 disp">Réalisations</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"><div style="height: 84px; border-radius: 12px; border: 1.5px dashed #D9D5CC"></div><div style="height: 84px; border-radius: 12px; border: 1.5px dashed #D9D5CC"></div><div style="height: 84px; border-radius: 12px; border: 1.5px dashed #D9D5CC"></div></div>
+        <span style="font-size: 13px; color: #656B77; font-weight: 600">Aucune photo pour le moment</span></div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 4px; align-items: center; text-align: center; padding: 20px"><span style="font-size: 26px; color: #D9D5CC; letter-spacing: 2px" aria-hidden="true">★★★★★</span><strong style="font-size: 15px">Pas encore d’avis</strong><span class="muted" style="font-size: 13px">Soyez le premier à le noter après l’intervention.</span></div>
+      <div style="margin-top: auto; display: flex; gap: 10px">
+        <a href="Chat.dc.html" class="btn btn-s" style="width: 52px; padding: 0" aria-label="Contacter"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></a>
+        <a href="RequestNeed.dc.html" class="btn btn-p" style="flex-grow: 1">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="lab"><b>Artisan déjà sélectionné</b><span>Évite les doublons, renvoie vers la mission.</span></div>
+    <div class="ph">
+      <a href="Results.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div class="hd">
+        <div class="av" style="background: #FBECE3; color: #9A3F14">KA</div>
+        <div style="display: flex; flex-direction: column; gap: 4px"><span class="disp" style="font-size: 22px; font-weight: 700">Koffi Agbodjan</span><span class="muted">Plombier · ★ 4,9 (212)</span><span class="tag" style="background: #E3EEF2; color: #0B4F6C; align-self: flex-start">Profil vérifié</span></div>
+      </div>
+      <div role="status" style="border-radius: 18px; background: #E3F2EA; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; gap: 10px; align-items: center"><span style="width: 32px; height: 32px; border-radius: 10px; background: #1D7A4E; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><strong style="font-size: 15px; color: #144D31">Déjà réservé pour vous</strong></div>
+        <span style="font-size: 14px; line-height: 20px; color: #1F5A3C; font-weight: 600">Koffi intervient aujourd’hui, 14:00 – 16:00 pour « Fuite sous l’évier » (FX-24817).</span>
+      </div>
+      <div class="card" style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between"><span class="muted">Statut</span><span class="tag" style="background: #FBECE3; color: #9A3F14">En route · 12 min</span></div>
+        <div style="height: 6px; border-radius: 3px; background: #F0EEE8"><div style="width: 62%; height: 100%; border-radius: 3px; background: #C8531D"></div></div>
+      </div>
+      <p class="muted" style="margin: 0">Besoin d’un autre travail ? Vous pouvez créer une nouvelle demande avec Koffi pour une autre date.</p>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+        <a href="MissionLive.dc.html" class="btn btn-p">Suivre ma réservation</a>
+        <a href="RequestNeed.dc.html" class="btn btn-s">Nouvelle demande</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="lab"><b>Erreur de chargement</b><span>Squelette figé + message clair + réessai.</span></div>
+    <div class="ph">
+      <a href="Results.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div class="hd" style="opacity: .55" aria-hidden="true"><div class="sk" style="width: 72px; height: 72px; border-radius: 999px"></div><div style="flex-grow: 1; display: flex; flex-direction: column; gap: 8px"><div class="sk" style="height: 18px; width: 70%"></div><div class="sk" style="height: 14px; width: 45%"></div></div></div>
+      <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px; padding: 0 12px">
+        <div style="width: 88px; height: 88px; border-radius: 28px; background: #FBE7E5; display: flex; align-items: center; justify-content: center"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#B02E28" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 9.5v4.5M12 17v.01"/></svg></div>
+        <h2 class="disp" style="margin: 0; font-size: 22px; font-weight: 700">Impossible de charger ce profil</h2>
+        <p class="muted" style="margin: 0; max-width: 290px">Le réseau semble instable. Vos données sont en sécurité, réessayez dans un instant.</p>
+        <span style="font-size: 12px; color: #656B77; font-weight: 600">Code : PRF-503</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <a href="ArtisanProfile.dc.html" class="btn btn-p"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg>Réessayer</a>
+        <a href="Results.dc.html" class="btn" style="color: #0B4F6C; height: 44px">Retour aux résultats</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1760,"height":1004}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

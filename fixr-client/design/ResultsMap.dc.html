@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Résultats — Carte</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;color:#12161F;box-shadow:0 4px 14px rgba(18,22,31,.14);flex-shrink:0}
+.pin{position:absolute;transform:translate(-50%,-100%);height:34px;padding:0 10px;border-radius:999px;background:#fff;color:#12161F;font-size:13px;font-weight:800;display:flex;align-items:center;gap:4px;box-shadow:0 4px 12px rgba(18,22,31,.18);transition:transform .18s cubic-bezier(.2,1.4,.4,1),background .15s}
+.pin::after{content:'';position:absolute;left:50%;bottom:-5px;width:10px;height:10px;background:inherit;transform:translateX(-50%) rotate(45deg);border-radius:2px}
+.pin-on{background:#0B4F6C;color:#fff;transform:translate(-50%,-100%) scale(1.12);z-index:2}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;height:44px;padding:0 14px;border-radius:12px;font-weight:700;font-size:14px}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-s{background:#F2F0EB;color:#12161F}.btn-s:hover{color:#12161F}
+.me{animation:pu 2s ease-out infinite}
+@keyframes pu{0%{box-shadow:0 0 0 0 rgba(11,79,108,.45)}100%{box-shadow:0 0 0 18px rgba(11,79,108,0)}}
+.su{animation:su .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes su{from{opacity:0;transform:translateY(16px)}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #EAE7DF; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <svg width="390" height="844" viewBox="0 0 390 844" style="position: absolute; inset: 0" aria-label="Carte des artisans autour de Haie Vive">
+    <rect width="390" height="844" fill="#EDEAE2"/>
+    <path d="M0 700 C 90 680, 180 720, 260 700 S 360 690, 390 700 V844 H0z" fill="#BFD9E3"/>
+    <path d="M300 0 C 290 120, 330 200, 390 230 V0z" fill="#CFE3D3"/>
+    <path d="M20 250 h90 v70 h-90z M150 380 h70 v90 h-70z" fill="#DFE9D7"/>
+    <g stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" fill="none">
+      <path d="M-10 170 L400 130"/><path d="M-10 420 L400 400"/><path d="M-10 610 L400 590"/>
+      <path d="M120 -10 L140 860"/><path d="M270 -10 L250 700"/>
+    </g>
+    <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" opacity=".9">
+      <path d="M-10 300 L400 280"/><path d="M-10 520 L400 500"/><path d="M60 -10 L70 700"/><path d="M200 -10 L195 700"/><path d="M340 -10 L330 700"/>
+    </g>
+    <g font-family="Manrope, system-ui, sans-serif" font-size="11" font-weight="700" fill="#8A8F99">
+      <text x="150" y="360">HAIE VIVE</text><text x="20" y="480">CADJÈHOUN</text><text x="280" y="340">GANHI</text><text x="130" y="760" fill="#5E8797">Océan Atlantique</text>
+    </g>
+  </svg>
+
+  <div class="me" style="position: absolute; left: 180px; top: 440px; width: 20px; height: 20px; border-radius: 10px; background: #0B4F6C; border: 4px solid #fff" aria-label="Votre position"></div>
+  <sc-for list="{{pins}}" as="p" hint-placeholder-count="5">
+    <button class="{{p.cls}}" style="left: {{p.x}}; top: {{p.y}}" onClick="{{p.pick}}" aria-label="{{p.aria}}">
+      <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#E0A21B"/></svg>{{p.rate}}
+    </button>
+  </sc-for>
+
+  <header style="position: absolute; left: 16px; right: 16px; top: 54px; display: flex; gap: 10px; align-items: center">
+    <a href="Results.dc.html" class="ib" aria-label="Retour à la liste"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+    <a href="Search.dc.html" style="flex-grow: 1; height: 44px; border-radius: 14px; background: #fff; box-shadow: 0 4px 14px rgba(18,22,31,.14); display: flex; align-items: center; gap: 8px; padding: 0 14px; color: #12161F; font-size: 14px; font-weight: 700">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Plomberie <span style="color: #656B77; font-weight: 600">· Haie Vive</span>
+    </a>
+    <a href="Filters.dc.html" class="ib" aria-label="Filtres, 2 actifs"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></a>
+  </header>
+  <button style="position: absolute; left: 50%; top: 112px; transform: translateX(-50%); height: 40px; padding: 0 16px; border-radius: 999px; background: #12161F; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px; box-shadow: 0 6px 16px rgba(18,22,31,.25)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg>Rechercher dans cette zone
+  </button>
+  <button class="ib" aria-label="Recentrer sur ma position" style="position: absolute; right: 16px; top: 540px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B4F6C" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button>
+
+  <sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+    <article class="su" style="position: absolute; left: 16px; right: 16px; bottom: 34px; background: #fff; border-radius: 22px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 16px 40px rgba(18,22,31,.2)">
+      <div style="display: flex; gap: 12px; align-items: center">
+        <div style="width: 56px; height: 56px; border-radius: 999px; background: {{sel.bg}}; color: {{sel.ink}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0">{{sel.ini}}</div>
+        <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-weight: 800; font-size: 16px">{{sel.name}}</span>
+          <span style="font-size: 13px; color: #4A515E; font-weight: 600">★ {{sel.rate}} ({{sel.reviews}} avis) · {{sel.km}}</span>
+          <span style="font-size: 13px; font-weight: 800; color: #1D6B45">{{sel.avail}} · <span style="color: #12161F">{{sel.price}}</span></span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <a href="ArtisanProfile.dc.html" class="btn btn-s">Voir le profil</a>
+        <a href="RequestNeed.dc.html" class="btn btn-p">Demander</a>
+      </div>
+    </article>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 0 }; }
+  renderVals() {
+    const A = [
+      { x: '118px', y: '372px', ini: 'KA', name: 'Koffi Agbodjan', rate: '4,9', reviews: 212, km: '1,2 km', avail: 'Dispo aujourd’hui', price: 'Dès 5 000 FCFA', bg: '#FBECE3', ink: '#9A3F14' },
+      { x: '262px', y: '250px', ini: 'SH', name: 'Sèdjro Houénou', rate: '4,7', reviews: 88, km: '2,8 km', avail: 'Dispo 16h', price: 'Dès 4 000 FCFA', bg: '#E3F2EA', ink: '#1D6B45' },
+      { x: '300px', y: '470px', ini: 'BM', name: 'Bernard Mensah', rate: '4,6', reviews: 143, km: '3,4 km', avail: 'Demain', price: 'Sur devis', bg: '#EEE7F7', ink: '#5B3A8C' },
+      { x: '70px', y: '560px', ini: 'AL', name: 'Anicet Lokossou', rate: '4,5', reviews: 21, km: '2,1 km', avail: 'Dispo aujourd’hui', price: 'Dès 3 500 FCFA', bg: '#E3EEF2', ink: '#0B4F6C' },
+      { x: '210px', y: '220px', ini: 'DT', name: 'Dieudonné Tossou', rate: '4,8', reviews: 64, km: '2,4 km', avail: 'Dispo 18h', price: 'Dès 6 000 FCFA', bg: '#FBF1DE', ink: '#7A4F0C' }
+    ];
+    const s = this.state.sel;
+    return {
+      pins: A.map((a, i) => ({ ...a, cls: 'pin' + (i === s ? ' pin-on' : ''), aria: a.name + ', note ' + a.rate, pick: () => this.setState({ sel: i }) })),
+      sel: A[s], hasSel: s !== null
+    };
+  }
+}
+</script>
+</body>
+</html>

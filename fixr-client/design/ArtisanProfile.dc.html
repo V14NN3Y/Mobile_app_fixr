@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Profil artisan — Koffi Agbodjan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar,.hs::-webkit-scrollbar{display:none}
+.hs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+.ibw{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);color:#12161F;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.card{background:#fff;border-radius:20px;border:1px solid #ECE9E2;padding:16px}
+.h2{margin:0;font-size:18px;line-height:23px;font-weight:700}
+.tag{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap}
+.skill{display:inline-flex;align-items:center;height:34px;padding:0 12px;border-radius:10px;background:#F2F0EB;font-size:13px;font-weight:700}
+.stat{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 4px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 18px;border-radius:14px;font-weight:700;font-size:16px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.price{display:flex;justify-content:space-between;align-items:center;min-height:44px;font-size:14px;font-weight:600;border-bottom:1px solid #F0EEE8}
+.fav{transition:transform .2s cubic-bezier(.2,1.6,.4,1)}.fav:active{transform:scale(.85)}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <div class="scroll">
+    <div style="height: 230px; position: relative; background: #0B4F6C; overflow: hidden">
+      <svg width="390" height="230" viewBox="0 0 390 230" aria-hidden="true" style="position: absolute; inset: 0">
+        <g fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="2">
+          <circle cx="330" cy="40" r="120"/><circle cx="330" cy="40" r="80"/><circle cx="330" cy="40" r="40"/>
+        </g>
+        <path d="M0 180 C 100 150, 240 210, 390 170 V230 H0z" fill="#0A4660"/>
+      </svg>
+      <span style="position: absolute; left: 20px; bottom: 16px; font-size: 11px; font-weight: 700; color: #BFE0EC; letter-spacing: .04em">PHOTO DE COUVERTURE · CHANTIER RÉCENT</span>
+    </div>
+    <div style="position: absolute; left: 16px; right: 16px; top: 54px; display: flex; justify-content: space-between; z-index: 2">
+      <a href="Results.dc.html" class="ibw" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div style="display: flex; gap: 8px">
+        <button class="ibw" aria-label="Partager le profil"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg></button>
+        <button class="ibw fav" onClick="{{toggleFav}}" aria-pressed="{{fav}}" aria-label="Ajouter aux favoris"><svg width="20" height="20" viewBox="0 0 24 24" fill="{{favFill}}" stroke="{{favStroke}}" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-8-4.6-8-10.2A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.8C20 15.4 12 20 12 20z"/></svg></button>
+      </div>
+    </div>
+
+    <div style="padding: 0 20px 130px; display: flex; flex-direction: column; gap: 16px; margin-top: -52px; position: relative">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between">
+        <div style="width: 104px; height: 104px; border-radius: 999px; background: #FBECE3; color: #9A3F14; border: 4px solid #F6F5F1; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 34px; font-family: 'Bricolage Grotesque', system-ui, sans-serif" aria-label="Photo de Koffi Agbodjan">KA</div>
+        <span class="tag" style="background: #E3F2EA; color: #1D6B45; margin-bottom: 8px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #2EA067"></span>En ligne</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 class="disp" style="margin: 0; font-size: 26px; line-height: 31px; font-weight: 700; display: flex; align-items: center; gap: 8px">Koffi Agbodjan
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Profil vérifié"><path d="M12 2.5 14.6 4l3-.2 1 2.8 2.4 1.8-.9 2.9.9 2.9-2.4 1.8-1 2.8-3-.2L12 21.5 9.4 20l-3 .2-1-2.8L3 15.6l.9-2.9L3 9.8l2.4-1.8 1-2.8 3 .2z" fill="#0B4F6C"/><path d="m8.5 12 2.4 2.4 4.6-4.8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </h1>
+        <span style="font-size: 15px; color: #4A515E; font-weight: 600">Plombier-sanitaire · Fidjrossè, Cotonou</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px">
+          <span class="tag" style="background: #E3EEF2; color: #0B4F6C"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Profil vérifié</span>
+          <span class="tag" style="background: #12161F; color: #fff">Pro certifié</span>
+          <span class="tag" style="background: #F2F0EB; color: #12161F">Répond en ~10 min</span>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 4px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr))">
+        <div class="stat"><span class="disp" style="font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 4px">4,9<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#E0A21B"/></svg></span><span style="font-size: 12px; color: #656B77; font-weight: 700">212 avis</span></div>
+        <div class="stat" style="border-left: 1px solid #F0EEE8; border-right: 1px solid #F0EEE8"><span class="disp" style="font-size: 22px; font-weight: 700">480</span><span style="font-size: 12px; color: #656B77; font-weight: 700">interventions</span></div>
+        <div class="stat"><span class="disp" style="font-size: 22px; font-weight: 700">9 ans</span><span style="font-size: 12px; color: #656B77; font-weight: 700">d’expérience</span></div>
+      </div>
+
+      <div class="card" style="display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h2 disp">Disponibilité</h2><span class="tag" style="background: #E3F2EA; color: #1D6B45">Aujourd’hui</span></div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">
+          <sc-for list="{{days}}" as="d" hint-placeholder-count="5">
+            <div style="height: 58px; border-radius: 12px; background: {{d.bg}}; color: {{d.ink}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 11px; font-weight: 700">{{d.day}}</span><span style="font-size: 16px; font-weight: 800">{{d.num}}</span></div>
+          </sc-for>
+        </div>
+        <span style="font-size: 14px; font-weight: 600; color: #4A515E">Prochain créneau : <strong style="color: #12161F">aujourd’hui, 16:00 – 18:00</strong></span>
+      </div>
+
+      <section style="display: flex; flex-direction: column; gap: 8px">
+        <h2 class="h2 disp">À propos</h2>
+        <p style="margin: 0; font-size: 15px; line-height: 23px; color: #4A515E; font-weight: 500">Plombier depuis 2017, je travaille surtout à Fidjrossè, Haie Vive et Cadjèhoun. Recherche de fuites, débouchage, pose de chauffe-eau et de surpresseurs. Je donne toujours un devis avant de commencer et je laisse le chantier propre.</p>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 class="h2 disp">Compétences</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span class="skill">Recherche de fuite</span><span class="skill">Débouchage</span><span class="skill">Chauffe-eau</span><span class="skill">Surpresseur &amp; pompe</span><span class="skill">Tuyauterie PPR / PVC</span><span class="skill">Sanitaires</span>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 class="h2 disp">Zones couvertes</h2>
+        <div class="card" style="display: flex; gap: 12px; align-items: flex-start; padding: 14px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8531D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 21s-7-6.2-7-12a7 7 0 1 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span style="font-size: 14px; line-height: 21px; font-weight: 600; color: #4A515E"><strong style="color: #12161F">Cotonou</strong> — Fidjrossè, Haie Vive, Cadjèhoun, Gbégamey, Akpakpa<br><strong style="color: #12161F">Abomey-Calavi</strong> — Godomey, Zogbadjè</span>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h2 disp">Réalisations</h2><a href="#galerie" style="font-size: 14px; font-weight: 700; min-height: 44px; display: flex; align-items: center">Voir les 24</a></div>
+        <div class="hs">
+          <sc-for list="{{gallery}}" as="g" hint-placeholder-count="3">
+            <figure style="margin: 0; width: 150px; flex-shrink: 0; display: flex; flex-direction: column; gap: 6px">
+              <div style="height: 150px; border-radius: 16px; background: {{g.bg}}; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center" aria-label="Photo : {{g.caption}}">
+                <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="{{g.ink}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-8 9"/></svg>
+                <span style="position: absolute; left: 8px; top: 8px; font-size: 11px; font-weight: 800; background: rgba(255,255,255,.92); color: #12161F; border-radius: 999px; padding: 3px 8px">{{g.tag}}</span>
+              </div>
+              <figcaption style="font-size: 13px; font-weight: 700">{{g.caption}}</figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 10px">
+        <h2 class="h2 disp">Tarifs indicatifs</h2>
+        <div class="card" style="padding: 4px 16px">
+          <div class="price"><span>Déplacement + diagnostic</span><strong>2 000 FCFA</strong></div>
+          <div class="price"><span>Recherche de fuite</span><strong>dès 5 000 FCFA</strong></div>
+          <div class="price"><span>Remplacement de robinet</span><strong>dès 4 000 FCFA</strong></div>
+          <div class="price" style="border-bottom: 0"><span>Pose de chauffe-eau</span><strong>dès 15 000 FCFA</strong></div>
+        </div>
+        <span style="font-size: 13px; color: #656B77; font-weight: 600">Le prix final est confirmé par devis avant les travaux.</span>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h2 disp">Avis clients</h2><a href="#avis" style="font-size: 14px; font-weight: 700; min-height: 44px; display: flex; align-items: center">Tous les avis</a></div>
+        <div class="card" style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center">
+          <div style="display: flex; flex-direction: column; align-items: center"><span class="disp" style="font-size: 40px; line-height: 44px; font-weight: 700">4,9</span><span style="font-size: 12px; color: #656B77; font-weight: 700">212 avis</span></div>
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <sc-for list="{{dist}}" as="r" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #4A515E"><span style="width: 8px">{{r.n}}</span><div style="flex-grow: 1; height: 6px; border-radius: 3px; background: #F0EEE8"><div style="width: {{r.w}}; height: 100%; border-radius: 3px; background: #E0A21B"></div></div></div>
+            </sc-for>
+          </div>
+        </div>
+        <sc-for list="{{reviews}}" as="v" hint-placeholder-count="2">
+          <article class="card" style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <div style="width: 36px; height: 36px; border-radius: 999px; background: #F2F0EB; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px">{{v.ini}}</div>
+              <div style="flex-grow: 1; display: flex; flex-direction: column"><span style="font-weight: 800; font-size: 14px">{{v.name}}</span><span style="font-size: 12px; color: #656B77; font-weight: 600">{{v.meta}}</span></div>
+              <span style="font-size: 13px; font-weight: 800; color: #7A4F0C">★ {{v.rate}}</span>
+            </div>
+            <p style="margin: 0; font-size: 14px; line-height: 21px; color: #4A515E; font-weight: 500">{{v.text}}</p>
+          </article>
+        </sc-for>
+      </section>
+    </div>
+  </div>
+
+  <footer style="position: absolute; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,.97); backdrop-filter: blur(12px); border-top: 1px solid #ECE9E2; padding: 12px 20px 34px; display: flex; gap: 10px; align-items: center">
+    <a href="Chat.dc.html" aria-label="Contacter Koffi" style="width: 52px; height: 52px; border-radius: 14px; border: 1.5px solid #D9D5CC; display: flex; align-items: center; justify-content: center; color: #12161F; flex-shrink: 0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></a>
+    <a href="RequestNeed.dc.html" class="btn btn-p" style="flex-grow: 1; flex-direction: column; gap: 0; line-height: 18px"><span>Demander une intervention</span><span style="font-size: 12px; font-weight: 600; color: #BFE0EC">Dès 5 000 FCFA · devis gratuit</span></a>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { fav: false }; }
+  renderVals() {
+    const fav = this.state.fav;
+    const days = [['Lun', '28', 'ok'], ['Mar', '29', 'ok'], ['Mer', '30', 'full'], ['Jeu', '1', 'ok'], ['Ven', '2', 'ok']].map(([day, num, st]) => ({
+      day, num, bg: st === 'full' ? '#F2F0EB' : (num === '28' ? '#0B4F6C' : '#E3EEF2'), ink: st === 'full' ? '#8A8F99' : (num === '28' ? '#fff' : '#0B4F6C')
+    }));
+    return {
+      fav, favFill: fav ? '#C8531D' : 'none', favStroke: fav ? '#C8531D' : '#12161F',
+      toggleFav: () => this.setState({ fav: !fav }),
+      days,
+      gallery: [
+        { tag: 'Avant / Après', caption: 'Salle de bain · Cadjèhoun', bg: '#E3EEF2', ink: '#0B4F6C' },
+        { tag: 'Chauffe-eau', caption: 'Pose 100 L · Haie Vive', bg: '#FBECE3', ink: '#9A3F14' },
+        { tag: 'Surpresseur', caption: 'Villa · Godomey', bg: '#E3F2EA', ink: '#1D6B45' }
+      ],
+      dist: [['5', '88%'], ['4', '9%'], ['3', '2%'], ['2', '1%'], ['1', '0%']].map(([n, w]) => ({ n, w })),
+      reviews: [
+        { ini: 'MA', name: 'Mireille A.', meta: 'Fuite de chasse d’eau · il y a 3 jours', rate: '5,0', text: 'Arrivé à l’heure, il a trouvé la fuite en 15 minutes et m’a montré les pièces changées. Très propre.' },
+        { ini: 'OK', name: 'Olivier K.', meta: 'Pose chauffe-eau · il y a 2 semaines', rate: '4,5', text: 'Travail sérieux, devis respecté. Un petit retard à cause des embouteillages mais il a prévenu.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

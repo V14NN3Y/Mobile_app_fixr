@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Notifications</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#12161F}
+.chip{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E3E0D8;font-size:14px;font-weight:700;transition:all .15s}
+.chip-on{background:#12161F;border-color:#12161F;color:#fff}
+.grp{margin:0;padding:18px 20px 8px;font-size:13px;font-weight:800;color:#656B77;letter-spacing:.04em;text-transform:uppercase}
+.n{display:flex;gap:12px;padding:14px 20px;color:#12161F;position:relative;transition:background .3s}
+.n:hover{color:#12161F;background:#EFEDE7}
+.fu{animation:fu .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fu{from{opacity:0;transform:translateY(6px)}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <div class="scroll">
+    <header style="position: sticky; top: 0; z-index: 2; background: rgba(246,245,241,.97); backdrop-filter: blur(12px); padding: 54px 12px 10px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #ECE9E2">
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <a href="Home.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+        <a href="Settings.dc.html" class="ib" aria-label="Préférences de notification"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></a>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 8px">
+        <h1 class="disp" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 700">Notifications</h1>
+        <sc-if value="{{hasUnread}}" hint-placeholder-val="{{ true }}"><button onClick="{{markAll}}" style="font-size: 14px; font-weight: 800; color: #0B4F6C; min-height: 44px">Tout marquer comme lu</button></sc-if>
+      </div>
+      <div style="display: flex; gap: 8px; padding: 0 8px">
+        <button class="{{allCls}}" onClick="{{showAll}}" aria-pressed="{{isAll}}">Toutes</button>
+        <button class="{{unCls}}" onClick="{{showUnread}}" aria-pressed="{{isUn}}">Non lues · {{unreadCount}}</button>
+      </div>
+    </header>
+
+    <div style="padding-bottom: 40px" aria-live="polite">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <section>
+          <h2 class="grp">{{g.label}}</h2>
+          <sc-for list="{{g.items}}" as="n" hint-placeholder-count="3">
+            <a href="{{n.href}}" class="n fu" style="background: {{n.rowBg}}" onClick="{{n.read}}">
+              <span style="width: 44px; height: 44px; border-radius: 14px; background: {{n.bg}}; color: {{n.ink}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{n.d}}"/></svg></span>
+              <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0">
+                <span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 15px; font-weight: {{n.w}}; line-height: 20px">{{n.title}}</span><span style="font-size: 12px; font-weight: 700; color: #656B77; flex-shrink: 0">{{n.time}}</span></span>
+                <span style="font-size: 14px; line-height: 20px; color: #4A515E; font-weight: 500">{{n.body}}</span>
+                <span style="font-size: 13px; font-weight: 800; color: #0B4F6C; margin-top: 2px">{{n.cta}}</span>
+              </span>
+              <sc-if value="{{n.unread}}" hint-placeholder-val="{{ false }}"><span aria-label="Non lue" style="position: absolute; left: 8px; top: 32px; width: 8px; height: 8px; border-radius: 4px; background: #C8531D"></span></sc-if>
+            </a>
+          </sc-for>
+        </section>
+      </sc-for>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+        <div class="fu" style="padding: 80px 32px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+          <span style="width: 72px; height: 72px; border-radius: 24px; background: #E3F2EA; display: flex; align-items: center; justify-content: center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1D6B45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="m9 11 2 2 4-4"/></svg></span>
+          <h2 class="disp" style="margin: 0; font-size: 22px; font-weight: 700">Vous êtes à jour</h2>
+          <p style="margin: 0; font-size: 15px; line-height: 22px; color: #4A515E; font-weight: 500">Nous vous préviendrons dès qu’un artisan répond ou se met en route.</p>
+          <button onClick="{{showAll}}" style="height: 44px; padding: 0 18px; border-radius: 12px; background: #F2F0EB; font-weight: 800; font-size: 14px">Voir toutes les notifications</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { read: {}, allRead: false, unreadOnly: false }; }
+  renderVals() {
+    const s = this.state;
+    const T = {
+      road: ['#FBECE3', '#9A3F14', 'M3 11 21 3l-8 18-2-8z'],
+      msg: ['#E3EEF2', '#0B4F6C', 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z'],
+      ok: ['#E3F2EA', '#1D6B45', 'M5 12l5 5 9-10'],
+      edit: ['#FBF1DE', '#7A4F0C', 'M6 5h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zM3 10h18M8 3v4M16 3v4'],
+      report: ['#E3EEF2', '#0B4F6C', 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6'],
+      pay: ['#E3F2EA', '#1D6B45', 'M5 6h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM3 10h18M7 15h4'],
+      review: ['#FBF1DE', '#7A4F0C', 'm12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z'],
+      sec: ['#ECE9E2', '#3A4250', 'M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6zM12 9v4M12 16v.01']
+    };
+    const G = [
+      ['Aujourd’hui', [
+        ['n1', 'road', 'L’artisan est en route', 'Koffi arrive dans 12 min pour « Fuite sous l’évier ».', '13:52', 'Suivre l’arrivée', 'MissionLive.dc.html', true],
+        ['n2', 'msg', 'Nouveau message de Koffi', '« Je passe Cadjèhoun, j’arrive dans 10 min. »', '14:02', 'Répondre', 'Chat.dc.html', true],
+        ['n3', 'ok', 'Nouveau devis reçu', 'Fabrice propose 18 000 FCFA pour l’entretien de votre climatiseur.', '11:58', 'Comparer les devis', 'Bookings.dc.html', true]
+      ]],
+      ['Hier', [
+        ['n4', 'edit', 'Mission modifiée', 'Christelle a avancé l’heure : jeu. 1 oct. à 08:00 au lieu de 09:00.', '18:20', 'Voir la réservation', 'BookingDetail.dc.html', false],
+        ['n5', 'sec', 'Nouvelle connexion', 'Connexion depuis un téléphone Android à Cotonou. Ce n’était pas vous ?', '09:05', 'Sécuriser mon compte', 'Settings.dc.html', false]
+      ]],
+      ['Cette semaine', [
+        ['n6', 'report', 'Le rapport d’intervention est disponible', 'Remplacement disjoncteur · Rodrigue Dossou', 'sam.', 'Consulter', 'Report.dc.html', false],
+        ['n7', 'pay', 'Paiement confirmé', '18 000 FCFA payés à Rodrigue par Mobile Money.', 'sam.', '', 'Report.dc.html', false],
+        ['n8', 'review', 'Rodrigue attend votre avis', 'Votre retour aide les autres clients à choisir.', 'sam.', 'Noter', 'Review.dc.html', false]
+      ]]
+    ];
+    const isUnread = (id, u) => u && !s.allRead && !s.read[id];
+    let unreadCount = 0;
+    const groups = G.map(([label, items]) => ({
+      label,
+      items: items.filter(([id, , , , , , , u]) => !s.unreadOnly || isUnread(id, u)).map(([id, t, title, body, time, cta, href, u]) => {
+        const un = isUnread(id, u);
+        return { title, body, time, cta, href, unread: un, w: un ? 800 : 700, rowBg: un ? '#FFFFFF' : 'transparent', bg: T[t][0], ink: T[t][1], d: T[t][2],
+          read: () => this.setState({ read: { ...s.read, [id]: true } }) };
+      })
+    })).filter((g) => g.items.length > 0);
+    G.forEach(([, items]) => items.forEach(([id, , , , , , , u]) => { if (isUnread(id, u)) unreadCount++; }));
+    return {
+      groups, unreadCount, hasUnread: unreadCount > 0, empty: groups.length === 0,
+      isAll: !s.unreadOnly, isUn: s.unreadOnly,
+      allCls: 'chip' + (!s.unreadOnly ? ' chip-on' : ''), unCls: 'chip' + (s.unreadOnly ? ' chip-on' : ''),
+      showAll: () => this.setState({ unreadOnly: false }), showUnread: () => this.setState({ unreadOnly: true }),
+      markAll: () => this.setState({ allRead: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

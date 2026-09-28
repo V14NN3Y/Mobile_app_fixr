@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Paramètres</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#12161F}
+.gh{margin:0 0 8px 4px;font-size:13px;font-weight:800;color:#656B77;letter-spacing:.04em;text-transform:uppercase}
+.grp{background:#fff;border:1px solid #ECE9E2;border-radius:20px;overflow:hidden}
+.it{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 16px;color:#12161F;border-bottom:1px solid #F0EEE8;width:100%;text-align:left}
+.it:last-child{border-bottom:0}
+.it:hover{color:#12161F;background:#FAF9F6}
+.lb{flex-grow:1;display:flex;flex-direction:column;font-size:15px;font-weight:700}
+.lb small{font-size:13px;font-weight:600;color:#656B77}
+.sw{width:50px;height:30px;border-radius:15px;background:#D9D5CC;position:relative;transition:background .2s;flex-shrink:0}
+.sw span{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .22s cubic-bezier(.2,.8,.2,1)}
+.sw-on{background:#0B4F6C}.sw-on span{left:23px}
+.sw-lock{opacity:.6}
+.seg{flex:1;height:40px;border-radius:10px;font-size:14px;font-weight:700;color:#4A515E;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
+.seg-on{background:#fff;color:#12161F;box-shadow:0 1px 3px rgba(18,22,31,.14)}
+.chev{flex-shrink:0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 16px;border-radius:14px;font-weight:700;font-size:16px;width:100%}
+.scrim{position:absolute;inset:0;background:rgba(18,22,31,.45);animation:fa .2s ease both;z-index:5}
+@keyframes fa{from{opacity:0}}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;background:#fff;border-radius:26px 26px 0 0;padding:10px 20px 34px;display:flex;flex-direction:column;gap:12px;animation:su .32s cubic-bezier(.2,.8,.2,1) both}
+@keyframes su{from{transform:translateY(100%)}}
+.chk{width:24px;height:24px;border-radius:7px;border:1.5px solid #B9B4A9;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chk-on{background:#B02E28;border-color:#B02E28}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <div class="scroll">
+    <header style="position: sticky; top: 0; z-index: 2; background: rgba(246,245,241,.97); backdrop-filter: blur(12px); padding: 54px 12px 8px; display: flex; align-items: center; gap: 6px">
+      <a href="Profile.dc.html" class="ib" aria-label="Retour au profil"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <h1 class="disp" style="margin: 0; font-size: 22px; font-weight: 700">Paramètres</h1>
+    </header>
+    <div style="padding: 8px 20px 60px; display: flex; flex-direction: column; gap: 22px">
+      <section>
+        <h2 class="gh">Compte</h2>
+        <div class="grp">
+          <a href="#infos" class="it"><span class="lb">Informations personnelles<small>Nom, téléphone, e-mail</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+          <a href="#securite" class="it"><span class="lb">Sécurité<small>Mot de passe, appareils connectés</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+          <button class="it" role="switch" aria-checked="{{bio}}" onClick="{{toggleBio}}"><span class="lb">Déverrouillage biométrique<small>Empreinte ou visage à l’ouverture</small></span><span class="{{bioCls}}"><span></span></span></button>
+          <a href="#confidentialite" class="it"><span class="lb">Confidentialité<small>Position partagée pendant les missions uniquement</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="gh">Notifications</h2>
+        <div class="grp">
+          <sc-for list="{{notifs}}" as="n" hint-placeholder-count="4">
+            <button class="it" role="switch" aria-checked="{{n.on}}" aria-disabled="{{n.locked}}" onClick="{{n.toggle}}"><span class="lb">{{n.label}}<small>{{n.help}}</small></span><span class="{{n.cls}}"><span></span></span></button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="gh">Préférences</h2>
+        <div class="grp">
+          <a href="#langue" class="it"><span class="lb">Langue<small>Français</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+          <div class="it" style="flex-direction: column; align-items: stretch; gap: 10px; padding: 14px 16px">
+            <span class="lb" id="app">Apparence</span>
+            <div role="radiogroup" aria-labelledby="app" style="display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: #F0EEE8">
+              <sc-for list="{{themes}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for>
+            </div>
+            <span style="font-size: 13px; font-weight: 600; color: #656B77">{{themeHelp}}</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="gh">Informations légales</h2>
+        <div class="grp">
+          <a href="#cgu" class="it"><span class="lb">Conditions générales d’utilisation</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+          <a href="#privacy" class="it"><span class="lb">Politique de confidentialité</span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: 4px">
+        <button onClick="{{openLogout}}" class="it" style="background: #fff; border: 1px solid #ECE9E2; border-radius: 16px; font-weight: 800; font-size: 15px; justify-content: center">Se déconnecter</button>
+        <button onClick="{{openDelete}}" style="min-height: 48px; font-size: 14px; font-weight: 800; color: #B02E28">Supprimer mon compte</button>
+      </section>
+    </div>
+  </div>
+
+  <sc-if value="{{logout}}" hint-placeholder-val="{{ false }}">
+    <button class="scrim" onClick="{{close}}" aria-label="Fermer"></button>
+    <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="lo">
+      <span style="width: 40px; height: 5px; border-radius: 3px; background: #D9D5CC; align-self: center"></span>
+      <h2 id="lo" class="disp" style="margin: 4px 0 0; font-size: 21px; font-weight: 700">Se déconnecter ?</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 22px; color: #4A515E; font-weight: 500">Vous ne recevrez plus le suivi de la mission en cours (FX-24817) sur ce téléphone.</p>
+      <a href="Main.dc.html" class="btn" style="background: #12161F; color: #fff">Me déconnecter</a>
+      <button class="btn" onClick="{{close}}" style="background: #F2F0EB">Rester connecté</button>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{del}}" hint-placeholder-val="{{ false }}">
+    <button class="scrim" onClick="{{close}}" aria-label="Fermer"></button>
+    <section class="sheet" role="alertdialog" aria-modal="true" aria-labelledby="dl">
+      <span style="width: 40px; height: 5px; border-radius: 3px; background: #D9D5CC; align-self: center"></span>
+      <span style="width: 52px; height: 52px; border-radius: 16px; background: #FBE7E5; display: flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B02E28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 13a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1l1-13M9 7V4h6v3"/></svg></span>
+      <h2 id="dl" class="disp" style="margin: 0; font-size: 21px; font-weight: 700">Supprimer définitivement votre compte ?</h2>
+      <p style="margin: 0; font-size: 14px; line-height: 21px; color: #4A515E; font-weight: 500">Vos réservations, messages, adresses et avis seront effacés sous 30 jours. Terminez d’abord la mission en cours pour ne rien perdre.</p>
+      <button onClick="{{toggleAck}}" role="checkbox" aria-checked="{{ack}}" style="display: flex; gap: 12px; align-items: flex-start; text-align: left; min-height: 44px">
+        <span class="{{ackCls}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+        <span style="font-size: 14px; line-height: 20px; font-weight: 700">Je comprends que cette action est irréversible.</span>
+      </button>
+      <sc-if value="{{ack}}" hint-placeholder-val="{{ false }}"><a href="Main.dc.html" class="btn" style="background: #B02E28; color: #fff">Supprimer mon compte</a></sc-if>
+      <sc-if value="{{noAck}}" hint-placeholder-val="{{ true }}"><span class="btn" aria-disabled="true" style="background: #F2D9D7; color: #9E6A66">Supprimer mon compte</span></sc-if>
+      <button class="btn" onClick="{{close}}" style="background: #F2F0EB">Annuler</button>
+    </section>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { bio: true, n: { mission: true, msg: true, promo: false, sms: true }, theme: 'system', modal: null, ack: false }; }
+  renderVals() {
+    const s = this.state;
+    const sw = (on, locked) => 'sw' + (on ? ' sw-on' : '') + (locked ? ' sw-lock' : '');
+    const notifs = [
+      ['mission', 'Suivi des missions', 'Artisan en route, arrivée, rapport · recommandé', true],
+      ['msg', 'Messages', 'Nouveaux messages des artisans', false],
+      ['sms', 'SMS de secours', 'Si vous n’avez pas de connexion internet', false],
+      ['promo', 'Offres et nouveautés', 'Au plus une fois par semaine', false]
+    ].map(([k, label, help, locked]) => ({ label, help, locked, on: s.n[k], cls: sw(s.n[k], locked), toggle: () => { if (!locked) this.setState({ n: { ...s.n, [k]: !s.n[k] } }); } }));
+    const themes = [['light', 'Clair'], ['dark', 'Sombre'], ['system', 'Système']].map(([id, label]) => ({ label, on: s.theme === id, cls: 'seg' + (s.theme === id ? ' seg-on' : ''), pick: () => this.setState({ theme: id }) }));
+    return {
+      bio: s.bio, bioCls: sw(s.bio), toggleBio: () => this.setState({ bio: !s.bio }),
+      notifs, themes,
+      themeHelp: { light: 'Toujours en mode clair.', dark: 'Toujours en mode sombre — voir la page « Mode sombre ».', system: 'Suit le réglage de votre téléphone.' }[s.theme],
+      logout: s.modal === 'logout', del: s.modal === 'delete',
+      openLogout: () => this.setState({ modal: 'logout' }), openDelete: () => this.setState({ modal: 'delete', ack: false }), close: () => this.setState({ modal: null }),
+      ack: s.ack, noAck: !s.ack, ackCls: 'chk' + (s.ack ? ' chk-on' : ''), toggleAck: () => this.setState({ ack: !s.ack })
+    };
+  }
+}
+</script>
+</body>
+</html>

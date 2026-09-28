@@ -1,0 +1,78 @@
+/* Généré depuis src/theme/tokens.ts — ne pas éditer à la main. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: 246 245 241;
+  --color-surface: 255 255 255;
+  --color-surface-muted: 242 240 235;
+  --color-border: 227 224 216;
+  --color-border-subtle: 236 233 226;
+  --color-border-strong: 217 213 204;
+  --color-text: 18 22 31;
+  --color-text-secondary: 74 81 94;
+  --color-text-tertiary: 101 107 119;
+  --color-text-disabled: 122 128 139;
+  --color-primary: 11 79 108;
+  --color-primary-pressed: 8 59 81;
+  --color-primary-soft: 227 238 242;
+  --color-on-primary: 255 255 255;
+  --color-accent: 196 81 28;
+  --color-accent-soft: 251 236 227;
+  --color-accent-ink: 154 63 20;
+  --color-on-accent: 255 255 255;
+  --color-success: 29 122 78;
+  --color-success-soft: 227 242 234;
+  --color-success-ink: 29 107 69;
+  --color-warning: 122 79 12;
+  --color-warning-soft: 251 241 222;
+  --color-danger: 176 46 40;
+  --color-danger-soft: 251 231 229;
+  --color-danger-border: 194 54 47;
+  --color-rating: 224 162 27;
+  --color-online: 46 160 103;
+  --color-disabled-bg: 227 224 216;
+  --color-toast-bg: 18 22 31;
+  --color-toast-text: 255 255 255;
+  --color-offline-bg: 59 63 70;
+}
+
+/* Mode sombre : suit le système. Pour le choix manuel Clair/Sombre/Système (Paramètres),
+   utiliser colorScheme.set() de NativeWind — vérifier la syntaxe dans la doc de la version installée. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: 14 18 21;
+    --color-surface: 22 27 32;
+    --color-surface-muted: 30 37 43;
+    --color-border: 42 50 56;
+    --color-border-subtle: 35 43 49;
+    --color-border-strong: 58 67 76;
+    --color-text: 242 241 236;
+    --color-text-secondary: 183 188 196;
+    --color-text-tertiary: 140 147 157;
+    --color-text-disabled: 107 114 124;
+    --color-primary: 95 179 212;
+    --color-primary-pressed: 134 199 224;
+    --color-primary-soft: 18 48 61;
+    --color-on-primary: 4 35 47;
+    --color-accent: 240 138 88;
+    --color-accent-soft: 58 34 23;
+    --color-accent-ink: 244 167 126;
+    --color-on-accent: 26 13 6;
+    --color-success: 76 195 138;
+    --color-success-soft: 21 48 31;
+    --color-success-ink: 111 211 160;
+    --color-warning: 230 176 74;
+    --color-warning-soft: 51 40 18;
+    --color-danger: 240 122 114;
+    --color-danger-soft: 58 27 25;
+    --color-danger-border: 240 122 114;
+    --color-rating: 242 185 59;
+    --color-online: 76 195 138;
+    --color-disabled-bg: 42 50 56;
+    --color-toast-bg: 242 241 236;
+    --color-toast-text: 18 22 31;
+    --color-offline-bg: 42 50 56;
+  }
+}

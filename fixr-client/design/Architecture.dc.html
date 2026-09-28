@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>FIXR — Architecture de navigation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.lane{border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.lt{display:flex;align-items:baseline;gap:12px}
+.lt b{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:20px}
+.lt span{font-size:14px;font-weight:600;color:#4A515E}
+.node{background:#fff;border:1px solid #E3E0D8;border-radius:12px;padding:9px 12px;font-size:14px;font-weight:700;color:#12161F;display:flex;flex-direction:column;gap:1px;line-height:18px}
+.node small{font-size:11px;font-weight:600;color:#656B77;font-family:'JetBrains Mono',ui-monospace,monospace}
+.node:hover{border-color:#0B4F6C;color:#12161F}
+.root{background:#12161F;border-color:#12161F;color:#fff}.root small{color:#B7BCC4}.root:hover{color:#fff}
+.mod{border-style:dashed;border-color:#C8531D}
+.ar{color:#8A8F99;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center}
+.col{display:flex;flex-direction:column;gap:6px}
+.dn{height:14px;display:flex;justify-content:center}
+.dn::before{content:'';width:2px;background:#C9C4B8;border-radius:1px}
+.tree{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:20px;color:#DDE3EA;white-space:pre;margin:0}
+.tree b{color:#fff;font-weight:700}.tree i{color:#8FC7DC;font-style:normal}.tree em{color:#8A93A0;font-style:normal}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.flow span.s{background:#fff;border:1px solid #E3E0D8;border-radius:999px;padding:5px 10px}
+.leg{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#4A515E}
+</style>
+</helmet>
+<div style="width: 1600px; height: 1240px; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; padding: 56px 64px; display: flex; flex-direction: column; gap: 32px">
+  <header style="display: flex; justify-content: space-between; align-items: flex-end">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#0B4F6C"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#fff" transform="rotate(45 20 20)"/><rect x="17" y="8" width="6" height="24" rx="3" fill="#E07A45" transform="rotate(-45 20 20)"/></svg>
+        <span class="disp" style="font-size: 28px; font-weight: 700">fixr</span>
+        <span style="font-size: 13px; font-weight: 800; color: #0B4F6C; background: #E3EEF2; border-radius: 999px; padding: 5px 12px">Espace Client · v1</span>
+      </div>
+      <h1 class="disp" style="margin: 0; font-size: 44px; line-height: 50px; font-weight: 700">Architecture de navigation</h1>
+      <p style="margin: 0; font-size: 17px; color: #4A515E; font-weight: 500">Expo Router · 5 onglets, 1 pile d’authentification, 3 flux modaux. Chaque nœud correspond à un artboard de ce canevas.</p>
+    </div>
+    <div style="display: flex; gap: 20px">
+      <span class="leg"><span style="width: 18px; height: 18px; border-radius: 5px; background: #12161F"></span>Racine d’onglet</span>
+      <span class="leg"><span style="width: 18px; height: 18px; border-radius: 5px; background: #fff; border: 1px solid #E3E0D8"></span>Écran poussé</span>
+      <span class="leg"><span style="width: 18px; height: 18px; border-radius: 5px; background: #fff; border: 1.5px dashed #C8531D"></span>Modale / sheet</span>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) 470px; gap: 32px; flex-grow: 1">
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <section class="lane" style="background: #EFEBE3">
+        <div class="lt"><b>(auth)</b><span>Pile non connectée · affichée tant qu’aucune session n’existe</span></div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <a href="Main.dc.html" class="node">Bienvenue<small>welcome</small></a><span class="ar">→</span>
+          <a href="Onboarding1.dc.html" class="node">Onboarding ×3<small>onboarding</small></a><span class="ar">→</span>
+          <div style="display: flex; flex-direction: column; gap: 6px"><a href="Login.dc.html" class="node">Connexion<small>login</small></a><a href="Signup.dc.html" class="node">Inscription<small>signup</small></a></div><span class="ar">→</span>
+          <a href="Otp.dc.html" class="node">Code SMS<small>verify-otp</small></a><span class="ar">→</span>
+          <span class="node root">(tabs)<small>session créée</small></span>
+        </div>
+      </section>
+
+      <section class="lane" style="background: #E3EEF2; flex-grow: 1">
+        <div class="lt"><b>(tabs)</b><span>Barre inférieure persistante · badges Réservations et Messages</span></div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px">
+          <div class="col">
+            <a href="Home.dc.html" class="node root">Accueil<small>index</small></a><div class="dn"></div>
+            <a href="Notifications.dc.html" class="node">Notifications<small>notifications</small></a>
+            <a href="MissionLive.dc.html" class="node">Mission en cours<small>→ bookings/[id]/live</small></a>
+            <a href="RequestNeed.dc.html" class="node mod">Décrire mon besoin<small>request/*</small></a>
+          </div>
+          <div class="col">
+            <a href="Search.dc.html" class="node root">Rechercher<small>search/index</small></a><div class="dn"></div>
+            <a href="Results.dc.html" class="node">Résultats · liste<small>search/results</small></a>
+            <a href="ResultsMap.dc.html" class="node">Résultats · carte<small>?view=map</small></a>
+            <a href="Filters.dc.html" class="node mod">Filtres<small>filters (sheet)</small></a>
+            <a href="ArtisanProfile.dc.html" class="node">Profil artisan<small>artisan/[id]</small></a>
+          </div>
+          <div class="col">
+            <a href="Bookings.dc.html" class="node root">Réservations<small>bookings/index</small></a><div class="dn"></div>
+            <a href="BookingDetail.dc.html" class="node">Détail<small>bookings/[id]</small></a>
+            <a href="MissionLive.dc.html" class="node">Suivi en direct<small>[id]/live</small></a>
+            <a href="Report.dc.html" class="node">Rapport<small>[id]/report</small></a>
+            <a href="Review.dc.html" class="node">Évaluation<small>[id]/review</small></a>
+          </div>
+          <div class="col">
+            <a href="Messages.dc.html" class="node root">Messages<small>messages/index</small></a><div class="dn"></div>
+            <a href="Chat.dc.html" class="node">Conversation<small>messages/[threadId]</small></a>
+            <a href="BookingDetail.dc.html" class="node">Carte mission<small>→ bookings/[id]</small></a>
+          </div>
+          <div class="col">
+            <a href="Profile.dc.html" class="node root">Profil<small>profile/index</small></a><div class="dn"></div>
+            <a href="Settings.dc.html" class="node">Paramètres<small>profile/settings</small></a>
+            <span class="node">Adresses<small>profile/addresses</small></span>
+            <span class="node">Paiements<small>profile/payments</small></span>
+            <span class="node">Favoris · Avis · Aide<small>profile/*</small></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="lane" style="background: #FBECE3">
+        <div class="lt"><b>request/</b><span>Modale plein écran · état partagé par un RequestProvider · ouverte depuis Accueil, Résultats, Profil artisan, Réservations</span></div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <a href="RequestNeed.dc.html" class="node mod">1 · Besoin<small>need</small></a><span class="ar">→</span>
+          <a href="RequestAddress.dc.html" class="node mod">2 · Adresse<small>address</small></a><span class="ar">→</span>
+          <a href="RequestDate.dc.html" class="node mod">3 · Date<small>date</small></a><span class="ar">→</span>
+          <a href="RequestConfirm.dc.html" class="node mod">4 · Confirmer<small>confirm</small></a><span class="ar">→</span>
+          <a href="RequestSuccess.dc.html" class="node mod">Succès<small>success</small></a><span class="ar">→</span>
+          <a href="Bookings.dc.html" class="node root">Réservations<small>replace</small></a>
+        </div>
+      </section>
+
+      <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 800; color: #0B4F6C">PARCOURS 1 · RÉSERVER</span><div class="flow"><span class="s">Accueil</span>→<span class="s">Catégorie</span>→<span class="s">Résultats</span>→<span class="s">Profil</span>→<span class="s">Demande</span>→<span class="s">Succès</span></div></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 800; color: #9A3F14">PARCOURS 2 · SUIVRE</span><div class="flow"><span class="s">Push « en route »</span>→<span class="s">Suivi</span>→<span class="s">Rapport</span>→<span class="s">Avis</span></div></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 800; color: #1D6B45">PARCOURS 3 · ÉCHANGER</span><div class="flow"><span class="s">Réservation</span>→<span class="s">Chat</span>→<span class="s">Appel</span></div></div>
+      </section>
+    </div>
+
+    <aside style="background: #12161F; border-radius: 24px; padding: 26px 28px; display: flex; flex-direction: column; gap: 14px">
+      <span style="font-size: 13px; font-weight: 800; color: #8FC7DC; letter-spacing: .06em">STRUCTURE EXPO ROUTER</span>
+<pre class="tree"><b>app/</b>
+├─ _layout.tsx        <em>// Theme, Query, SafeArea</em>
+├─ <b>(auth)/</b>            <em>// Stack</em>
+│  ├─ welcome.tsx
+│  ├─ onboarding.tsx  <em>// PagerView 3 slides</em>
+│  ├─ login.tsx · signup.tsx
+│  └─ verify-otp.tsx
+├─ <b>(tabs)/</b>
+│  ├─ _layout.tsx     <em>// Tabs + badges</em>
+│  ├─ index.tsx       <i>Accueil</i>
+│  ├─ search/index.tsx · results.tsx
+│  ├─ bookings/index.tsx
+│  │  └─ [id]/ index · live · report · review
+│  ├─ messages/index.tsx · [threadId].tsx
+│  └─ profile/index.tsx · settings.tsx
+├─ artisan/[id].tsx
+├─ <b>request/</b>           <em>// presentation: modal</em>
+│  ├─ _layout.tsx     <em>// RequestProvider</em>
+│  └─ need · address · date · confirm · success
+├─ filters.tsx        <em>// formSheet</em>
+└─ notifications.tsx
+
+<b>src/</b>
+├─ theme/tokens.ts    <em>// light + dark</em>
+├─ components/ui/
+│  <i>Button TextField Chip Badge Avatar Card
+│  Tabs Sheet Modal Toast Skeleton Rating</i>
+├─ components/domain/
+│  <i>ArtisanCard BookingCard CategoryTile
+│  MissionTimeline MissionProgress ChatBubble
+│  QuickReplies DatePicker SlotPicker</i>
+├─ features/  <em>auth request bookings chat</em>
+└─ lib/       <em>api, i18n (fr), format FCFA</em></pre>
+      <div style="margin-top: auto; border-top: 1px solid #2A3038; padding-top: 14px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 13px; font-weight: 800; color: #fff">Liens profonds des notifications</span>
+        <span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; line-height: 19px; color: #B7BCC4">fixr://bookings/FX-24817/live · en route<br>fixr://bookings/FX-24817/report · rapport<br>fixr://messages/koffi-24817 · message</span>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":1240}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

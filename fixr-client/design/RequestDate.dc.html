@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nouvelle demande — Date et créneau</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar,.hs::-webkit-scrollbar{display:none}
+.hs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:2px 20px 4px}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#12161F}
+.lbl{margin:0;font-size:14px;font-weight:800}
+.q{flex:1;height:48px;border-radius:14px;background:#fff;border:1.5px solid #E3E0D8;font-size:14px;font-weight:800;transition:all .15s}
+.q-on{background:#12161F;border-color:#12161F;color:#fff}
+.day{width:58px;height:76px;flex-shrink:0;border-radius:16px;background:#fff;border:1.5px solid #E3E0D8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all .15s;position:relative}
+.day:active{transform:scale(.95)}
+.day-on{background:#0B4F6C;border-color:#0B4F6C;color:#fff}
+.day-off{background:#F2F0EB;border-color:#F2F0EB;color:#8A8F99;cursor:not-allowed}
+.slot{height:64px;border-radius:14px;background:#fff;border:1.5px solid #E3E0D8;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:0 14px;text-align:left;transition:all .15s}
+.slot-on{border-color:#0B4F6C;background:#E3EEF2;box-shadow:0 0 0 3px rgba(11,79,108,.10)}
+.slot-off{background:#F2F0EB;border-color:#F2F0EB;color:#8A8F99;cursor:not-allowed}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 18px;border-radius:14px;font-weight:700;font-size:16px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-dis{background:#E3E0D8;color:#7A808B}
+.fu{animation:fu .25s ease both}
+@keyframes fu{from{opacity:0;transform:translateY(4px)}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="padding: 0 12px; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="RequestAddress.dc.html" class="ib" aria-label="Retour à l’étape Adresse"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <span style="font-size: 15px; font-weight: 800">Nouvelle demande</span>
+      <a href="Home.dc.html" class="ib" aria-label="Annuler la demande"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+    </div>
+    <ol aria-label="Progression : étape 3 sur 4" style="list-style: none; margin: 0; padding: 0 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A515E"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>1 · Besoin</li>
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A515E"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>2 · Adresse</li>
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 800; color: #0B4F6C" aria-current="step"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>3 · Date</li>
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #656B77"><span style="height: 4px; border-radius: 2px; background: #E3E0D8"></span>4 · Confirmer</li>
+    </ol>
+  </header>
+
+  <div class="scroll" style="flex-grow: 1; min-height: 0; padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 20px">
+    <h1 class="disp" style="margin: 0; font-size: 25px; line-height: 30px; font-weight: 700">Quand souhaitez-vous l’intervention ?</h1>
+
+    <div style="display: flex; gap: 8px" role="group" aria-label="Raccourcis de date">
+      <sc-for list="{{quick}}" as="q" hint-placeholder-count="3"><button class="{{q.cls}}" aria-pressed="{{q.on}}" onClick="{{q.pick}}">{{q.label}}</button></sc-for>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 class="lbl">Septembre – octobre 2026</h2><span style="font-size: 12px; color: #656B77; font-weight: 700; display: flex; align-items: center; gap: 5px"><span style="width: 7px; height: 7px; border-radius: 4px; background: #C8531D"></span>Peu de dispo</span></div>
+      <div class="hs" role="radiogroup" aria-label="Choisir un jour">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+          <button class="{{d.cls}}" role="radio" aria-checked="{{d.on}}" aria-disabled="{{d.off}}" onClick="{{d.pick}}" aria-label="{{d.aria}}">
+            <span style="font-size: 12px; font-weight: 700; opacity: .85">{{d.dow}}</span>
+            <span style="font-size: 20px; font-weight: 800; font-family: 'Bricolage Grotesque', system-ui, sans-serif">{{d.num}}</span>
+            <span style="width: 6px; height: 6px; border-radius: 3px; background: {{d.dot}}"></span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section class="fu" style="display: flex; flex-direction: column; gap: 10px">
+      <h2 class="lbl">Créneaux · {{dayLong}}</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px" role="radiogroup" aria-label="Choisir un créneau">
+        <sc-for list="{{slots}}" as="s" hint-placeholder-count="6">
+          <button class="{{s.cls}}" role="radio" aria-checked="{{s.on}}" aria-disabled="{{s.off}}" onClick="{{s.pick}}">
+            <span style="font-size: 15px; font-weight: 800">{{s.label}}</span>
+            <span style="font-size: 12px; font-weight: 700; color: {{s.ink}}">{{s.avail}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <div style="display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: #E3EEF2; color: #0A3D53; font-size: 13px; line-height: 19px; font-weight: 600">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg>
+      Les artisans confirment en 25 min en moyenne. Vous pourrez ajuster l’heure avec eux dans la messagerie.
+    </div>
+  </div>
+
+  <footer style="padding: 12px 20px 34px; border-top: 1px solid #ECE9E2; background: #fff; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: center" aria-live="polite">
+      <span style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #4A515E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Récapitulatif</span>
+      <span style="font-size: 15px; font-weight: 800">{{recap}}</span>
+    </div>
+    <sc-if value="{{hasSlot}}" hint-placeholder-val="{{ true }}"><a href="RequestConfirm.dc.html" class="btn btn-p">Continuer</a></sc-if>
+    <sc-if value="{{noSlot}}" hint-placeholder-val="{{ false }}"><span class="btn btn-dis" aria-disabled="true">Choisissez un créneau</span></sc-if>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { day: 1, slot: 1 }; }
+  renderVals() {
+    const s = this.state;
+    const D = [
+      ['Lun', '28', 'lundi 28 sept.', 'low'], ['Mar', '29', 'mardi 29 sept.', 'ok'], ['Mer', '30', 'mercredi 30 sept.', 'full'],
+      ['Jeu', '1', 'jeudi 1er oct.', 'ok'], ['Ven', '2', 'vendredi 2 oct.', 'low'], ['Sam', '3', 'samedi 3 oct.', 'ok'], ['Dim', '4', 'dimanche 4 oct.', 'full'], ['Lun', '5', 'lundi 5 oct.', 'ok']
+    ];
+    const days = D.map(([dow, num, long, st], i) => {
+      const off = st === 'full', on = s.day === i;
+      return { dow, num, on, off, aria: long + (off ? ', complet' : ''), dot: off ? 'transparent' : (st === 'low' ? (on ? '#F0A070' : '#C8531D') : (on ? '#7FE0AA' : '#2EA067')),
+        cls: 'day' + (on ? ' day-on' : '') + (off ? ' day-off' : ''), pick: () => { if (!off) this.setState({ day: i, slot: null }); } };
+    });
+    const base = [['07:00 – 09:00', 3], ['09:00 – 11:00', 4], ['11:00 – 13:00', 2], ['14:00 – 16:00', 5], ['16:00 – 18:00', 1], ['18:00 – 20:00', 0]];
+    const today = s.day === 0;
+    const slots = base.map(([label, n], i) => {
+      const past = today && i < 2;
+      const off = past || n === 0;
+      const on = s.slot === i;
+      const avail = past ? 'Passé' : n === 0 ? 'Complet' : n === 1 ? 'Dernier artisan dispo' : n + ' artisans dispo';
+      return { label, on, off, avail, ink: off ? '#8A8F99' : n === 1 ? '#9A3F14' : '#1D6B45',
+        cls: 'slot' + (on ? ' slot-on' : '') + (off ? ' slot-off' : ''), pick: () => { if (!off) this.setState({ slot: i }); } };
+    });
+    const quick = [['Aujourd’hui', 0], ['Demain', 1], ['Autre date', 3]].map(([label, idx]) => ({
+      label, on: idx === 3 ? s.day >= 3 : s.day === idx, cls: 'q' + ((idx === 3 ? s.day >= 3 : s.day === idx) ? ' q-on' : ''), pick: () => this.setState({ day: idx, slot: null })
+    }));
+    const hasSlot = s.slot !== null && s.slot !== undefined;
+    return {
+      days, slots, quick, dayLong: D[s.day][2], hasSlot, noSlot: !hasSlot,
+      recap: hasSlot ? D[s.day][0] + '. ' + D[s.day][1] + ' · ' + base[s.slot][0] : D[s.day][0] + '. ' + D[s.day][1] + ' · —'
+    };
+  }
+}
+</script>
+</body>
+</html>

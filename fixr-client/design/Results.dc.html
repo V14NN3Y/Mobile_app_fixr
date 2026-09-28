@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Résultats — Plomberie</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar,.hs::-webkit-scrollbar{display:none}
+.hs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #ECE9E2;color:#12161F;position:relative;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E3E0D8;font-size:14px;font-weight:700;color:#12161F;white-space:nowrap;flex-shrink:0}
+.chip-dark{background:#12161F;border-color:#12161F;color:#fff}.chip-dark:hover{color:#fff}
+.card{background:#fff;border-radius:20px;border:1px solid #ECE9E2}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;height:44px;padding:0 14px;border-radius:12px;font-weight:700;font-size:14px;transition:transform .12s ease,background .2s}
+.btn:active{transform:scale(.97)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-s{background:#F2F0EB;color:#12161F}.btn-s:hover{background:#E8E5DE;color:#12161F}
+.pill{font-size:12px;font-weight:800;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.fu{animation:fu .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sk{background:linear-gradient(90deg,#EEECE6 0%,#F7F6F2 50%,#EEECE6 100%);background-size:200% 100%;animation:sk 1.2s linear infinite;border-radius:8px}
+@keyframes sk{to{background-position:-200% 0}}
+.scrim{position:absolute;inset:0;background:rgba(18,22,31,.42);animation:fa .2s ease both}
+@keyframes fa{from{opacity:0}}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px 40px;animation:su .32s cubic-bezier(.2,.8,.2,1) both}
+@keyframes su{from{transform:translateY(100%)}}
+.opt{display:flex;align-items:center;justify-content:space-between;min-height:52px;font-size:16px;font-weight:700;width:100%;text-align:left;border-bottom:1px solid #F0EEE8}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <div class="scroll">
+    <header style="position: sticky; top: 0; z-index: 2; background: rgba(246,245,241,.96); backdrop-filter: blur(12px); padding: 54px 16px 12px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid #ECE9E2">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <a href="Search.dc.html" class="ib" aria-label="Retour" style="border: 0; background: transparent"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+        <div style="flex-grow: 1; display: flex; flex-direction: column">
+          <h1 class="disp" style="margin: 0; font-size: 21px; line-height: 26px; font-weight: 700">Plomberie</h1>
+          <span style="font-size: 13px; color: #656B77; font-weight: 600">48 artisans · Haie Vive, Cotonou</span>
+        </div>
+        <div style="display: flex; padding: 3px; border-radius: 12px; background: #ECE9E2" role="group" aria-label="Affichage">
+          <span aria-current="true" style="height: 38px; padding: 0 12px; border-radius: 9px; background: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; box-shadow: 0 1px 3px rgba(18,22,31,.1)">Liste</span>
+          <a href="ResultsMap.dc.html" style="height: 38px; padding: 0 12px; font-size: 13px; font-weight: 700; color: #4A515E; display: flex; align-items: center">Carte</a>
+        </div>
+      </div>
+      <div class="hs">
+        <a href="Filters.dc.html" class="chip chip-dark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>Filtres · 2</a>
+        <button class="chip" onClick="{{openSort}}" aria-haspopup="dialog">{{sortLabel}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <a href="Filters.dc.html" class="chip" style="background: #E3EEF2; border-color: #C9DEE6; color: #0B4F6C">Aujourd’hui<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-label="Retirer"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+        <a href="Filters.dc.html" class="chip" style="background: #E3EEF2; border-color: #C9DEE6; color: #0B4F6C">Note 4+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-label="Retirer"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+      </div>
+    </header>
+
+    <div style="padding: 14px 16px 40px; display: flex; flex-direction: column; gap: 12px">
+      <sc-for list="{{list}}" as="a" hint-placeholder-count="4">
+        <article class="card fu" style="padding: 14px; display: flex; flex-direction: column; gap: 12px; animation-delay: {{a.delay}}">
+          <a href="ArtisanProfile.dc.html" style="display: flex; gap: 12px; color: #12161F">
+            <div style="position: relative; flex-shrink: 0">
+              <div style="width: 60px; height: 60px; border-radius: 999px; background: {{a.bg}}; color: {{a.ink}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 19px">{{a.ini}}</div>
+              <sc-if value="{{a.online}}" hint-placeholder-val="{{ true }}"><span style="position: absolute; right: 1px; bottom: 1px; width: 14px; height: 14px; border-radius: 7px; background: #2EA067; border: 2.5px solid #fff"></span></sc-if>
+            </div>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px">
+                <span style="font-weight: 800; font-size: 16px; line-height: 21px">{{a.name}}</span>
+                <span style="display: flex; align-items: center; gap: 3px; font-size: 14px; font-weight: 800; flex-shrink: 0"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#E0A21B"/></svg>{{a.rate}}<span style="color: #656B77; font-weight: 600; font-size: 13px">({{a.reviews}})</span></span>
+              </div>
+              <span style="font-size: 13px; color: #4A515E; font-weight: 600">{{a.job}} · {{a.exp}}</span>
+              <span style="font-size: 13px; color: #656B77; font-weight: 600; display: flex; align-items: center; gap: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 1 1 14 0c0 5.8-7 12-7 12z"/></svg>{{a.zone}} · {{a.km}}</span>
+            </div>
+          </a>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <span class="pill" style="background: {{a.availBg}}; color: {{a.availInk}}">{{a.avail}}</span>
+            <span class="pill" style="background: #E3EEF2; color: #0B4F6C; display: flex; align-items: center; gap: 4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg>{{a.level}}</span>
+            <span class="pill" style="background: #F2F0EB; color: #12161F">{{a.price}}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <a href="ArtisanProfile.dc.html" class="btn btn-s">Voir le profil</a>
+            <a href="RequestNeed.dc.html" class="btn btn-p">Demander</a>
+          </div>
+        </article>
+      </sc-for>
+
+      <div class="card" aria-label="Chargement de plus d’artisans" style="padding: 14px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 12px"><div class="sk" style="width: 60px; height: 60px; border-radius: 999px"></div><div style="flex-grow: 1; display: flex; flex-direction: column; gap: 8px; padding-top: 4px"><div class="sk" style="height: 14px; width: 70%"></div><div class="sk" style="height: 12px; width: 50%"></div><div class="sk" style="height: 12px; width: 60%"></div></div></div>
+        <div style="display: flex; gap: 6px"><div class="sk" style="height: 22px; width: 90px; border-radius: 999px"></div><div class="sk" style="height: 22px; width: 80px; border-radius: 999px"></div></div>
+      </div>
+      <p style="margin: 0; text-align: center; font-size: 13px; color: #656B77; font-weight: 600">4 sur 48 artisans · chargement…</p>
+    </div>
+  </div>
+
+  <sc-if value="{{sortOpen}}" hint-placeholder-val="{{ false }}">
+    <button class="scrim" onClick="{{closeSort}}" aria-label="Fermer"></button>
+    <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="st">
+      <div style="width: 40px; height: 5px; border-radius: 3px; background: #D9D5CC; margin: 0 auto 14px"></div>
+      <h2 id="st" class="disp" style="margin: 0 0 6px; font-size: 20px; font-weight: 700">Trier par</h2>
+      <sc-for list="{{sorts}}" as="s" hint-placeholder-count="4">
+        <button class="opt" onClick="{{s.pick}}" role="radio" aria-checked="{{s.on}}">{{s.label}}
+          <span style="width: 22px; height: 22px; border-radius: 11px; border: 2px solid {{s.ring}}; display: flex; align-items: center; justify-content: center"><span style="width: 10px; height: 10px; border-radius: 5px; background: {{s.dot}}"></span></span>
+        </button>
+      </sc-for>
+    </section>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sort: 'pertinence', sortOpen: false }; }
+  renderVals() {
+    const base = [
+      { ini: 'KA', name: 'Koffi Agbodjan', job: 'Plombier', exp: '9 ans', rate: '4,9', r: 4.9, reviews: 212, zone: 'Fidjrossè', km: '1,2 km', d: 1.2, avail: 'Dispo aujourd’hui', level: 'Pro certifié', price: 'Dès 5 000 FCFA', p: 5000, online: true, bg: '#FBECE3', ink: '#9A3F14', availBg: '#E3F2EA', availInk: '#1D6B45' },
+      { ini: 'SH', name: 'Sèdjro Houénou', job: 'Plombier', exp: '6 ans', rate: '4,7', r: 4.7, reviews: 88, zone: 'Cadjèhoun', km: '2,8 km', d: 2.8, avail: 'Dispo 16h', level: 'Identité vérifiée', price: 'Dès 4 000 FCFA', p: 4000, online: true, bg: '#E3F2EA', ink: '#1D6B45', availBg: '#E3F2EA', availInk: '#1D6B45' },
+      { ini: 'BM', name: 'Bernard Mensah', job: 'Plombier-sanitaire', exp: '12 ans', rate: '4,6', r: 4.6, reviews: 143, zone: 'Akpakpa', km: '3,4 km', d: 3.4, avail: 'Demain', level: 'Pro certifié', price: 'Sur devis', p: 99999, online: false, bg: '#EEE7F7', ink: '#5B3A8C', availBg: '#FBF1DE', availInk: '#7A4F0C' },
+      { ini: 'AL', name: 'Anicet Lokossou', job: 'Plombier', exp: '3 ans', rate: '4,5', r: 4.5, reviews: 21, zone: 'Gbégamey', km: '2,1 km', d: 2.1, avail: 'Dispo aujourd’hui', level: 'Identité vérifiée', price: 'Dès 3 500 FCFA', p: 3500, online: false, bg: '#E3EEF2', ink: '#0B4F6C', availBg: '#E3F2EA', availInk: '#1D6B45' }
+    ];
+    const sort = this.state.sort;
+    const list = base.slice().sort((a, b) => sort === 'note' ? b.r - a.r : sort === 'distance' ? a.d - b.d : sort === 'prix' ? a.p - b.p : 0)
+      .map((a, i) => ({ ...a, delay: (i * 0.06) + 's' }));
+    const opts = [['pertinence', 'Pertinence'], ['note', 'Mieux notés'], ['distance', 'Plus proches'], ['prix', 'Prix croissant']];
+    return {
+      list,
+      sortLabel: 'Trier : ' + opts.find((o) => o[0] === sort)[1],
+      sortOpen: this.state.sortOpen,
+      openSort: () => this.setState({ sortOpen: true }),
+      closeSort: () => this.setState({ sortOpen: false }),
+      sorts: opts.map(([id, label]) => ({ label, on: sort === id, ring: sort === id ? '#0B4F6C' : '#B9B4A9', dot: sort === id ? '#0B4F6C' : 'transparent', pick: () => this.setState({ sort: id, sortOpen: false }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

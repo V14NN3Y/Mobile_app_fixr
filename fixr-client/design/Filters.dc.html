@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Filtres</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.sec{display:flex;flex-direction:column;gap:12px;padding:20px 0;border-bottom:1px solid #F0EEE8}
+.sec h2{margin:0;font-size:16px;font-weight:800}
+.chip{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:999px;background:#fff;border:1.5px solid #E3E0D8;font-size:14px;font-weight:700;color:#12161F;white-space:nowrap;transition:all .15s ease}
+.chip:active{transform:scale(.96)}
+.chip-on{background:#E3EEF2;border-color:#0B4F6C;color:#0B4F6C}
+.seg{flex:1;height:40px;border-radius:10px;font-size:14px;font-weight:700;color:#4A515E;transition:all .15s}
+.seg-on{background:#fff;color:#12161F;box-shadow:0 1px 3px rgba(18,22,31,.14)}
+.ck{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;text-align:left}
+.box{width:24px;height:24px;border-radius:7px;border:1.5px solid #B9B4A9;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.box-on{background:#0B4F6C;border-color:#0B4F6C}
+.sw{width:48px;height:28px;border-radius:14px;background:#D9D5CC;position:relative;transition:background .2s;flex-shrink:0}
+.sw span{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:11px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s cubic-bezier(.2,.8,.2,1)}
+.sw-on{background:#0B4F6C}.sw-on span{left:23px}
+.btn{display:flex;align-items:center;justify-content:center;height:52px;padding:0 18px;border-radius:14px;font-weight:700;font-size:16px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-s{background:#fff;color:#12161F;border:1.5px solid #D9D5CC}
+.num{transition:opacity .2s}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #3B3F46; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <section role="dialog" aria-modal="true" aria-labelledby="ft" style="position: absolute; left: 0; right: 0; top: 48px; bottom: 0; background: #fff; border-radius: 24px 24px 0 0; display: flex; flex-direction: column">
+    <header style="display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 8px; border-bottom: 1px solid #F0EEE8">
+      <a href="Results.dc.html" aria-label="Fermer" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #12161F"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+      <h1 id="ft" class="disp" style="margin: 0; font-size: 19px; font-weight: 700">Filtres</h1>
+      <button onClick="{{reset}}" style="height: 44px; padding: 0 12px; font-size: 15px; font-weight: 700; color: #0B4F6C">Effacer</button>
+    </header>
+    <div class="scroll" style="flex-grow: 1; min-height: 0; padding: 0 20px">
+      <div class="sec">
+        <h2>Métier</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{jobs}}" as="c" hint-placeholder-count="6"><button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+      </div>
+      <div class="sec">
+        <h2>Disponibilité</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{whens}}" as="c" hint-placeholder-count="4"><button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+      </div>
+      <div class="sec">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><h2>Distance maximale</h2><span style="font-size: 14px; font-weight: 800; color: #0B4F6C">{{distLabel}}</span></div>
+        <div style="display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: #F0EEE8"><sc-for list="{{dists}}" as="c" hint-placeholder-count="4"><button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+      </div>
+      <div class="sec">
+        <h2>Note minimale</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{rates}}" as="c" hint-placeholder-count="4"><button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#E0A21B"/></svg>{{c.label}}</button></sc-for></div>
+      </div>
+      <div class="sec">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><h2>Prix estimé</h2><span style="font-size: 14px; font-weight: 800">3 000 – 25 000 FCFA</span></div>
+        <div style="position: relative; height: 44px; display: flex; align-items: center" role="group" aria-label="Fourchette de prix">
+          <div style="position: absolute; left: 0; right: 0; height: 4px; border-radius: 2px; background: #E3E0D8"></div>
+          <div style="position: absolute; left: 8%; right: 30%; height: 4px; border-radius: 2px; background: #0B4F6C"></div>
+          <span role="slider" aria-label="Prix minimum" aria-valuenow="3000" tabindex="0" style="position: absolute; left: calc(8% - 13px); width: 26px; height: 26px; border-radius: 13px; background: #fff; border: 2px solid #0B4F6C; box-shadow: 0 2px 6px rgba(0,0,0,.15)"></span>
+          <span role="slider" aria-label="Prix maximum" aria-valuenow="25000" tabindex="0" style="position: absolute; right: calc(30% - 13px); width: 26px; height: 26px; border-radius: 13px; background: #fff; border: 2px solid #0B4F6C; box-shadow: 0 2px 6px rgba(0,0,0,.15)"></span>
+        </div>
+        <button class="ck" onClick="{{toggleDevis}}" role="switch" aria-checked="{{devis}}" style="justify-content: space-between">
+          <span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 700">Inclure « Sur devis »</span><span style="font-size: 13px; color: #656B77; font-weight: 600">Artisans sans prix affiché</span></span>
+          <span class="{{devisCls}}"><span></span></span>
+        </button>
+      </div>
+      <div class="sec">
+        <h2>Niveau de vérification</h2>
+        <div style="display: flex; flex-direction: column">
+          <sc-for list="{{levels}}" as="l" hint-placeholder-count="3">
+            <button class="ck" role="checkbox" aria-checked="{{l.on}}" onClick="{{l.pick}}">
+              <span class="{{l.cls}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>
+              <span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 700">{{l.label}}</span><span style="font-size: 13px; color: #656B77; font-weight: 600">{{l.help}}</span></span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="sec" style="border-bottom: 0; padding-bottom: 28px">
+        <h2>Expérience</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{exps}}" as="c" hint-placeholder-count="4"><button class="{{c.cls}}" aria-pressed="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+      </div>
+    </div>
+    <footer style="padding: 12px 20px 34px; border-top: 1px solid #F0EEE8; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 10px; background: #fff">
+      <button class="btn btn-s" onClick="{{reset}}">Réinitialiser</button>
+      <a href="Results.dc.html" class="btn btn-p"><span class="num">Afficher {{count}} artisans</span></a>
+    </footer>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = this.initial(); }
+  initial() { return { jobs: ['Plomberie'], when: 'today', dist: '5', rate: '4', devis: true, levels: ['id', 'pro'], exp: 'all' }; }
+  renderVals() {
+    const s = this.state;
+    const chip = (on) => 'chip' + (on ? ' chip-on' : '');
+    const seg = (on) => 'seg' + (on ? ' seg-on' : '');
+    const jobs = ['Plomberie', 'Électricité', 'Climatisation', 'Peinture', 'Menuiserie', 'Serrurerie', 'Nettoyage'].map((label) => {
+      const on = s.jobs.includes(label);
+      return { label, on, cls: chip(on), pick: () => this.setState({ jobs: on ? s.jobs.filter((j) => j !== label) : s.jobs.concat(label) }) };
+    });
+    const pickOne = (key, list, fmt) => list.map(([id, label]) => ({ label, on: s[key] === id, cls: fmt(s[key] === id), pick: () => this.setState({ [key]: id }) }));
+    const levels = [['id', 'Identité vérifiée', 'Pièce d’identité contrôlée'], ['skill', 'Compétences vérifiées', 'Diplôme ou test pratique'], ['pro', 'Pro certifié', 'Entreprise enregistrée + assurance']].map(([id, label, help]) => {
+      const on = s.levels.includes(id);
+      return { label, help, on, cls: 'box' + (on ? ' box-on' : ''), pick: () => this.setState({ levels: on ? s.levels.filter((l) => l !== id) : s.levels.concat(id) }) };
+    });
+    let count = 48 * Math.max(1, s.jobs.length);
+    if (s.when === 'today') count = Math.round(count * 0.45); else if (s.when === 'tomorrow') count = Math.round(count * 0.7);
+    count = Math.round(count * ({ '2': 0.35, '5': 0.6, '10': 0.85, '20': 1 })[s.dist]);
+    count = Math.round(count * ({ '3': 1, '4': 0.8, '4.5': 0.55 })[s.rate]);
+    if (!s.devis) count = Math.round(count * 0.8);
+    if (s.exp !== 'all') count = Math.round(count * 0.7);
+    count = Math.max(0, count - (s.levels.includes('pro') ? 2 : 0));
+    return {
+      jobs, levels,
+      whens: pickOne('when', [['today', 'Aujourd’hui'], ['tomorrow', 'Demain'], ['week', 'Cette semaine'], ['later', 'Plus tard']], chip),
+      dists: pickOne('dist', [['2', '2 km'], ['5', '5 km'], ['10', '10 km'], ['20', '20 km+']], seg),
+      rates: pickOne('rate', [['3', '3+'], ['4', '4+'], ['4.5', '4,5+']], chip),
+      exps: pickOne('exp', [['all', 'Tous'], ['2', '2 ans +'], ['5', '5 ans +'], ['10', '10 ans +']], chip),
+      distLabel: ({ '2': 'Jusqu’à 2 km', '5': 'Jusqu’à 5 km', '10': 'Jusqu’à 10 km', '20': 'Toute la ville' })[s.dist],
+      devis: s.devis, devisCls: 'sw' + (s.devis ? ' sw-on' : ''),
+      toggleDevis: () => this.setState({ devis: !s.devis }),
+      count,
+      reset: () => this.setState({ jobs: ['Plomberie'], when: 'week', dist: '20', rate: '3', devis: true, levels: [], exp: 'all' })
+    };
+  }
+}
+</script>
+</body>
+</html>

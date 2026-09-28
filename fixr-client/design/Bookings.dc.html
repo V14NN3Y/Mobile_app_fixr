@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Réservations</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid #E3E0D8;margin:0 -12px}
+.t{height:48px;font-size:13px;font-weight:700;color:#656B77;position:relative;display:flex;align-items:center;justify-content:center;gap:4px;transition:color .15s;white-space:nowrap}
+.t-on{color:#12161F}
+.t-on::after{content:'';position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:#0B4F6C;animation:gl .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes gl{from{transform:scaleX(.3);opacity:0}}
+.cnt{min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:#ECE9E2;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;color:#4A515E}
+.card{background:#fff;border-radius:20px;border:1px solid #ECE9E2;padding:16px;display:flex;flex-direction:column;gap:12px;color:#12161F;transition:transform .15s,box-shadow .15s}
+.card:hover{color:#12161F;box-shadow:0 8px 22px rgba(18,22,31,.07)}
+.card:active{transform:scale(.99)}
+.badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:800}
+.meta{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#4A515E}
+.fu{animation:fu .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:88px;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-top:1px solid #ECE9E2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:0 6px 34px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:#656B77;position:relative;min-height:54px}
+.tab:hover{color:#12161F}
+.tab-on,.tab-on:hover{color:#0B4F6C}
+.tab-on::before{content:'';position:absolute;top:-1px;width:28px;height:3px;border-radius:0 0 3px 3px;background:#0B4F6C}
+.nb{position:absolute;top:3px;left:calc(50% + 4px);min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#C8531D;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <div class="scroll">
+    <header style="position: sticky; top: 0; z-index: 2; background: rgba(246,245,241,.97); backdrop-filter: blur(12px); padding: 62px 20px 0; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h1 class="disp" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 700">Réservations</h1>
+        <a href="RequestNeed.dc.html" style="height: 40px; padding: 0 14px; border-radius: 12px; background: #0B4F6C; color: #fff; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Demande</a>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Statut des réservations">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+          <button role="tab" class="{{t.cls}}" aria-selected="{{t.on}}" onClick="{{t.pick}}">{{t.label}}<span class="cnt" style="background: {{t.cntBg}}; color: {{t.cntInk}}">{{t.n}}</span></button>
+        </sc-for>
+      </div>
+    </header>
+
+    <div role="tabpanel" style="padding: 16px 20px 120px; display: flex; flex-direction: column; gap: 12px">
+      <sc-for list="{{items}}" as="b" hint-placeholder-count="3">
+        <a href="{{b.href}}" class="card fu" style="animation-delay: {{b.delay}}">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span class="badge" style="background: {{b.bBg}}; color: {{b.bInk}}"><span style="width: 7px; height: 7px; border-radius: 4px; background: currentColor"></span>{{b.status}}</span>
+            <span style="font-size: 12px; font-weight: 700; color: #656B77">{{b.id}}</span>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center">
+            <div style="width: 46px; height: 46px; border-radius: 999px; background: {{b.avBg}}; color: {{b.avInk}}; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0">{{b.ini}}</div>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <span style="font-size: 16px; font-weight: 800; line-height: 21px">{{b.title}}</span>
+              <span style="font-size: 13px; color: #656B77; font-weight: 600">{{b.who}}</span>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid #F0EEE8">
+            <span class="meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>{{b.date}}</span>
+            <span class="meta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 1 1 14 0c0 5.8-7 12-7 12z"/></svg>{{b.addr}}</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px">
+              <span style="font-size: 13px; color: #656B77; font-weight: 700">{{b.priceLabel}}</span>
+              <span style="font-size: 15px; font-weight: 800">{{b.price}}</span>
+            </div>
+          </div>
+          <sc-if value="{{b.hasCta}}" hint-placeholder-val="{{ false }}">
+            <span style="height: 44px; border-radius: 12px; background: {{b.ctaBg}}; color: {{b.ctaInk}}; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{b.cta}}</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <nav class="tabbar" aria-label="Navigation principale">
+    <a href="Home.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a>
+    <a href="Search.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher</a>
+    <a href="Bookings.dc.html" class="tab tab-on" aria-current="page"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="nb">1</span>Réservations</a>
+    <a href="Messages.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="nb">2</span>Messages</a>
+    <a href="Profile.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</a>
+  </nav>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'up' }; }
+  renderVals() {
+    const S = {
+      wait: ['Devis reçus', '#FBF1DE', '#7A4F0C'], conf: ['Confirmée', '#E3EEF2', '#0B4F6C'], road: ['En route', '#FBECE3', '#9A3F14'],
+      done: ['Terminée', '#E3F2EA', '#1D6B45'], cancel: ['Annulée', '#ECE9E2', '#4A515E']
+    };
+    const mk = (st, o) => ({ ...o, status: S[st][0], bBg: S[st][1], bInk: S[st][2] });
+    const data = {
+      up: [
+        mk('wait', { id: 'FX-25103', ini: '3', title: 'Entretien climatiseur', who: '2 devis reçus · 1 en attente', date: 'Mar. 29 sept. · 09:00 – 11:00', addr: 'Maison · Haie Vive, Cotonou', priceLabel: 'Devis de', price: '18 000 – 24 000 FCFA', avBg: '#DFF1F1', avInk: '#0F5E5E', href: 'BookingDetail.dc.html', hasCta: true, cta: 'Comparer les devis', ctaBg: '#0B4F6C', ctaInk: '#fff' }),
+        mk('conf', { id: 'FX-24990', ini: 'CA', title: 'Peinture chambre (12 m²)', who: 'Christelle Akpovi · Peintre', date: 'Jeu. 1 oct. · 08:00 – 12:00', addr: 'Maison · Haie Vive, Cotonou', priceLabel: 'Prix estimé', price: '45 000 FCFA', avBg: '#EEE7F7', avInk: '#5B3A8C', href: 'BookingDetail.dc.html', hasCta: false }),
+        mk('conf', { id: 'FX-24951', ini: 'MS', title: 'Nettoyage après travaux', who: 'Mariam Soulé · Nettoyage', date: 'Sam. 3 oct. · 09:00 – 13:00', addr: 'Chez maman · Zopah, Abomey-Calavi', priceLabel: 'Prix estimé', price: '15 000 FCFA', avBg: '#E3F2EA', avInk: '#1D6B45', href: 'BookingDetail.dc.html', hasCta: false })
+      ],
+      now: [
+        mk('road', { id: 'FX-24817', ini: 'KA', title: 'Fuite sous l’évier', who: 'Koffi Agbodjan · Plombier', date: 'Aujourd’hui · 14:00 – 16:00', addr: 'Maison · Haie Vive, Cotonou', priceLabel: 'Prix estimé', price: '15 000 – 25 000 FCFA', avBg: '#FBECE3', avInk: '#9A3F14', href: 'MissionLive.dc.html', hasCta: true, cta: 'Suivre l’arrivée · 12 min', ctaBg: '#FBECE3', ctaInk: '#9A3F14' })
+      ],
+      done: [
+        mk('done', { id: 'FX-24402', ini: 'RD', title: 'Remplacement disjoncteur', who: 'Rodrigue Dossou · Électricien', date: 'Sam. 12 sept. · 10:00', addr: 'Maison · Haie Vive, Cotonou', priceLabel: 'Montant payé', price: '18 000 FCFA', avBg: '#FBF1DE', avInk: '#7A4F0C', href: 'Report.dc.html', hasCta: true, cta: 'Noter Rodrigue', ctaBg: '#F2F0EB', ctaInk: '#12161F' }),
+        mk('done', { id: 'FX-23877', ini: 'HG', title: 'Ouverture de porte + serrure', who: 'Hervé Gbaguidi · Serrurier · noté ★ 5', date: 'Dim. 30 août · 21:40', addr: 'Bureau · Ganhi, Cotonou', priceLabel: 'Montant payé', price: '12 000 FCFA', avBg: '#E3EEF2', avInk: '#0B4F6C', href: 'Report.dc.html', hasCta: false })
+      ],
+      cancel: [
+        mk('cancel', { id: 'FX-23790', ini: 'GK', title: 'Réparation porte de placard', who: 'Gildas Kpadonou · annulée par vous', date: 'Jeu. 20 août · 15:00', addr: 'Maison · Haie Vive, Cotonou', priceLabel: 'Frais d’annulation', price: '0 FCFA', avBg: '#F1E9E0', avInk: '#6B4A2B', href: 'BookingDetail.dc.html', hasCta: true, cta: 'Refaire une demande', ctaBg: '#F2F0EB', ctaInk: '#12161F' })
+      ]
+    };
+    const T = [['up', 'À venir'], ['now', 'En cours'], ['done', 'Terminées'], ['cancel', 'Annulées']];
+    const tab = this.state.tab;
+    return {
+      tabs: T.map(([id, label]) => ({ label, n: data[id].length, on: tab === id, cls: 't' + (tab === id ? ' t-on' : ''),
+        cntBg: id === 'now' ? '#C8531D' : '#ECE9E2', cntInk: id === 'now' ? '#fff' : '#4A515E', pick: () => this.setState({ tab: id }) })),
+      items: data[tab].map((b, i) => ({ ...b, delay: (i * 0.06) + 's' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nouvelle demande — Adresse</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+input,textarea{font:inherit;color:inherit}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#12161F}
+.lbl{font-size:14px;font-weight:800;display:flex;justify-content:space-between;align-items:baseline}
+.lbl small{font-size:12px;color:#656B77;font-weight:600}
+.f{display:flex;flex-direction:column;gap:8px}
+.field{border-radius:14px;background:#fff;border:1.5px solid #D9D5CC;display:flex;align-items:center;gap:10px;padding:0 14px;transition:border-color .15s,box-shadow .15s}
+.field:focus-within{border-color:#0B4F6C;box-shadow:0 0 0 4px rgba(11,79,108,.12)}
+.field input,.field textarea{border:0;outline:0;background:transparent;width:100%;font-size:16px;font-weight:600;height:50px}
+.field textarea{resize:none;font-weight:500;line-height:22px;height:78px;padding:12px 0}
+.addr{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:#fff;border:1.5px solid #E3E0D8;width:100%;text-align:left;transition:all .15s}
+.addr-on{border-color:#0B4F6C;box-shadow:0 0 0 3px rgba(11,79,108,.10)}
+.radio{width:22px;height:22px;border-radius:11px;border:2px solid #B9B4A9;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.radio-on{border-color:#0B4F6C}.radio-on::after{content:'';width:10px;height:10px;border-radius:5px;background:#0B4F6C}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 18px;border-radius:14px;font-weight:700;font-size:16px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.drop{animation:dr .45s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes dr{from{transform:translate(-50%,-130%);opacity:0}to{transform:translate(-50%,-100%);opacity:1}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <header style="padding: 0 12px; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="RequestNeed.dc.html" class="ib" aria-label="Retour à l’étape Besoin"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <span style="font-size: 15px; font-weight: 800">Nouvelle demande</span>
+      <a href="Home.dc.html" class="ib" aria-label="Annuler la demande"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+    </div>
+    <ol aria-label="Progression : étape 2 sur 4" style="list-style: none; margin: 0; padding: 0 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #4A515E"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>1 · Besoin</li>
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 800; color: #0B4F6C" aria-current="step"><span style="height: 4px; border-radius: 2px; background: #0B4F6C"></span>2 · Adresse</li>
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #656B77"><span style="height: 4px; border-radius: 2px; background: #E3E0D8"></span>3 · Date</li>
+      <li style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #656B77"><span style="height: 4px; border-radius: 2px; background: #E3E0D8"></span>4 · Confirmer</li>
+    </ol>
+  </header>
+
+  <form class="scroll" style="flex-grow: 1; min-height: 0; padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 20px">
+    <h1 class="disp" style="margin: 0; font-size: 25px; line-height: 30px; font-weight: 700">Où doit intervenir l’artisan ?</h1>
+
+    <div class="field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A515E" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input aria-label="Rechercher une adresse" placeholder="Quartier, rue, repère connu…"></div>
+
+    <button type="button" onClick="{{useGps}}" style="display: flex; align-items: center; gap: 12px; min-height: 56px; text-align: left">
+      <span style="width: 44px; height: 44px; border-radius: 14px; background: #E3EEF2; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B4F6C" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
+      <span style="display: flex; flex-direction: column; flex-grow: 1"><span style="font-weight: 800; font-size: 15px; color: #0B4F6C">Utiliser ma position actuelle</span><span style="font-size: 13px; color: #656B77; font-weight: 600">{{gpsText}}</span></span>
+    </button>
+
+    <div style="height: 128px; border-radius: 18px; overflow: hidden; position: relative; background: #EDEAE2" aria-label="Aperçu de l’adresse sélectionnée sur la carte">
+      <svg width="350" height="128" viewBox="0 0 350 128" aria-hidden="true" style="position: absolute; inset: 0">
+        <g stroke="#fff" stroke-width="10" stroke-linecap="round"><path d="M-10 40 L360 30M-10 100 L360 92M90 -10 L100 140M250 -10 L240 140"/></g>
+        <path d="M150 50h60v34h-60z" fill="#DFE9D7"/>
+      </svg>
+      <div class="drop" style="position: absolute; left: {{pinX}}; top: 76px; transform: translate(-50%,-100%); display: flex; flex-direction: column; align-items: center">
+        <svg width="34" height="42" viewBox="0 0 34 42"><path d="M17 41S2 27 2 16a15 15 0 1 1 30 0c0 11-15 25-15 25z" fill="#C8531D" stroke="#fff" stroke-width="2.5"/><circle cx="17" cy="16" r="5.5" fill="#fff"/></svg>
+      </div>
+      <span style="position: absolute; left: 10px; bottom: 10px; background: #fff; border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 800">{{selShort}}</span>
+    </div>
+
+    <div class="f">
+      <span class="lbl" id="la">Adresses enregistrées</span>
+      <div role="radiogroup" aria-labelledby="la" style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{addrs}}" as="a" hint-placeholder-count="3">
+          <button type="button" class="{{a.cls}}" role="radio" aria-checked="{{a.on}}" onClick="{{a.pick}}">
+            <span class="{{a.rcls}}"></span>
+            <span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1"><span style="font-size: 15px; font-weight: 800">{{a.label}}</span><span style="font-size: 14px; color: #4A515E; font-weight: 600; line-height: 20px">{{a.line}}</span><span style="font-size: 13px; color: #656B77; font-weight: 600">{{a.hint}}</span></span>
+          </button>
+        </sc-for>
+        <button type="button" style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 14px; border-radius: 16px; border: 1.5px dashed #B9B4A9; color: #0B4F6C; font-weight: 800; font-size: 15px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Ajouter une nouvelle adresse</button>
+      </div>
+    </div>
+
+    <div class="f">
+      <label for="cp" class="lbl">Complément d’adresse <small>Facultatif</small></label>
+      <div class="field"><input id="cp" value="Maison à étage, portail bleu"></div>
+    </div>
+    <div class="f">
+      <label for="ins" class="lbl">Instructions d’accès <small>Visibles par l’artisan</small></label>
+      <div class="field"><textarea id="ins">Deuxième von après la pharmacie Les Cocotiers. Appelez en arrivant, le gardien s’appelle Paulin.</textarea></div>
+    </div>
+  </form>
+
+  <footer style="padding: 12px 20px 34px; border-top: 1px solid #ECE9E2; background: #fff">
+    <a href="RequestDate.dc.html" class="btn btn-p">Continuer<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 0, gps: false }; }
+  renderVals() {
+    const s = this.state;
+    const A = [
+      { label: 'Maison', line: 'Carré 412, Haie Vive, Cotonou', hint: 'Près de la pharmacie Les Cocotiers', short: 'Haie Vive, Cotonou', x: '180px' },
+      { label: 'Bureau', line: 'Immeuble Les Palmiers, 2e étage, Ganhi, Cotonou', hint: 'Accueil au rez-de-chaussée', short: 'Ganhi, Cotonou', x: '260px' },
+      { label: 'Chez maman', line: 'Quartier Zopah, Abomey-Calavi', hint: 'Maison après l’église, portail vert', short: 'Zopah, Abomey-Calavi', x: '100px' }
+    ];
+    return {
+      addrs: A.map((a, i) => ({ ...a, on: s.sel === i, cls: 'addr' + (s.sel === i ? ' addr-on' : ''), rcls: 'radio' + (s.sel === i ? ' radio-on' : ''), pick: () => this.setState({ sel: i, gps: false }) })),
+      selShort: s.gps ? 'Position actuelle · ±12 m' : A[s.sel].short,
+      pinX: s.gps ? '170px' : A[s.sel].x,
+      gpsText: s.gps ? 'Position détectée : Haie Vive, précision 12 m' : 'Localisation approximative : Haie Vive',
+      useGps: () => this.setState({ gps: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

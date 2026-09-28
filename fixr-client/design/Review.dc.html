@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Évaluer l’artisan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+textarea{font:inherit;color:inherit}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.ib{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#12161F}
+.star{width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:transform .2s cubic-bezier(.2,1.6,.4,1)}
+.star:active{transform:scale(.8)}
+.star-on{animation:sp .35s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes sp{0%{transform:scale(.7)}100%{transform:scale(1)}}
+.crit{display:flex;align-items:center;justify-content:space-between;min-height:52px;border-bottom:1px solid #F0EEE8}
+.mini{width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+.field{border-radius:14px;background:#fff;border:1.5px solid #D9D5CC}
+.field:focus-within{border-color:#0B4F6C;box-shadow:0 0 0 4px rgba(11,79,108,.12)}
+.field textarea{border:0;outline:0;background:transparent;width:100%;resize:none;height:96px;padding:12px 14px;font-size:15px;line-height:22px;font-weight:500}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 16px;border-radius:14px;font-weight:700;font-size:16px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#0B4F6C;color:#fff}.btn-p:hover{background:#083B51;color:#fff}
+.btn-dis{background:#E3E0D8;color:#7A808B;cursor:not-allowed}
+.btn-t{color:#0B4F6C;height:44px}
+.pop{animation:po .5s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes po{from{transform:scale(.4);opacity:0}}
+.fu{animation:fu .4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}}
+.spin{width:20px;height:20px;border-radius:10px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;animation:rt .7s linear infinite}
+@keyframes rt{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif; display: flex; flex-direction: column; padding-top: 54px">
+  <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+    <header style="padding: 0 12px; display: flex; align-items: center; justify-content: space-between">
+      <a href="Report.dc.html" class="ib" aria-label="Retour"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></a>
+      <a href="Home.dc.html" style="height: 44px; padding: 0 12px; display: flex; align-items: center; font-weight: 700; font-size: 15px; color: #4A515E">Plus tard</a>
+    </header>
+    <div class="scroll" style="flex-grow: 1; min-height: 0; padding: 8px 20px 24px; display: flex; flex-direction: column; gap: 20px">
+      <section style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <div style="width: 72px; height: 72px; border-radius: 999px; background: #FBECE3; color: #9A3F14; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 24px">KA</div>
+        <h1 class="disp" style="margin: 0; font-size: 24px; line-height: 29px; font-weight: 700">Comment s’est passée l’intervention de Koffi ?</h1>
+        <span style="font-size: 14px; color: #656B77; font-weight: 600">Fuite sous l’évier · lun. 28 sept.</span>
+        <div role="radiogroup" aria-label="Note globale" style="display: flex; gap: 2px; margin-top: 4px">
+          <sc-for list="{{stars}}" as="s" hint-placeholder-count="5">
+            <button class="{{s.cls}}" role="radio" aria-checked="{{s.on}}" aria-label="{{s.aria}}" onClick="{{s.pick}}"><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="{{s.fill}}" stroke="{{s.stroke}}" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+          </sc-for>
+        </div>
+        <span style="font-size: 15px; font-weight: 800; color: {{labelInk}}; min-height: 22px" aria-live="polite">{{label}}</span>
+      </section>
+
+      <section style="background: #fff; border: 1px solid #ECE9E2; border-radius: 20px; padding: 6px 16px" aria-label="Critères facultatifs">
+        <sc-for list="{{crits}}" as="c" hint-placeholder-count="4">
+          <div class="crit">
+            <span style="font-size: 15px; font-weight: 700">{{c.label}}</span>
+            <div style="display: flex" role="radiogroup" aria-label="{{c.label}}">
+              <sc-for list="{{c.stars}}" as="m" hint-placeholder-count="5">
+                <button class="mini" onClick="{{m.pick}}" aria-label="{{m.aria}}"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="{{m.fill}}"/></svg></button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <label for="cm" style="font-size: 14px; font-weight: 800; display: flex; justify-content: space-between">Votre commentaire <span style="font-size: 12px; color: #656B77; font-weight: 600">Facultatif</span></label>
+        <div class="field"><textarea id="cm" placeholder="Ponctualité, propreté, conseils… votre retour aide les autres clients.">Très rapide et professionnel. Il m’a montré les anciennes pièces et expliqué l’entretien.</textarea></div>
+      </div>
+
+      <button style="display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 0 14px; border-radius: 16px; border: 1.5px dashed #B9B4A9; color: #0B4F6C; font-weight: 800; font-size: 15px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>Ajouter une photo du résultat
+      </button>
+    </div>
+    <footer style="padding: 12px 20px 34px; border-top: 1px solid #ECE9E2; background: #fff">
+      <sc-if value="{{canSend}}" hint-placeholder-val="{{ false }}"><button class="btn btn-p" style="width: 100%" onClick="{{send}}">Publier mon avis</button></sc-if>
+      <sc-if value="{{sending}}" hint-placeholder-val="{{ false }}"><span class="btn btn-p" aria-busy="true" style="opacity: .85"><span class="spin"></span>Publication…</span></sc-if>
+      <sc-if value="{{cantSend}}" hint-placeholder-val="{{ true }}"><span class="btn btn-dis" aria-disabled="true">Choisissez une note</span></sc-if>
+    </footer>
+  </sc-if>
+
+  <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+    <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 0 28px; text-align: center">
+      <div class="pop" style="width: 96px; height: 96px; border-radius: 32px; background: #FBF1DE; display: flex; align-items: center; justify-content: center"><svg width="52" height="52" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#E0A21B"/></svg></div>
+      <h1 class="disp fu" style="margin: 0; font-size: 26px; line-height: 31px; font-weight: 700">Merci pour votre avis !</h1>
+      <p class="fu" style="margin: 0; font-size: 15px; line-height: 22px; color: #4A515E; font-weight: 500; animation-delay: .1s">Il sera publié sur le profil de Koffi après une vérification rapide. Le paiement de 22 500 FCFA a été confirmé.</p>
+    </div>
+    <footer style="padding: 12px 20px 34px; display: flex; flex-direction: column; gap: 4px">
+      <a href="Home.dc.html" class="btn btn-p">Retour à l’accueil</a>
+      <a href="ArtisanProfile.dc.html" class="btn btn-t">Ajouter Koffi à mes favoris</a>
+    </footer>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { rate: 0, crit: { p: 5, q: 5, c: 4, v: 0 }, phase: 'edit' }; }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() {
+    const s = this.state;
+    const words = ['', 'Très décevant', 'Décevant', 'Correct', 'Très bien', 'Excellent !'];
+    const stars = [1, 2, 3, 4, 5].map((n) => ({
+      on: s.rate === n, aria: n + ' étoile' + (n > 1 ? 's' : ''), cls: 'star' + (n <= s.rate ? ' star-on' : ''),
+      fill: n <= s.rate ? '#E0A21B' : '#fff', stroke: n <= s.rate ? '#E0A21B' : '#C9C4B8', pick: () => this.setState({ rate: n })
+    }));
+    const crits = [['p', 'Ponctualité'], ['q', 'Qualité du travail'], ['c', 'Communication'], ['v', 'Rapport qualité-prix']].map(([k, label]) => ({
+      label, stars: [1, 2, 3, 4, 5].map((n) => ({ aria: label + ' : ' + n + ' sur 5', fill: n <= s.crit[k] ? '#E0A21B' : '#E3E0D8', pick: () => this.setState({ crit: { ...s.crit, [k]: n } }) }))
+    }));
+    return {
+      stars, crits, label: s.rate ? words[s.rate] : 'Touchez une étoile pour noter', labelInk: s.rate ? '#12161F' : '#656B77',
+      notSent: s.phase !== 'done', sent: s.phase === 'done',
+      canSend: s.rate > 0 && s.phase === 'edit', cantSend: s.rate === 0, sending: s.phase === 'sending',
+      send: () => { this.setState({ phase: 'sending' }); this.t = setTimeout(() => this.setState({ phase: 'done' }), 1200); }
+    };
+  }
+}
+</script>
+</body>
+</html>

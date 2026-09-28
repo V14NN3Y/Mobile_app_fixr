@@ -1,0 +1,80 @@
+/**
+ * Tailwind / NativeWind — généré depuis src/theme/tokens.ts.
+ * Les couleurs pointent vers les variables CSS de src/theme/global.css (clair + sombre).
+ * Vérifier la configuration exacte (preset, content, darkMode) dans la doc NativeWind installée.
+ */
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
+  presets: [require('nativewind/preset')],
+  theme: {
+    extend: {
+      colors: {
+        'bg': 'rgb(var(--color-bg) / <alpha-value>)',
+        'surface': 'rgb(var(--color-surface) / <alpha-value>)',
+        'surface-muted': 'rgb(var(--color-surface-muted) / <alpha-value>)',
+        'border': 'rgb(var(--color-border) / <alpha-value>)',
+        'border-subtle': 'rgb(var(--color-border-subtle) / <alpha-value>)',
+        'border-strong': 'rgb(var(--color-border-strong) / <alpha-value>)',
+        'text': 'rgb(var(--color-text) / <alpha-value>)',
+        'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'text-tertiary': 'rgb(var(--color-text-tertiary) / <alpha-value>)',
+        'text-disabled': 'rgb(var(--color-text-disabled) / <alpha-value>)',
+        'primary': 'rgb(var(--color-primary) / <alpha-value>)',
+        'primary-pressed': 'rgb(var(--color-primary-pressed) / <alpha-value>)',
+        'primary-soft': 'rgb(var(--color-primary-soft) / <alpha-value>)',
+        'on-primary': 'rgb(var(--color-on-primary) / <alpha-value>)',
+        'accent': 'rgb(var(--color-accent) / <alpha-value>)',
+        'accent-soft': 'rgb(var(--color-accent-soft) / <alpha-value>)',
+        'accent-ink': 'rgb(var(--color-accent-ink) / <alpha-value>)',
+        'on-accent': 'rgb(var(--color-on-accent) / <alpha-value>)',
+        'success': 'rgb(var(--color-success) / <alpha-value>)',
+        'success-soft': 'rgb(var(--color-success-soft) / <alpha-value>)',
+        'success-ink': 'rgb(var(--color-success-ink) / <alpha-value>)',
+        'warning': 'rgb(var(--color-warning) / <alpha-value>)',
+        'warning-soft': 'rgb(var(--color-warning-soft) / <alpha-value>)',
+        'danger': 'rgb(var(--color-danger) / <alpha-value>)',
+        'danger-soft': 'rgb(var(--color-danger-soft) / <alpha-value>)',
+        'danger-border': 'rgb(var(--color-danger-border) / <alpha-value>)',
+        'rating': 'rgb(var(--color-rating) / <alpha-value>)',
+        'online': 'rgb(var(--color-online) / <alpha-value>)',
+        'disabled-bg': 'rgb(var(--color-disabled-bg) / <alpha-value>)',
+        'toast-bg': 'rgb(var(--color-toast-bg) / <alpha-value>)',
+        'toast-text': 'rgb(var(--color-toast-text) / <alpha-value>)',
+        'offline-bg': 'rgb(var(--color-offline-bg) / <alpha-value>)',
+      },
+      fontFamily: {
+        display: ['BricolageGrotesque_700Bold'],
+        'display-semibold': ['BricolageGrotesque_600SemiBold'],
+        body: ['Manrope_500Medium'],
+        'body-semibold': ['Manrope_600SemiBold'],
+        'body-bold': ['Manrope_700Bold'],
+        'body-extrabold': ['Manrope_800ExtraBold'],
+      },
+      fontSize: {
+        display: ['32px', { lineHeight: '38px', letterSpacing: '-0.64px' }],
+        title1: ['28px', { lineHeight: '34px', letterSpacing: '-0.56px' }],
+        title2: ['22px', { lineHeight: '28px', letterSpacing: '-0.44px' }],
+        title3: ['18px', { lineHeight: '23px', letterSpacing: '-0.36px' }],
+        'body-lg': ['16px', { lineHeight: '24px' }],
+        body: ['15px', { lineHeight: '22px' }],
+        label: ['14px', { lineHeight: '20px' }],
+        caption: ['13px', { lineHeight: '18px' }],
+        micro: ['11px', { lineHeight: '14px', letterSpacing: '0.44px' }],
+      },
+      borderRadius: {
+        sm: '8px',
+        md: '12px',
+        lg: '14px',
+        xl: '20px',
+        '2xl': '28px',
+      },
+      spacing: {
+        screen: '20px',
+        touch: '44px',
+        button: '52px',
+      },
+    },
+  },
+  plugins: [],
+};

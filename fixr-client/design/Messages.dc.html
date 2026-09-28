@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Messages</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+body{margin:0;background:#F6F5F1}
+*{box-sizing:border-box}
+a{color:#0B4F6C;text-decoration:none}a:hover{color:#083B51}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+input{font:inherit;color:inherit}
+.disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.02em}
+.scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.chip{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E3E0D8;font-size:14px;font-weight:700;transition:all .15s}
+.chip-on{background:#12161F;border-color:#12161F;color:#fff}
+.conv{display:flex;gap:12px;align-items:center;padding:12px 20px;color:#12161F;transition:background .15s}
+.conv:hover{background:#EFEDE7;color:#12161F}
+.fu{animation:fu .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fu{from{opacity:0;transform:translateY(6px)}}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:88px;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-top:1px solid #ECE9E2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:0 6px 34px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:#656B77;position:relative;min-height:54px}
+.tab:hover{color:#12161F}
+.tab-on,.tab-on:hover{color:#0B4F6C}
+.tab-on::before{content:'';position:absolute;top:-1px;width:28px;height:3px;border-radius:0 0 3px 3px;background:#0B4F6C}
+.nb{position:absolute;top:3px;left:calc(50% + 4px);min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#C8531D;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+</style>
+</helmet>
+<main style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F6F5F1; color: #12161F; font-family: Manrope, system-ui, sans-serif">
+  <div class="scroll">
+    <header style="padding: 62px 20px 12px; display: flex; flex-direction: column; gap: 14px">
+      <h1 class="disp" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 700">Messages</h1>
+      <div style="height: 48px; border-radius: 14px; background: #fff; border: 1px solid #E3E0D8; display: flex; align-items: center; gap: 10px; padding: 0 14px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A515E" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input aria-label="Rechercher une conversation" placeholder="Rechercher un artisan ou une mission" style="border: 0; outline: 0; background: transparent; flex-grow: 1; font-size: 15px; font-weight: 600">
+      </div>
+      <div style="display: flex; gap: 8px">
+        <button class="{{allCls}}" onClick="{{showAll}}" aria-pressed="{{isAll}}">Toutes</button>
+        <button class="{{unreadCls}}" onClick="{{showUnread}}" aria-pressed="{{isUnread}}">Non lues <span style="min-width: 20px; height: 20px; border-radius: 10px; background: #C8531D; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; padding: 0 5px">2</span></button>
+      </div>
+    </header>
+    <ul style="list-style: none; margin: 0; padding: 0 0 110px">
+      <sc-for list="{{convs}}" as="c" hint-placeholder-count="6">
+        <li class="fu" style="animation-delay: {{c.delay}}">
+          <a href="Chat.dc.html" class="conv">
+            <div style="position: relative; flex-shrink: 0">
+              <div style="width: 52px; height: 52px; border-radius: 999px; background: {{c.bg}}; color: {{c.ink}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px">{{c.ini}}</div>
+              <sc-if value="{{c.online}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: 1px; bottom: 1px; width: 14px; height: 14px; border-radius: 7px; background: #2EA067; border: 2.5px solid #F6F5F1"></span></sc-if>
+            </div>
+            <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+                <span style="font-size: 15px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.name}}</span>
+                <span style="font-size: 12px; font-weight: {{c.timeW}}; color: {{c.timeInk}}; flex-shrink: 0">{{c.time}}</span>
+              </div>
+              <span style="font-size: 12px; font-weight: 700; color: #656B77">{{c.mission}}</span>
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+                <span style="font-size: 14px; font-weight: {{c.msgW}}; color: {{c.msgInk}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.msg}}</span>
+                <sc-if value="{{c.hasUnread}}" hint-placeholder-val="{{ false }}"><span style="min-width: 22px; height: 22px; border-radius: 11px; background: #0B4F6C; color: #fff; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; padding: 0 6px; flex-shrink: 0">{{c.unread}}</span></sc-if>
+                <sc-if value="{{c.readByThem}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B4F6C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Lu" style="flex-shrink: 0"><path d="m2 12 5 5L17 7M12 16l1 1L23 7"/></svg></sc-if>
+              </div>
+            </div>
+          </a>
+        </li>
+      </sc-for>
+    </ul>
+  </div>
+  <nav class="tabbar" aria-label="Navigation principale">
+    <a href="Home.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a>
+    <a href="Search.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Rechercher</a>
+    <a href="Bookings.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="nb">1</span>Réservations</a>
+    <a href="Messages.dc.html" class="tab tab-on" aria-current="page"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="nb">2</span>Messages</a>
+    <a href="Profile.dc.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</a>
+  </nav>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { unreadOnly: false }; }
+  renderVals() {
+    const C = [
+      { ini: 'KA', name: 'Koffi Agbodjan', mission: 'Plomberie · FX-24817', msg: 'Je passe Cadjèhoun, j’arrive dans 10 min.', time: '14:02', unread: 2, online: true, bg: '#FBECE3', ink: '#9A3F14' },
+      { ini: 'FA', name: 'Fabrice Ahouandjinou', mission: 'Devis · FX-25103', msg: 'Je peux passer demain à 9h pour le diagnostic.', time: '11:58', unread: 0, online: true, bg: '#DFF1F1', ink: '#0F5E5E' },
+      { ini: 'CA', name: 'Christelle Akpovi', mission: 'Peinture · FX-24990', msg: 'Vous : Beige clair, comme sur la photo.', time: '11:40', unread: 0, mine: true, bg: '#EEE7F7', ink: '#5B3A8C' },
+      { ini: 'F', name: 'Support FIXR', mission: 'Assistance', msg: 'Votre numéro a bien été vérifié. Bienvenue !', time: 'Hier', unread: 0, bg: '#0B4F6C', ink: '#fff' },
+      { ini: 'MS', name: 'Mariam Soulé', mission: 'Nettoyage · FX-24951', msg: 'Vous : D’accord pour samedi 9h.', time: '26 sept.', unread: 0, mine: true, bg: '#E3F2EA', ink: '#1D6B45' },
+      { ini: 'RD', name: 'Rodrigue Dossou', mission: 'Électricité · FX-24402', msg: 'Merci pour votre confiance, bonne soirée.', time: '12 sept.', unread: 0, bg: '#FBF1DE', ink: '#7A4F0C' }
+    ];
+    const u = this.state.unreadOnly;
+    const convs = C.filter((c) => !u || c.unread > 0).map((c, i) => ({
+      ...c, delay: (i * 0.04) + 's', hasUnread: c.unread > 0, readByThem: !!c.mine,
+      timeW: c.unread ? 800 : 600, timeInk: c.unread ? '#0B4F6C' : '#656B77', msgW: c.unread ? 800 : 500, msgInk: c.unread ? '#12161F' : '#4A515E'
+    }));
+    return {
+      convs, isAll: !u, isUnread: u,
+      allCls: 'chip' + (!u ? ' chip-on' : ''), unreadCls: 'chip' + (u ? ' chip-on' : ''),
+      showAll: () => this.setState({ unreadOnly: false }), showUnread: () => this.setState({ unreadOnly: true })
+    };
+  }
+}
+</script>
+</body>
+</html>
