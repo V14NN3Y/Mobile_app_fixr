@@ -16,15 +16,12 @@ import Animated, {
 
 export type SpinnerProps = {
   size?: number;
-  color?: string;
-  trackColor?: string;
+  /** Couleur résolue (useTheme().colors) — pas de défaut : le blanc ne convient pas à tous les fonds. */
+  color: string;
+  trackColor: string;
 };
 
-export function Spinner({
-  size = 18,
-  color = '#FFFFFF',
-  trackColor = 'rgba(255,255,255,0.35)',
-}: SpinnerProps) {
+export function Spinner({ size = 18, color, trackColor }: SpinnerProps) {
   const rotation = useSharedValue(0);
 
   useEffect(() => {

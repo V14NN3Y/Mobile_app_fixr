@@ -82,7 +82,7 @@ const ALL_STATUSES: BookingStatus[] = [
 
 export default function Catalogue() {
   const insets = useSafeAreaInsets();
-  const { preference, setPreference } = useTheme();
+  const { preference, setPreference, colors } = useTheme();
   const { show } = useToast();
 
   const [chipSelected, setChipSelected] = useState(true);
@@ -144,7 +144,7 @@ export default function Catalogue() {
             {ICON_NAMES.map((name) => (
               <View key={name} className="w-16 items-center gap-1">
                 <View className="h-14 w-14 items-center justify-center rounded-xl border border-border-subtle bg-surface">
-                  <Icon name={name} color="#12161F" />
+                  <Icon name={name} color={colors.text} />
                 </View>
                 <Text variant="micro" tone="tertiary" numberOfLines={1} className="normal-case">
                   {name}
@@ -247,7 +247,7 @@ export default function Catalogue() {
             <Chip variant="filter" removable onRemove={() => setChipSelected(false)}>
               Aujourd’hui
             </Chip>
-            <Chip icon="star" iconColor="#E0A21B">
+            <Chip icon="star" iconColor={colors.rating}>
               4+
             </Chip>
             {!chipSelected ? null : (
