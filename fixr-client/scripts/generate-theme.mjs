@@ -156,8 +156,31 @@ ${spacingLines}
 `;
 writeFileSync(new URL('../tailwind.config.js', import.meta.url), tw);
 
+/* ---------- src/theme/colorClasses.ts ---------- */
+// Table de noms de classes Tailwind LITTÉRAUX (pas de concaténation à l'exécution :
+// le compilateur NativeWind scanne le texte source, il n'exécute rien — une classe
+// construite dynamiquement ne serait jamais générée).
+const classEntry = (k) => {
+  const kb = kebab(k);
+  return `  ${k}: { bg: 'bg-${kb}', text: 'text-${kb}', border: 'border-${kb}' },`;
+};
+const colorClassesTs = `/**
+ * Généré depuis src/theme/tokens.ts par scripts/generate-theme.mjs — ne pas éditer à la main.
+ * Classes NativeWind littérales par token de couleur, pour un mapping dynamique
+ * (ex. Badge via tokens.statusTone) sans concaténation de chaîne à l'exécution —
+ * NativeWind scanne le texte source, une classe assemblée au runtime ne serait pas générée.
+ */
+import type { ColorToken } from './tokens';
+
+export const colorClasses: Record<ColorToken, { bg: string; text: string; border: string }> = {
+${hexKeys.map(classEntry).join('\n')}
+${skipped.map((k) => `  ${k}: { bg: '', text: '', border: '' }, // hors variables CSS — utiliser useTheme().colors`).join('\n')}
+};
+`;
+writeFileSync(new URL('../src/theme/colorClasses.ts', import.meta.url), colorClassesTs);
+
 console.log(
-  `global.css + tailwind.config.js régénérés : ${hexKeys.length} couleurs, ` +
+  `global.css + tailwind.config.js + colorClasses.ts régénérés : ${hexKeys.length} couleurs, ` +
     `${Object.keys(typo).length} styles de texte, ${Object.keys(space).length} espacements.` +
     (skipped.length ? `\nHors variables CSS : ${skipped.join(', ')}` : ''),
 );
