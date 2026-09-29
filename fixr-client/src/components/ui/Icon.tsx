@@ -101,14 +101,21 @@ export type IconProps = {
   color: string;
   size?: number;
   strokeWidth?: number;
+  /**
+   * Force le remplissage (ex. onglet actif de la tab bar), en overridant le réglage par
+   * défaut du registre pour cette icône. Sur les tracés à segments ouverts (search,
+   * calendar…), le remplissage perd un peu de détail — acceptable pour un onglet actif
+   * (couleur + repère suffisent à distinguer l'état).
+   */
+  filled?: boolean;
 };
 
 /** Icône trait 1.8 (planche 07). */
-export function Icon({ name, color, size = 24, strokeWidth = 1.8 }: IconProps) {
+export function Icon({ name, color, size = 24, strokeWidth = 1.8, filled }: IconProps) {
   // Le registre est en `as const` (pour que IconName reste un union littéral) : chaque entrée
   // n'a que ses propres clés déclarées. On l'élargit ici à IconSpec, structurellement compatible.
   const spec: IconSpec = registry[name];
-  const isFilled = spec.filled ?? false;
+  const isFilled = filled ?? spec.filled ?? false;
 
   const paths = useMemo(
     () =>

@@ -1,21 +1,23 @@
 /**
- * Badge — design/Components.dc.html « Badges & avatars ».
+ * Badge — design/Components.dc.html « Badges & avatars » + « Barre de navigation ».
  * mode="status" : tokens.statusTone (puce ● + libellé). mode="verification" : 3 niveaux.
- * Taille (12/800) absente des 9 variantes de <Text> : dérivée de `micro` (même graisse/famille),
- * sans majuscules ni tracking.
+ * mode="count" : pastille numérique (barre d'onglets, cloche de notifications — Lot 6).
+ * Taille du texte status/verification (12/800) absente des 9 variantes de <Text> :
+ * dérivée de `micro` (même graisse/famille), sans majuscules ni tracking.
  */
 import { View } from 'react-native';
 
 import { cn } from '@/lib/cn';
-import { statusTone } from '@/theme/tokens';
 import { colorClasses } from '@/theme/colorClasses';
+import { statusTone } from '@/theme/tokens';
 import type { BookingStatus, VerificationLevel } from '@/types/domain';
 
 import { Text } from './Text';
 
 export type BadgeProps =
   | { mode: 'status'; status: BookingStatus; testID?: string }
-  | { mode: 'verification'; level: VerificationLevel; testID?: string };
+  | { mode: 'verification'; level: VerificationLevel; testID?: string }
+  | { mode: 'count'; value: number; max?: number; testID?: string };
 
 const verificationContent: Record<VerificationLevel, { label: string; bg: string; text: string }> =
   {
@@ -25,6 +27,27 @@ const verificationContent: Record<VerificationLevel, { label: string; bg: string
   };
 
 export function Badge(props: BadgeProps) {
+  if (props.mode === 'count') {
+    const { value, max = 99, testID } = props;
+    const display = value > max ? `${max}+` : String(value);
+    return (
+      <View
+        testID={testID}
+        className="h-[19px] min-w-[19px] items-center justify-center rounded-full border-2 border-surface bg-accent px-1"
+      >
+        <Text
+          variant="micro"
+          tone="inherit"
+          className="normal-case tracking-normal text-on-accent"
+          style={{ fontSize: 10, lineHeight: 12 }}
+          numberOfLines={1}
+        >
+          {display}
+        </Text>
+      </View>
+    );
+  }
+
   const { mode, testID } = props;
 
   const { label, bg, fg, dot } =
