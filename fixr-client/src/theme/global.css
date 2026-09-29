@@ -48,52 +48,52 @@
   --color-offline-text: 255 255 255;
 }
 
-/* Mode sombre. NativeWind résout prefers-color-scheme à partir de son propre
-   colorScheme : colorScheme.set('light' | 'dark' | 'system') depuis src/theme/ThemeProvider.tsx
-   fait donc bien rebasculer ces variables. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: 14 18 21;
-    --color-surface: 22 27 32;
-    --color-surface-muted: 30 37 43;
-    --color-border: 42 50 56;
-    --color-border-subtle: 35 43 49;
-    --color-border-strong: 58 67 76;
-    --color-text: 242 241 236;
-    --color-text-secondary: 183 188 196;
-    --color-text-tertiary: 140 147 157;
-    --color-text-disabled: 107 114 124;
-    --color-primary: 95 179 212;
-    --color-primary-pressed: 134 199 224;
-    --color-primary-soft: 18 48 61;
-    --color-on-primary: 4 35 47;
-    --color-accent: 240 138 88;
-    --color-accent-soft: 58 34 23;
-    --color-accent-ink: 244 167 126;
-    --color-on-accent: 26 13 6;
-    --color-success: 76 195 138;
-    --color-success-soft: 21 48 31;
-    --color-success-ink: 111 211 160;
-    --color-warning: 230 176 74;
-    --color-warning-soft: 51 40 18;
-    --color-warning-ink: 240 201 120;
-    --color-danger: 240 122 114;
-    --color-danger-soft: 58 27 25;
-    --color-danger-border: 240 122 114;
-    --color-danger-pressed: 217 99 92;
-    --color-danger-ink: 244 161 154;
-    --color-field-error-bg: 42 21 19;
-    --color-on-danger: 26 13 6;
-    --color-rating: 242 185 59;
-    --color-online: 76 195 138;
-    --color-disabled-bg: 42 50 56;
-    --color-skeleton-base: 30 37 43;
-    --color-skeleton-highlight: 42 50 56;
-    --color-toast-bg: 242 241 236;
-    --color-toast-text: 18 22 31;
-    --color-toast-success: 29 107 69;
-    --color-toast-action: 154 63 20;
-    --color-offline-bg: 42 50 56;
-    --color-offline-text: 242 241 236;
-  }
+/* Mode sombre : classe .dark sur l'élément racine, pas @media — tailwind.config.js déclare
+   darkMode: 'class', requis pour que colorScheme.set('light'|'dark'|'system')
+   (src/theme/ThemeProvider.tsx) puisse effectivement piloter ces variables. Une simple
+   @media (prefers-color-scheme: dark) ignorerait ce bouton : elle ne suit que l'OS, jamais
+   un choix manuel (vérifié en testant un rendu web réel — voir le commentaire du fichier). */
+:root.dark {
+  --color-bg: 14 18 21;
+  --color-surface: 22 27 32;
+  --color-surface-muted: 30 37 43;
+  --color-border: 42 50 56;
+  --color-border-subtle: 35 43 49;
+  --color-border-strong: 58 67 76;
+  --color-text: 242 241 236;
+  --color-text-secondary: 183 188 196;
+  --color-text-tertiary: 140 147 157;
+  --color-text-disabled: 107 114 124;
+  --color-primary: 95 179 212;
+  --color-primary-pressed: 134 199 224;
+  --color-primary-soft: 18 48 61;
+  --color-on-primary: 4 35 47;
+  --color-accent: 240 138 88;
+  --color-accent-soft: 58 34 23;
+  --color-accent-ink: 244 167 126;
+  --color-on-accent: 26 13 6;
+  --color-success: 76 195 138;
+  --color-success-soft: 21 48 31;
+  --color-success-ink: 111 211 160;
+  --color-warning: 230 176 74;
+  --color-warning-soft: 51 40 18;
+  --color-warning-ink: 240 201 120;
+  --color-danger: 240 122 114;
+  --color-danger-soft: 58 27 25;
+  --color-danger-border: 240 122 114;
+  --color-danger-pressed: 217 99 92;
+  --color-danger-ink: 244 161 154;
+  --color-field-error-bg: 42 21 19;
+  --color-on-danger: 26 13 6;
+  --color-rating: 242 185 59;
+  --color-online: 76 195 138;
+  --color-disabled-bg: 42 50 56;
+  --color-skeleton-base: 30 37 43;
+  --color-skeleton-highlight: 42 50 56;
+  --color-toast-bg: 242 241 236;
+  --color-toast-text: 18 22 31;
+  --color-toast-success: 29 107 69;
+  --color-toast-action: 154 63 20;
+  --color-offline-bg: 42 50 56;
+  --color-offline-text: 242 241 236;
 }

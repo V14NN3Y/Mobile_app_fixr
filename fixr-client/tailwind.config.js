@@ -7,6 +7,10 @@
 module.exports = {
   content: ['./app/**/*.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
+  // Requis pour colorScheme.set() (src/theme/ThemeProvider.tsx) : avec 'media' (défaut
+  // Tailwind), NativeWind refuse tout bascule manuel ("Cannot manually set color scheme,
+  // as dark mode is type 'media'").
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

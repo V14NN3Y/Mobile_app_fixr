@@ -55,13 +55,13 @@ const css = `/* Généré depuis src/theme/tokens.ts par scripts/generate-theme.
 ${vars('light', '  ')}
 }
 
-/* Mode sombre. NativeWind résout prefers-color-scheme à partir de son propre
-   colorScheme : colorScheme.set('light' | 'dark' | 'system') depuis src/theme/ThemeProvider.tsx
-   fait donc bien rebasculer ces variables. */
-@media (prefers-color-scheme: dark) {
-  :root {
-${vars('dark', '    ')}
-  }
+/* Mode sombre : classe .dark sur l'élément racine, pas @media — tailwind.config.js déclare
+   darkMode: 'class', requis pour que colorScheme.set('light'|'dark'|'system')
+   (src/theme/ThemeProvider.tsx) puisse effectivement piloter ces variables. Une simple
+   @media (prefers-color-scheme: dark) ignorerait ce bouton : elle ne suit que l'OS, jamais
+   un choix manuel (vérifié en testant un rendu web réel — voir le commentaire du fichier). */
+:root.dark {
+${vars('dark', '  ')}
 }
 `;
 writeFileSync(new URL('../src/theme/global.css', import.meta.url), css);
@@ -126,6 +126,10 @@ const tw = `/**
 module.exports = {
   content: ['./app/**/*.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
+  // Requis pour colorScheme.set() (src/theme/ThemeProvider.tsx) : avec 'media' (défaut
+  // Tailwind), NativeWind refuse tout bascule manuel ("Cannot manually set color scheme,
+  // as dark mode is type 'media'").
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
