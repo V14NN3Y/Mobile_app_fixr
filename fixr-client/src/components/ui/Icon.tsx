@@ -134,13 +134,10 @@ export function Icon({ name, color, size = 24, strokeWidth = 1.8, filled }: Icon
   );
 
   return (
-    <Svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      accessibilityElementsHidden
-      importantForAccessibility="no"
-    >
+    // Purement décorative : les parents interactifs (Button, TabBarButton…) portent déjà
+    // l'accessibilityLabel réelle. react-native-svg traduit mal les props d'accessibilité
+    // RN vers le DOM web (attribut brut invalide plutôt qu'un aria-*) — on n'en passe aucune.
+    <Svg width={size} height={size} viewBox="0 0 24 24">
       {spec.rects?.map((r, i) => (
         <Rect
           key={`r${i}`}
