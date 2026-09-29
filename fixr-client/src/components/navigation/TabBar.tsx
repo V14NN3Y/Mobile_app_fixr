@@ -5,15 +5,21 @@
  * dans app/(tabs)/_layout.tsx — pas le `Tabs` classique de expo-router (déprécié) ni
  * unstable-native-tabs (rendu natif du système, pas fidèle à la maquette).
  *
+ * <TabList> doit être un enfant DIRECT de <Tabs> (vérifié dans le code source d'expo-router :
+ * Tabs.js#parseTriggersFromChildren ne descend que dans les Fragment et les éléments dont
+ * `type === TabList` — tout composant custom qui l'envelopperait le rendrait invisible à la
+ * découverte des routes, d'où l'erreur « Couldn't find any screens for the navigator »
+ * rencontrée en testant). Ce fichier n'exporte donc que les morceaux réutilisables
+ * (TabBarButton, useHideTabBar) ; app/(tabs)/_layout.tsx compose <TabList> lui-même.
+ *
  * Masquage : uniquement bookings/[id]/live et messages/[threadId] (les autres écrans à
  * masquer — request/*, artisan/[id], filters, notifications — sont hors du groupe (tabs),
  * donc n'ont structurellement jamais cette barre).
  */
-import { TabList, TabTrigger, type TabTriggerSlotProps } from 'expo-router/ui';
 import { usePathname } from 'expo-router';
+import type { TabTriggerSlotProps } from 'expo-router/ui';
 import { forwardRef } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@/theme/useTheme';
 
@@ -21,7 +27,7 @@ import { Badge } from '../ui/Badge';
 import { Icon, type IconName } from '../ui/Icon';
 import { Text } from '../ui/Text';
 
-function useHideTabBar(): boolean {
+export function useHideTabBar(): boolean {
   const pathname = usePathname();
   const parts = pathname.split('/').filter(Boolean);
   return (
@@ -30,7 +36,7 @@ function useHideTabBar(): boolean {
   );
 }
 
-type TabBarButtonProps = PressableProps &
+export type TabBarButtonProps = PressableProps &
   TabTriggerSlotProps & {
     icon: IconName;
     label: string;
@@ -38,7 +44,7 @@ type TabBarButtonProps = PressableProps &
     badge?: number;
   };
 
-const TabBarButton = forwardRef<View, TabBarButtonProps>(function TabBarButton(
+export const TabBarButton = forwardRef<View, TabBarButtonProps>(function TabBarButton(
   { icon, label, badge, isFocused, ...pressableProps },
   ref,
 ) {
@@ -76,33 +82,3 @@ const TabBarButton = forwardRef<View, TabBarButtonProps>(function TabBarButton(
     </Pressable>
   );
 });
-
-export function TabBar() {
-  const hidden = useHideTabBar();
-  const insets = useSafeAreaInsets();
-
-  if (hidden) return null;
-
-  return (
-    <TabList
-      style={{ height: 54 + insets.bottom, paddingBottom: insets.bottom }}
-      className="border-t border-border-subtle bg-surface"
-    >
-      <TabTrigger name="home" href="/" asChild>
-        <TabBarButton icon="home" label="Accueil" />
-      </TabTrigger>
-      <TabTrigger name="search" href="/search" asChild>
-        <TabBarButton icon="search" label="Rechercher" />
-      </TabTrigger>
-      <TabTrigger name="bookings" href="/bookings" asChild>
-        <TabBarButton icon="calendar" label="Réservations" badge={1} />
-      </TabTrigger>
-      <TabTrigger name="messages" href="/messages" asChild>
-        <TabBarButton icon="message" label="Messages" badge={2} />
-      </TabTrigger>
-      <TabTrigger name="profile" href="/profile" asChild>
-        <TabBarButton icon="user" label="Profil" />
-      </TabTrigger>
-    </TabList>
-  );
-}
