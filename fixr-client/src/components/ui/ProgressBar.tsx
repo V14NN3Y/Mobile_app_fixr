@@ -2,7 +2,9 @@
  * Barre de progression — design/Components.dc.html « Progression » (bandeau « Continue »).
  */
 import { View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { AnimatedView } from '@/lib/animated';
 import { useEffect } from 'react';
 
 import { cn } from '@/lib/cn';
@@ -36,7 +38,7 @@ export function ProgressBar({ value, height = 8, tone = 'primary', testID }: Pro
       style={{ height, borderRadius: height / 2 }}
       className="overflow-hidden bg-border-subtle"
     >
-      <Animated.View style={style} className={cn('h-full rounded-full', toneClass[tone])} />
+      <AnimatedView style={style} className={cn('h-full rounded-full', toneClass[tone])} />
     </View>
   );
 }

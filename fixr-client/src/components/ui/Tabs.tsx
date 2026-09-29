@@ -4,7 +4,9 @@
  */
 import { useEffect, useState } from 'react';
 import { Pressable, View, type LayoutChangeEvent } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { AnimatedView } from '@/lib/animated';
 
 import { motion } from '@/theme/tokens';
 
@@ -42,7 +44,7 @@ export function Tabs<T extends string>({ options, value, onChange, testID }: Tab
       className="relative flex-row border-b border-border"
     >
       {tabWidth > 0 ? (
-        <Animated.View
+        <AnimatedView
           pointerEvents="none"
           style={[
             indicatorStyle,

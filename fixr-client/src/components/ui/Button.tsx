@@ -8,9 +8,10 @@
 import * as Haptics from 'expo-haptics';
 import { useCallback } from 'react';
 import type { GestureResponderEvent } from 'react-native';
-import { AccessibilityInfo, Pressable } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { AccessibilityInfo } from 'react-native';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
+import { AnimatedPressable } from '@/lib/animated';
 import { withAlpha } from '@/lib/color';
 import { cn } from '@/lib/cn';
 import { motion } from '@/theme/tokens';
@@ -22,8 +23,6 @@ import { Text } from './Text';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive';
 export type ButtonSize = 'lg' | 'md' | 'sm';
-
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const sizeClass: Record<ButtonSize, string> = {
   lg: 'h-button rounded-lg px-[18px] gap-2',

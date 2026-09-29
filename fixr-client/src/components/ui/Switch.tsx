@@ -3,8 +3,9 @@
  */
 import * as Haptics from 'expo-haptics';
 import { Pressable } from 'react-native';
-import Animated, { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 
+import { AnimatedView } from '@/lib/animated';
 import { cn } from '@/lib/cn';
 import { motion } from '@/theme/tokens';
 
@@ -57,18 +58,18 @@ export function Switch({
       accessibilityState={{ checked: value, disabled }}
       hitSlop={8}
     >
-      <Animated.View
+      <AnimatedView
         style={trackStyle}
         className={cn(
           'h-7 w-12 justify-center rounded-full',
           value ? 'bg-primary' : 'bg-border-strong',
         )}
       >
-        <Animated.View
+        <AnimatedView
           style={knobStyle}
           className="absolute h-[22px] w-[22px] rounded-full bg-surface"
         />
-      </Animated.View>
+      </AnimatedView>
     </Pressable>
   );
 }

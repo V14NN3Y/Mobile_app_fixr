@@ -7,13 +7,9 @@ import { create } from 'zustand';
 import { useEffect, type ReactNode } from 'react';
 import { AccessibilityInfo, Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  runOnJS,
-} from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withTiming, runOnJS } from 'react-native-reanimated';
 
+import { AnimatedView } from '@/lib/animated';
 import { elevation, motion } from '@/theme/tokens';
 import { useTheme } from '@/theme/useTheme';
 
@@ -90,7 +86,7 @@ function ToastCard({ item, onDone }: { item: ToastItem; onDone: () => void }) {
   }));
 
   return (
-    <Animated.View
+    <AnimatedView
       style={[style, elevation.e2, { backgroundColor: colors.toastBg }]}
       className="mx-5 flex-row items-center gap-2.5 rounded-2xl px-4 py-3.5"
     >
@@ -116,7 +112,7 @@ function ToastCard({ item, onDone }: { item: ToastItem; onDone: () => void }) {
           </Text>
         </Pressable>
       ) : null}
-    </Animated.View>
+    </AnimatedView>
   );
 }
 

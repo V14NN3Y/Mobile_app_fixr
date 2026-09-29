@@ -4,7 +4,9 @@
  */
 import { useEffect, useState } from 'react';
 import { Pressable, View, type LayoutChangeEvent } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+
+import { AnimatedView } from '@/lib/animated';
 
 import { elevation, motion } from '@/theme/tokens';
 
@@ -50,7 +52,7 @@ export function Segmented<T extends string>({
       className="flex-row gap-1 rounded-lg bg-border-subtle p-1"
     >
       {segmentWidth > 0 ? (
-        <Animated.View
+        <AnimatedView
           pointerEvents="none"
           style={[
             pillStyle,
