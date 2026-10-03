@@ -73,7 +73,24 @@ const registry = {
   },
   check: { paths: ['m5 12.5 4.5 4.5L19 7'] },
   chevronRight: { paths: ['m9 5 7 7-7 7'] },
+  chevronLeft: { paths: ['m15 5-7 7 7 7'] },
   chevronDown: { paths: ['m5 9 7 7 7-7'] },
+  lock: {
+    rects: [{ x: 5, y: 11, width: 14, height: 10, rx: 2 }],
+    paths: ['M8 11V7a4 4 0 0 1 8 0v4'],
+  },
+  eye: {
+    paths: ['M2 12S5.5 5.5 12 5.5 22 12 22 12 18.5 18.5 12 18.5 2 12 2 12z'],
+    circles: [{ cx: 12, cy: 12, r: 3 }],
+  },
+  eyeOff: {
+    paths: [
+      'M3 3l18 18',
+      'M10.73 5.08A10.43 10.43 0 0 1 12 5c6 0 10 7 10 7a13.16 13.16 0 0 1-4.24 4.94',
+      'M6.31 6.31C3.66 8.14 2 12 2 12s2.16 4.16 6.06 5.94',
+      'M9.53 9.53a3 3 0 0 0 4.24 4.24',
+    ],
+  },
   close: { paths: ['m6 6 12 12M18 6 6 18'] },
   plus: { paths: ['M12 5v14M5 12h14'] },
   sliders: {

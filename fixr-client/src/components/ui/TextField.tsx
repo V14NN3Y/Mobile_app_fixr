@@ -4,7 +4,7 @@
  * Le halo de focus n'a pas d'équivalent box-shadow en React Native : rendu par une vue
  * absolue semi-transparente autour du champ (voir Point signalé n°3 du plan).
  */
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, type ReactNode } from 'react';
 import { TextInput, View, type TextInputProps } from 'react-native';
 
 import { cn } from '@/lib/cn';
@@ -18,8 +18,13 @@ import { Text } from './Text';
 export type TextFieldProps = Omit<TextInputProps, 'style' | 'placeholderTextColor'> & {
   label?: string;
   hint?: string;
-  error?: string;
+  /** string ou nœud composé (ex. message + lien, « Ce numéro a déjà un compte. Se connecter »). */
+  error?: ReactNode;
   icon?: IconName;
+  /** Préfixe fixe non éditable (ex. « +229 »), séparé du champ par un trait vertical. */
+  prefix?: string;
+  /** Rendu après le TextInput — ex. bouton œil afficher/masquer le mot de passe. */
+  accessory?: ReactNode;
   disabled?: boolean;
   containerClassName?: string;
   testID?: string;
@@ -31,6 +36,8 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
     hint,
     error,
     icon,
+    prefix,
+    accessory,
     disabled = false,
     containerClassName,
     testID,
@@ -81,6 +88,17 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
           )}
         >
           {icon ? <Icon name={icon} size={20} color={iconColor} /> : null}
+          {prefix ? (
+            <View className="flex-row items-center gap-2.5 border-r border-border pr-2.5">
+              <Text
+                variant="body"
+                className="font-body-bold"
+                tone={disabled ? 'disabled' : undefined}
+              >
+                {prefix}
+              </Text>
+            </View>
+          ) : null}
           <TextInput
             ref={ref}
             testID={testID}
@@ -104,11 +122,12 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
             )}
             {...inputProps}
           />
+          {accessory}
         </View>
       </View>
 
       {hasError ? (
-        <Text variant="caption" className="text-danger">
+        <Text variant="caption" className="text-danger" accessibilityRole="alert">
           {error}
         </Text>
       ) : hint ? (

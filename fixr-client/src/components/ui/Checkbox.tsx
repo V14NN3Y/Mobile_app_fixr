@@ -14,6 +14,8 @@ export type CheckboxProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;
   disabled?: boolean;
+  /** design/SignupErrors.dc.html : case CGU non cochée après soumission — bordure/fond erreur. */
+  error?: boolean;
   accessibilityLabel?: string;
   testID?: string;
 };
@@ -22,6 +24,7 @@ export function Checkbox({
   checked,
   onChange,
   disabled = false,
+  error = false,
   accessibilityLabel,
   testID,
 }: CheckboxProps) {
@@ -46,7 +49,9 @@ export function Checkbox({
           ? 'border-border-subtle bg-surface-muted'
           : checked
             ? 'border-primary bg-primary'
-            : 'border-border-strong bg-surface',
+            : error
+              ? 'border-danger-border bg-field-error-bg'
+              : 'border-border-strong bg-surface',
       )}
     >
       {checked ? (
