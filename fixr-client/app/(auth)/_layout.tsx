@@ -1,7 +1,8 @@
 /**
  * Pile non connectée — affichée tant qu'aucune session n'existe (design/Architecture.dc.html).
- * Chaque écran affiche son propre en-tête natif (titre + retour), posé via
- * <Stack.Screen options={{ title }} /> dans chaque fichier de route.
+ * headerShown: false (Lot 2) : chaque maquette (Main, Login, Otp, Signup) a son propre
+ * en-tête custom (bouton retour + éventuel lien à droite), pas de barre native — inverse le
+ * réglage par défaut du Lot 1 pour ce seul groupe de routes.
  *
  * Pas de (auth)/index.tsx : sans initialRouteName, Expo Router choisit un écran par défaut
  * arbitraire (constaté en testant un rendu réel : « login », probablement le premier
@@ -14,5 +15,5 @@ export const unstable_settings = {
 };
 
 export default function AuthLayout() {
-  return <Stack screenOptions={{ headerShown: true }} />;
+  return <Stack screenOptions={{ headerShown: false }} />;
 }
