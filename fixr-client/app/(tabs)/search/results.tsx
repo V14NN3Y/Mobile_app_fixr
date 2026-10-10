@@ -1,38 +1,40 @@
 /**
  * Sert à la fois l'écran 07 (liste) et 07b (carte), différenciés par ?view=map
  * (docs/ECRANS.md : (tabs)/search/results?view=map) — pas deux fichiers séparés.
+ * design/Results.dc.html + design/ResultsMap.dc.html.
  */
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
+import { useEffect, useRef } from 'react';
 
-import { ScreenPlaceholder } from '@/components/dev/ScreenPlaceholder';
+import { useCategories } from '@/features/categories/hooks';
+import { useFiltersStore } from '@/features/filters/store';
+import { ResultsListScreen } from '@/features/results/components/ResultsListScreen';
+import { ResultsMapScreen } from '@/features/results/components/ResultsMapScreen';
+import type { CategoryId } from '@/theme/tokens';
 
 export default function Results() {
-  const { view } = useLocalSearchParams<{ view?: string }>();
+  const { view, categoryId } = useLocalSearchParams<{ view?: string; categoryId?: CategoryId }>();
   const isMap = view === 'map';
 
-  return (
-    <>
-      <Stack.Screen
-        options={{ headerShown: true, title: isMap ? 'Résultats · Carte' : 'Résultats' }}
-      />
-      <ScreenPlaceholder
-        title={isMap ? '07b · Résultats (carte)' : '07 · Résultats (liste)'}
-        route="(tabs)/search/results"
-        description={
-          isMap
-            ? 'Lot 3 — design/ResultsMap.dc.html (react-native-maps, marqueurs note)'
-            : 'Lot 3 — design/Results.dc.html (tri en sheet, puces de filtres, FlashList)'
-        }
-        links={[
-          { label: 'Profil artisan →', href: '/artisan/koffi-agbodjan' },
-          { label: 'Filtres →', href: '/filters' },
-          { label: 'Demander →', href: '/request/need' },
-          {
-            label: isMap ? 'Vue liste' : 'Vue carte',
-            href: isMap ? '/search/results' : '/search/results?view=map',
-          },
-        ]}
-      />
-    </>
+  const categoriesQuery = useCategories();
+  const startSearch = useFiltersStore((s) => s.startSearch);
+  const lastCategoryId = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    // Nouvelle recherche (tuile catégorie / suggestion) : réinitialise filtres et tri.
+    // Si categoryId est absent (ex. « Voir plus » depuis l'Accueil), ne réinitialise pas
+    // une recherche déjà en cours (retour depuis Filtres/Carte).
+    if (categoryId && categoryId !== lastCategoryId.current) {
+      startSearch([categoryId]);
+    }
+    lastCategoryId.current = categoryId;
+  }, [categoryId, startSearch]);
+
+  const category = categoriesQuery.data?.find((c) => c.id === categoryId);
+
+  return isMap ? (
+    <ResultsMapScreen category={category} />
+  ) : (
+    <ResultsListScreen category={category} />
   );
 }

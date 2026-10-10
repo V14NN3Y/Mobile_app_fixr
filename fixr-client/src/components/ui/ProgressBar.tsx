@@ -14,11 +14,11 @@ export type ProgressBarProps = {
   /** 0–100. */
   value: number;
   height?: 4 | 6 | 8;
-  tone?: 'primary' | 'accent';
+  tone?: 'primary' | 'accent' | 'rating';
   testID?: string;
 };
 
-const toneClass = { primary: 'bg-primary', accent: 'bg-accent' } as const;
+const toneClass = { primary: 'bg-primary', accent: 'bg-accent', rating: 'bg-rating' } as const;
 
 export function ProgressBar({ value, height = 8, tone = 'primary', testID }: ProgressBarProps) {
   const clamped = Math.max(0, Math.min(100, value));
