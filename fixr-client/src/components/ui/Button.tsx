@@ -21,7 +21,7 @@ import { Icon, type IconName } from './Icon';
 import { Spinner } from './Spinner';
 import { Text } from './Text';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive' | 'ink';
 export type ButtonSize = 'lg' | 'md' | 'sm';
 
 const sizeClass: Record<ButtonSize, string> = {
@@ -53,6 +53,10 @@ const variantClass: Record<ButtonVariant, string> = {
   secondary: 'bg-surface border-[1.5px] border-border-strong active:border-text active:bg-bg',
   tertiary: 'bg-transparent active:bg-primary-soft',
   destructive: 'bg-danger active:bg-danger-pressed',
+  // Lot 7 : « Me déconnecter » — ni primary ni destructive dans la maquette (quasi-noir
+  // #12161F, identique clair/sombre) ; réutilise inkSolid/onInkSolid déjà existants
+  // (ResultsMapScreen).
+  ink: 'bg-ink-solid active:opacity-90',
 };
 
 const disabledVariantClass: Record<ButtonVariant, string> = {
@@ -60,6 +64,7 @@ const disabledVariantClass: Record<ButtonVariant, string> = {
   secondary: 'bg-surface border-[1.5px] border-border-subtle',
   tertiary: 'bg-transparent',
   destructive: 'bg-danger-soft',
+  ink: 'bg-disabled-bg',
 };
 
 type BaseProps = {
@@ -135,6 +140,7 @@ export function Button(props: ButtonProps) {
         secondary: colors.text,
         tertiary: colors.primary,
         destructive: colors.onDanger,
+        ink: colors.onInkSolid,
       }[variant];
 
   const spinnerTrack = withAlpha(

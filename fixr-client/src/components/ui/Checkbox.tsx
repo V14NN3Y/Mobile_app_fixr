@@ -16,6 +16,9 @@ export type CheckboxProps = {
   disabled?: boolean;
   /** design/SignupErrors.dc.html : case CGU non cochée après soumission — bordure/fond erreur. */
   error?: boolean;
+  /** 'default' (primary coché) | 'danger' (rouge coché) — Lot 7, case d'acquiescement de
+   * suppression de compte (design/Settings.dc.html, `.chk-on` en #B02E28). */
+  tone?: 'default' | 'danger';
   accessibilityLabel?: string;
   testID?: string;
 };
@@ -25,6 +28,7 @@ export function Checkbox({
   onChange,
   disabled = false,
   error = false,
+  tone = 'default',
   accessibilityLabel,
   testID,
 }: CheckboxProps) {
@@ -48,14 +52,20 @@ export function Checkbox({
         disabled
           ? 'border-border-subtle bg-surface-muted'
           : checked
-            ? 'border-primary bg-primary'
+            ? tone === 'danger'
+              ? 'border-danger bg-danger'
+              : 'border-primary bg-primary'
             : error
               ? 'border-danger-border bg-field-error-bg'
               : 'border-border-strong bg-surface',
       )}
     >
       {checked ? (
-        <Icon name="check" size={14} color={disabled ? colors.textDisabled : colors.onPrimary} />
+        <Icon
+          name="check"
+          size={14}
+          color={disabled ? colors.textDisabled : tone === 'danger' ? colors.onDanger : colors.onPrimary}
+        />
       ) : null}
     </Pressable>
   );

@@ -27,8 +27,10 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { OfflineBannerProvider } from '@/components/ui/OfflineBanner';
 import { ToastProvider } from '@/components/ui/Toast';
 import { useSessionStore } from '@/features/auth/store';
+import { useNotificationResponseRouter } from '@/features/notifications/push';
 import { queryClient } from '@/lib/queryClient';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 
@@ -44,6 +46,7 @@ export default function RootLayout() {
     Manrope_800ExtraBold,
   });
   const hasSession = useSessionStore((s) => s.session !== null);
+  useNotificationResponseRouter();
 
   const ready = fontsLoaded || Boolean(fontError);
 
@@ -61,22 +64,24 @@ export default function RootLayout() {
           <ThemeProvider>
             <BottomSheetModalProvider>
               <ToastProvider>
-                <Stack screenOptions={{ headerShown: false }}>
-                  <Stack.Protected guard={!hasSession}>
-                    <Stack.Screen name="(auth)" />
-                  </Stack.Protected>
+                <OfflineBannerProvider>
+                  <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Protected guard={!hasSession}>
+                      <Stack.Screen name="(auth)" />
+                    </Stack.Protected>
 
-                  <Stack.Protected guard={hasSession}>
-                    <Stack.Screen name="(tabs)" />
-                    <Stack.Screen name="request" options={{ presentation: 'modal' }} />
-                    <Stack.Screen name="artisan/[id]" options={{ headerShown: true }} />
-                    <Stack.Screen
-                      name="filters"
-                      options={{ presentation: 'formSheet', headerShown: true }}
-                    />
-                    <Stack.Screen name="notifications" options={{ headerShown: true }} />
-                  </Stack.Protected>
-                </Stack>
+                    <Stack.Protected guard={hasSession}>
+                      <Stack.Screen name="(tabs)" />
+                      <Stack.Screen name="request" options={{ presentation: 'modal' }} />
+                      <Stack.Screen name="artisan/[id]" options={{ headerShown: true }} />
+                      <Stack.Screen
+                        name="filters"
+                        options={{ presentation: 'formSheet', headerShown: true }}
+                      />
+                      <Stack.Screen name="notifications" options={{ headerShown: true }} />
+                    </Stack.Protected>
+                  </Stack>
+                </OfflineBannerProvider>
               </ToastProvider>
             </BottomSheetModalProvider>
           </ThemeProvider>

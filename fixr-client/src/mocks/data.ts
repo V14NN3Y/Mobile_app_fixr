@@ -27,11 +27,11 @@ export const addresses: Address[] = [
   { id: 'a_maison', label: 'Maison', line: 'Carré 412, Haie Vive, Cotonou', neighborhood: 'Haie Vive', city: 'Cotonou',
     landmark: 'Près de la pharmacie Les Cocotiers', complement: 'Maison à étage, portail bleu',
     accessInstructions: 'Deuxième von après la pharmacie Les Cocotiers. Appelez en arrivant, le gardien s’appelle Paulin.',
-    lat: 6.3575, lng: 2.3935 },
+    lat: 6.3575, lng: 2.3935, isDefault: true },
   { id: 'a_bureau', label: 'Bureau', line: 'Immeuble Les Palmiers, 2e étage, Ganhi, Cotonou', neighborhood: 'Ganhi', city: 'Cotonou',
-    landmark: 'Accueil au rez-de-chaussée', lat: 6.3555, lng: 2.4305 },
+    landmark: 'Accueil au rez-de-chaussée', lat: 6.3555, lng: 2.4305, isDefault: false },
   { id: 'a_maman', label: 'Chez maman', line: 'Quartier Zopah, Abomey-Calavi', neighborhood: 'Zopah', city: 'Abomey-Calavi',
-    landmark: 'Maison après l’église, portail vert', lat: 6.4480, lng: 2.3520 },
+    landmark: 'Maison après l’église, portail vert', lat: 6.4480, lng: 2.3520, isDefault: false },
 ];
 
 export const categories: Category[] = [
@@ -54,7 +54,7 @@ const plumbingPrices = [
 
 export const artisans: Artisan[] = [
   {
-    id: 'ar_koffi', firstName: 'Koffi', lastName: 'Agbodjan', trade: 'Plombier-sanitaire', categories: ['plomberie'],
+    id: 'ar_koffi', firstName: 'Koffi', lastName: 'Agbodjan', phone: '+2290197001122', trade: 'Plombier-sanitaire', categories: ['plomberie'],
     neighborhood: 'Fidjrossè', city: 'Cotonou', distanceKm: 1.2, rating: 4.9, reviewCount: 212, interventions: 480,
     yearsExperience: 9, verification: 'pro', online: true, responseTimeMin: 10,
     availability: { label: 'Dispo aujourd’hui', today: true, nextSlot: '2026-09-28T16:00:00+01:00' },
@@ -72,7 +72,7 @@ export const artisans: Artisan[] = [
     lat: 6.3545, lng: 2.3620,
   },
   {
-    id: 'ar_sedjro', firstName: 'Sèdjro', lastName: 'Houénou', trade: 'Plombier', categories: ['plomberie'],
+    id: 'ar_sedjro', firstName: 'Sèdjro', lastName: 'Houénou', phone: '+2290197002233', trade: 'Plombier', categories: ['plomberie'],
     neighborhood: 'Cadjèhoun', city: 'Cotonou', distanceKm: 2.8, rating: 4.7, reviewCount: 88, interventions: 190,
     yearsExperience: 6, verification: 'identity', online: true,
     availability: { label: 'Dispo 16h', today: true, nextSlot: '2026-09-28T16:00:00+01:00' },
@@ -80,22 +80,24 @@ export const artisans: Artisan[] = [
     prices: plumbingPrices, gallery: [], lat: 6.3610, lng: 2.3850,
   },
   {
-    id: 'ar_bernard', firstName: 'Bernard', lastName: 'Mensah', trade: 'Plombier-sanitaire', categories: ['plomberie'],
+    // Indisponible (design/ArtisanStates.dc.html col. 1) — seul artisan du jeu de données
+    // à couvrir ce cas, requis par les critères d'acceptation du Lot 3.
+    id: 'ar_bernard', firstName: 'Bernard', lastName: 'Mensah', phone: '+2290197003344', trade: 'Plombier-sanitaire', categories: ['plomberie'],
     neighborhood: 'Akpakpa', city: 'Cotonou', distanceKm: 3.4, rating: 4.6, reviewCount: 143, interventions: 320,
     yearsExperience: 12, verification: 'pro', online: false,
-    availability: { label: 'Demain', today: false, nextSlot: '2026-09-29T09:00:00+01:00' },
+    availability: { label: 'Indisponible', today: false, unavailableUntil: '2026-10-12T00:00:00+01:00' },
     priceFrom: null, skills: ['Sanitaires', 'Chauffe-eau'], zones: [{ city: 'Cotonou', neighborhoods: ['Akpakpa', 'Ganhi'] }],
     prices: plumbingPrices, gallery: [], lat: 6.3700, lng: 2.4500,
   },
   {
-    id: 'ar_anicet', firstName: 'Anicet', lastName: 'Lokossou', trade: 'Plombier', categories: ['plomberie'],
+    id: 'ar_anicet', firstName: 'Anicet', lastName: 'Lokossou', phone: '+2290197004455', trade: 'Plombier', categories: ['plomberie'],
     neighborhood: 'Gbégamey', city: 'Cotonou', distanceKm: 2.1, rating: 4.5, reviewCount: 21, interventions: 34,
     yearsExperience: 3, verification: 'identity', online: false,
     availability: { label: 'Dispo aujourd’hui', today: true }, priceFrom: 3500,
     skills: ['Débouchage'], zones: [{ city: 'Cotonou', neighborhoods: ['Gbégamey'] }], prices: plumbingPrices, gallery: [], lat: 6.3690, lng: 2.4020,
   },
   {
-    id: 'ar_rodrigue', firstName: 'Rodrigue', lastName: 'Dossou', trade: 'Électricien', categories: ['electricite'],
+    id: 'ar_rodrigue', firstName: 'Rodrigue', lastName: 'Dossou', phone: '+2290197005566', trade: 'Électricien', categories: ['electricite'],
     neighborhood: 'Cadjèhoun', city: 'Cotonou', distanceKm: 2.5, rating: 4.8, reviewCount: 164, interventions: 350,
     yearsExperience: 8, verification: 'skills', online: false,
     availability: { label: 'Dispo 14h', today: true }, priceFrom: null,
@@ -103,7 +105,7 @@ export const artisans: Artisan[] = [
     prices: [{ label: 'Déplacement + diagnostic', from: 2000, exact: true }], gallery: [], lat: 6.3620, lng: 2.3880,
   },
   {
-    id: 'ar_fabrice', firstName: 'Fabrice', lastName: 'Ahouandjinou', trade: 'Frigoriste', categories: ['climatisation'],
+    id: 'ar_fabrice', firstName: 'Fabrice', lastName: 'Ahouandjinou', phone: '+2290197006677', trade: 'Frigoriste', categories: ['climatisation'],
     neighborhood: 'Akpakpa', city: 'Cotonou', distanceKm: 4.1, rating: 4.7, reviewCount: 98, interventions: 210,
     yearsExperience: 7, verification: 'pro', online: true,
     availability: { label: 'Demain', today: false, nextSlot: '2026-09-29T09:00:00+01:00' }, priceFrom: 10000,
@@ -111,7 +113,7 @@ export const artisans: Artisan[] = [
     prices: [{ label: 'Entretien split', from: 10000 }], gallery: [], lat: 6.3720, lng: 2.4460,
   },
   {
-    id: 'ar_christelle', firstName: 'Christelle', lastName: 'Akpovi', trade: 'Peintre', categories: ['peinture'],
+    id: 'ar_christelle', firstName: 'Christelle', lastName: 'Akpovi', phone: '+2290197007788', trade: 'Peintre', categories: ['peinture'],
     neighborhood: 'Haie Vive', city: 'Cotonou', distanceKm: 0.9, rating: 4.8, reviewCount: 73, interventions: 140,
     yearsExperience: 6, verification: 'skills', online: false,
     availability: { label: 'Dispo 15h', today: true }, priceFrom: 20000,
@@ -119,7 +121,7 @@ export const artisans: Artisan[] = [
     prices: [{ label: 'Chambre (murs + plafond)', from: 30000 }], gallery: [], lat: 6.3580, lng: 2.3960,
   },
   {
-    id: 'ar_herve', firstName: 'Hervé', lastName: 'Gbaguidi', trade: 'Serrurier', categories: ['serrurerie'],
+    id: 'ar_herve', firstName: 'Hervé', lastName: 'Gbaguidi', phone: '+2290197008899', trade: 'Serrurier', categories: ['serrurerie'],
     neighborhood: 'Gbégamey', city: 'Cotonou', distanceKm: 1.8, rating: 4.7, reviewCount: 120, interventions: 260,
     yearsExperience: 10, verification: 'pro', online: true,
     availability: { label: '24h/24', today: true }, priceFrom: 8000,
@@ -127,7 +129,7 @@ export const artisans: Artisan[] = [
     prices: [{ label: 'Ouverture de porte', from: 8000 }], gallery: [], lat: 6.3700, lng: 2.4050,
   },
   {
-    id: 'ar_mariam', firstName: 'Mariam', lastName: 'Soulé', trade: 'Nettoyage', categories: ['nettoyage'],
+    id: 'ar_mariam', firstName: 'Mariam', lastName: 'Soulé', phone: '+2290197009900', trade: 'Nettoyage', categories: ['nettoyage'],
     neighborhood: 'Godomey', city: 'Abomey-Calavi', distanceKm: 6.0, rating: 4.9, reviewCount: 301, interventions: 520,
     yearsExperience: 5, verification: 'skills', online: false,
     availability: { label: 'Samedi', today: false }, priceFrom: 10000,
@@ -135,7 +137,7 @@ export const artisans: Artisan[] = [
     prices: [{ label: 'Ménage 4 h', from: 10000 }], gallery: [], lat: 6.4050, lng: 2.3350,
   },
   {
-    id: 'ar_gildas', firstName: 'Gildas', lastName: 'Kpadonou', trade: 'Menuisier', categories: ['menuiserie'],
+    id: 'ar_gildas', firstName: 'Gildas', lastName: 'Kpadonou', phone: '+2290197010011', trade: 'Menuisier', categories: ['menuiserie'],
     neighborhood: 'Ouando', city: 'Porto-Novo', distanceKm: 28, rating: 4.6, reviewCount: 57, interventions: 95,
     yearsExperience: 11, verification: 'identity', online: false,
     availability: { label: 'Cette semaine', today: false }, priceFrom: null,
@@ -157,6 +159,18 @@ export const reviews: Review[] = [
     text: 'Arrivé à l’heure, il a trouvé la fuite en 15 minutes et m’a montré les pièces changées. Très propre.', createdAt: '2026-09-25T10:00:00+01:00' },
   { id: 'rv2', artisanId: 'ar_koffi', authorName: 'Olivier K.', rating: 4.5, service: 'Pose chauffe-eau',
     text: 'Travail sérieux, devis respecté. Un petit retard à cause des embouteillages mais il a prévenu.', createdAt: '2026-09-14T10:00:00+01:00' },
+  // Lot 7 : avis publiés par l'utilisatrice courante (Mes avis) — authorId relie l'avis à
+  // user.id. rv3 référence FX-23877 (seule réservation à la fois done et reviewed:true dans
+  // les fixtures) ; rv4-rv6 n'ont pas de bookingId, comme rv1/rv2 déjà.
+  { id: 'rv3', artisanId: 'ar_herve', bookingId: 'FX-23877', authorId: 'u_aurore', authorName: 'Aurore T.', rating: 5,
+    service: 'Ouverture de porte + serrure',
+    text: 'Intervention rapide un soir tard, sans dégâts sur la porte. Rassurant.', createdAt: '2026-08-31T08:00:00+01:00' },
+  { id: 'rv4', artisanId: 'ar_mariam', authorId: 'u_aurore', authorName: 'Aurore T.', rating: 4.5, service: 'Ménage après travaux',
+    text: 'Très minutieuse, elle a même nettoyé les vitres sans qu’on lui demande.', createdAt: '2026-08-20T09:00:00+01:00' },
+  { id: 'rv5', artisanId: 'ar_fabrice', authorId: 'u_aurore', authorName: 'Aurore T.', rating: 4, service: 'Entretien climatiseur',
+    text: 'Bon diagnostic, un peu cher pour le filtre remplacé mais le résultat est là.', createdAt: '2026-08-05T15:00:00+01:00' },
+  { id: 'rv6', artisanId: 'ar_bernard', authorId: 'u_aurore', authorName: 'Aurore T.', rating: 5, service: 'Réparation fuite WC',
+    text: 'Ponctuel et explique bien ce qu’il fait. Je le recontacterai.', createdAt: '2026-07-18T11:00:00+01:00' },
 ];
 
 export const bookings: Booking[] = [
@@ -269,6 +283,20 @@ export const messages: Message[] = [
   { id: 'msg5', conversationId: 'c_koffi', kind: 'text', fromMe: false, text: 'D’accord, c’est sûrement le siphon. J’amène les pièces.', at: '2026-09-28T13:18:00+01:00' },
   { id: 'msg6', conversationId: 'c_koffi', kind: 'system', fromMe: false, systemTone: 'accent', text: 'Koffi est en route', at: '2026-09-28T13:52:00+01:00' },
   { id: 'msg7', conversationId: 'c_koffi', kind: 'text', fromMe: false, text: 'Je passe Cadjèhoun, j’arrive dans 10 min.', at: '2026-09-28T14:02:00+01:00' },
+
+  { id: 'msg_fab1', conversationId: 'c_fabrice', kind: 'text', fromMe: true, status: 'read', text: 'Bonjour, mon climatiseur ne refroidit plus du tout.', at: '2026-09-28T11:50:00+01:00' },
+  { id: 'msg_fab2', conversationId: 'c_fabrice', kind: 'text', fromMe: false, text: 'Je peux passer demain à 9h pour le diagnostic.', at: '2026-09-28T11:58:00+01:00' },
+
+  { id: 'msg_chr1', conversationId: 'c_christelle', kind: 'text', fromMe: false, text: 'Quelle couleur souhaitez-vous pour la chambre des enfants ?', at: '2026-09-28T11:35:00+01:00' },
+  { id: 'msg_chr2', conversationId: 'c_christelle', kind: 'text', fromMe: true, status: 'delivered', text: 'Beige clair, comme sur la photo.', at: '2026-09-28T11:40:00+01:00' },
+
+  { id: 'msg_sup1', conversationId: 'c_support', kind: 'text', fromMe: false, text: 'Votre numéro a bien été vérifié. Bienvenue !', at: '2026-09-27T09:00:00+01:00' },
+
+  { id: 'msg_mar1', conversationId: 'c_mariam', kind: 'text', fromMe: false, text: 'Je peux passer samedi matin si ça vous arrange ?', at: '2026-09-26T08:05:00+01:00' },
+  { id: 'msg_mar2', conversationId: 'c_mariam', kind: 'text', fromMe: true, status: 'delivered', text: 'D’accord pour samedi 9h.', at: '2026-09-26T08:10:00+01:00' },
+
+  { id: 'msg_rod1', conversationId: 'c_rodrigue', kind: 'system', fromMe: false, systemTone: 'success', text: 'Mission terminée', at: '2026-09-12T18:55:00+01:00' },
+  { id: 'msg_rod2', conversationId: 'c_rodrigue', kind: 'text', fromMe: false, text: 'Merci pour votre confiance, bonne soirée.', at: '2026-09-12T19:00:00+01:00' },
 ];
 
 export const quickReplies = [

@@ -46,6 +46,7 @@ export interface Address {
   accessInstructions?: string;
   lat: number;
   lng: number;
+  isDefault: boolean; // Lot 7 : adresse par défaut (Mes adresses)
 }
 
 export interface Category {
@@ -66,6 +67,7 @@ export interface Artisan {
   lastName: string;
   avatarUrl?: string;
   coverUrl?: string;
+  phone?: string; // E.164 : +2290100000000 — Lot 5, bouton « Appeler »
   trade: string; // Plombier-sanitaire
   categories: CategoryId[];
   neighborhood: string;
@@ -93,6 +95,8 @@ export interface Artisan {
 export interface Review {
   id: ID;
   artisanId: ID;
+  bookingId?: ID; // Lot 5 : relie l'avis à sa réservation d'origine
+  authorId?: ID; // Lot 7 : relie l'avis à son auteur (Mes avis), distinct d'artisanId (le sujet)
   authorName: string; // « Mireille A. »
   rating: number;
   criteria?: { punctuality?: number; quality?: number; communication?: number; value?: number };
@@ -112,7 +116,7 @@ export interface Quote {
 }
 
 export interface BookingEvent {
-  type: 'requested' | 'artisan_found' | 'confirmed' | 'on_the_way' | 'in_progress' | 'done' | 'cancelled';
+  type: 'requested' | 'artisan_found' | 'confirmed' | 'on_the_way' | 'on_site' | 'in_progress' | 'done' | 'cancelled';
   at: string | null; // null = étape future
 }
 

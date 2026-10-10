@@ -3,16 +3,19 @@ import { View } from 'react-native';
 
 import { Button } from '@/components/ui/Button';
 import { Text } from '@/components/ui/Text';
+import { fr } from '@/lib/i18n/fr';
 
 export default function NotFoundScreen() {
+  const t = fr.common.notFound;
+
   return (
     <>
-      <Stack.Screen options={{ title: 'Introuvable', headerShown: true }} />
+      <Stack.Screen options={{ title: t.title, headerShown: true }} />
       <View className="flex-1 items-center justify-center gap-4 bg-bg px-5">
-        <Text variant="title2">Cet écran n’existe pas</Text>
+        <Text variant="title2">{t.description}</Text>
         <Link href="/" asChild>
           <Button variant="primary" size="md">
-            Retour à l’accueil
+            {t.backHome}
           </Button>
         </Link>
       </View>

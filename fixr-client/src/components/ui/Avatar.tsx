@@ -12,9 +12,18 @@ import { useTheme } from '@/theme/useTheme';
 
 import { Text } from './Text';
 
-export type AvatarSize = 72 | 56 | 52 | 46 | 40 | 32;
+export type AvatarSize = 72 | 60 | 56 | 52 | 48 | 46 | 40 | 32;
 
-const fontSizeFor: Record<AvatarSize, number> = { 72: 24, 56: 18, 52: 16, 46: 15, 40: 13, 32: 11 };
+const fontSizeFor: Record<AvatarSize, number> = {
+  72: 24,
+  60: 19,
+  56: 18,
+  52: 16,
+  48: 16,
+  46: 15,
+  40: 13,
+  32: 11,
+};
 
 const tintOrder: CategoryId[] = [
   'plomberie',
@@ -41,6 +50,10 @@ export type AvatarProps = {
   online?: boolean;
   /** Bordure claire pour la pile (AvatarStack) : cercle plus épais autour de l'avatar. */
   stacked?: boolean;
+  /** 'auto' (défaut) : teinte dérivée du hash de `seed`. 'primary' : force colors.primary/
+   * onPrimary — Lot 7, grand avatar du Profil (la maquette le montre toujours en teal plein,
+   * pas une teinte de catégorie). */
+  tone?: 'auto' | 'primary';
   testID?: string;
 };
 
@@ -50,10 +63,11 @@ export function Avatar({
   size = 52,
   online = false,
   stacked = false,
+  tone = 'auto',
   testID,
 }: AvatarProps) {
-  const { categoryTints } = useTheme();
-  const tint = categoryTints[tintFor(seed ?? initials)];
+  const { categoryTints, colors } = useTheme();
+  const tint = tone === 'primary' ? { bg: colors.primary, ink: colors.onPrimary } : categoryTints[tintFor(seed ?? initials)];
 
   return (
     <View testID={testID} style={{ width: size, height: size }} className="relative">

@@ -71,6 +71,12 @@ const registry = {
     filled: true,
     paths: ['m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z'],
   },
+  // Favoris (ArtisanProfile) — rempli quand actif, via filled=true côté appelant.
+  heart: {
+    paths: [
+      'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z',
+    ],
+  },
   check: { paths: ['m5 12.5 4.5 4.5L19 7'] },
   chevronRight: { paths: ['m9 5 7 7-7 7'] },
   chevronLeft: { paths: ['m15 5-7 7 7 7'] },
@@ -100,6 +106,98 @@ const registry = {
       { cx: 9, cy: 12, r: 2 },
       { cx: 17, cy: 18, r: 2 },
     ],
+  },
+  // Recentrage carte (ResultsMap)
+  crosshair: {
+    paths: ['M22 12h-4M6 12H2M12 6V2M12 22v-4'],
+    circles: [{ cx: 12, cy: 12, r: 10 }],
+  },
+  // Partage (ArtisanProfile)
+  share: {
+    paths: ['M8.59 13.51 15.42 17.49M15.41 6.51 8.59 10.49'],
+    circles: [
+      { cx: 18, cy: 5, r: 3 },
+      { cx: 6, cy: 12, r: 3 },
+      { cx: 18, cy: 19, r: 3 },
+    ],
+  },
+  // Copier (RequestSuccess)
+  copy: {
+    rects: [{ x: 9, y: 9, width: 13, height: 13, rx: 2 }],
+    paths: ['M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'],
+  },
+  // Vignette vidéo (RequestNeed, ArtisanProfile galerie)
+  play: { filled: true, paths: ['M8 5v14l11-7z'] },
+  // Annulation (CancelBookingSheet) — rond barré, distinct de `alert` (cloche)
+  cancel: {
+    circles: [{ cx: 12, cy: 12, r: 9 }],
+    paths: ['m9 9 6 6M15 9l-6 6'],
+  },
+  // Aide (MissionLive)
+  help: {
+    circles: [{ cx: 12, cy: 12, r: 9 }],
+    paths: ['M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01'],
+  },
+  // Modifier (MissionLive)
+  edit: { paths: ['M4 20h4L19 9l-4-4L4 16z'] },
+  // Télécharger le rapport en PDF (Report)
+  download: { paths: ['M12 4v12M7 11l5 5 5-5M5 20h14'] },
+  // Garantie FIXR (Report) — bouclier seul, sans la coche de `verified`
+  shield: { paths: ['M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z'] },
+
+  // Lot 6 — Messages et notifications
+  // Message système « en route » (Chat) + type on_the_way (Notifications) — flèche d'envoi,
+  // distincte de `call`/`location`.
+  navigation: { paths: ['M3 11 21 3l-8 18-2-8z'] },
+  // Bulle photo reçue/envoyée (Chat) — image/paysage, distincte de la caméra `photo`
+  // (bouton pièce-jointe).
+  image: {
+    rects: [{ x: 3, y: 4, width: 18, height: 16, rx: 3 }],
+    circles: [{ cx: 9, cy: 10, r: 2 }],
+    paths: ['m21 16-5-5-8 9'],
+  },
+  // Coche de lecture double (Messages liste « Lu », Chat meta) — distincte de `check` (simple).
+  checkDouble: { paths: ['m2 12 5 5L17 7M12 16l1 1L23 7'] },
+  // Bouton d'envoi (Chat)
+  send: { paths: ['M4 12 20 4l-6 16-3-7z'] },
+  // Notification type report_ready — document avec coin plié.
+  document: { paths: ['M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6'] },
+  // Notification type payment — carte de paiement.
+  card: {
+    paths: ['M5 6h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM3 10h18M7 15h4'],
+  },
+  // Notification type security — bouclier + point d'exclamation, distinct du `shield` nu
+  // du Rapport (Lot 5, sans exclamation).
+  shieldAlert: {
+    paths: [
+      'M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z',
+      'M12 9v4M12 16v.01',
+    ],
+  },
+  // État vide des notifications — cloche + coche, distincte de `alert` (cloche + battant).
+  bellCheck: {
+    paths: ['M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8', 'm9 11 2 2 4-4'],
+  },
+
+  // Lot 7 — Profil, paramètres et finitions
+  // Bouton d'en-tête du Profil (engrenage), distinct de `sliders`/`preferences`.
+  gear: {
+    circles: [{ cx: 12, cy: 12, r: 3 }],
+    paths: [
+      'M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z',
+    ],
+  },
+  // Ligne « Paramètres » du Profil — 2 rangées + 2 curseurs, distincte de `sliders` (3 rangées).
+  preferences: {
+    paths: ['M4 7h10M18 7h2M4 17h4M12 17h8'],
+    circles: [
+      { cx: 16, cy: 7, r: 2 },
+      { cx: 10, cy: 17, r: 2 },
+    ],
+  },
+  // Badge de la feuille de suppression de compte.
+  trash: {
+    paths: ['M4 7h16M10 11v6M14 11v6M5 7l1 13a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1l1-13M9 7V4h6v3'],
   },
 } as const satisfies Record<string, IconSpec>;
 
