@@ -25,6 +25,7 @@
   --color-success: 29 122 78;
   --color-success-soft: 227 242 234;
   --color-success-ink: 29 107 69;
+  --color-on-success: 255 255 255;
   --color-warning: 122 79 12;
   --color-warning-soft: 251 241 222;
   --color-warning-ink: 92 59 8;
@@ -46,6 +47,12 @@
   --color-toast-action: 240 160 112;
   --color-offline-bg: 59 63 70;
   --color-offline-text: 255 255 255;
+  --color-neutral-soft: 236 233 226;
+  --color-neutral-ink: 58 66 80;
+  --color-control-muted: 159 182 192;
+  --color-on-control-muted: 255 255 255;
+  --color-ink-solid: 18 22 31;
+  --color-on-ink-solid: 255 255 255;
 }
 
 /* Mode sombre : classe .dark sur l'élément racine, pas @media — tailwind.config.js déclare
@@ -75,6 +82,7 @@
   --color-success: 76 195 138;
   --color-success-soft: 21 48 31;
   --color-success-ink: 111 211 160;
+  --color-on-success: 26 13 6;
   --color-warning: 230 176 74;
   --color-warning-soft: 51 40 18;
   --color-warning-ink: 240 201 120;
@@ -96,4 +104,10 @@
   --color-toast-action: 154 63 20;
   --color-offline-bg: 42 50 56;
   --color-offline-text: 242 241 236;
+  --color-neutral-soft: 35 43 49;
+  --color-neutral-ink: 183 188 196;
+  --color-control-muted: 74 90 102;
+  --color-on-control-muted: 255 255 255;
+  --color-ink-solid: 18 22 31;
+  --color-on-ink-solid: 255 255 255;
 }

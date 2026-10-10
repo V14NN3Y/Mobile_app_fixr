@@ -34,6 +34,7 @@ export const colors = {
     success: '#1D7A4E',
     successSoft: '#E3F2EA',
     successInk: '#1D6B45',
+    onSuccess: '#FFFFFF', // texte/icône sur success plein (SuccessCheck)
 
     warning: '#7A4F0C',
     warningSoft: '#FBF1DE',
@@ -59,6 +60,20 @@ export const colors = {
     toastAction: '#F0A070',
     offlineBg: '#3B3F46',
     offlineText: '#FFFFFF',
+
+    // Lot 6 : icône « sécurité » des notifications (design/Notifications.dc.html, seule
+    // teinte de la planche à ne correspondre à aucun token existant).
+    neutralSoft: '#ECE9E2',
+    neutralInk: '#3A4250',
+    // Lot 6 : bouton d'envoi du Chat à l'état « brouillon vide » (design/Chat.dc.html +
+    // StatesA.dc.html col. 4) — bleu-gris étouffé, distinct de tout token existant.
+    controlMuted: '#9FB6C0',
+    onControlMuted: '#FFFFFF',
+
+    // Flotte sur une carte (react-native-maps), pas sur le fond de l'app : doit rester
+    // visuellement sombre quel que soit le thème, donc même valeur clair/sombre.
+    inkSolid: '#12161F',
+    onInkSolid: '#FFFFFF',
   },
   dark: {
     bg: '#0E1215',
@@ -86,6 +101,7 @@ export const colors = {
     success: '#4CC38A',
     successSoft: '#15301F',
     successInk: '#6FD3A0',
+    onSuccess: '#1A0D06', // success sombre = teinte claire → encre foncée (comme onAccent/onDanger)
 
     warning: '#E6B04A',
     warningSoft: '#332812',
@@ -111,6 +127,16 @@ export const colors = {
     toastAction: '#9A3F14',
     offlineBg: '#2A3238',
     offlineText: '#F2F1EC',
+
+    // Pas de maquette sombre pour Chat/Notifications (ChatDark/NotificationsDark n'existent
+    // pas) : valeurs choisies par cohérence avec le reste du système, pas extraites.
+    neutralSoft: '#232B31', // = borderSubtle (dark) : même rôle de surface neutre discrète
+    neutralInk: '#B7BCC4', // = textSecondary (dark) : même rôle de texte gris atténué
+    controlMuted: '#4A5A66', // bleu-gris étouffé, cohérent avec primary (dark) désaturé
+    onControlMuted: '#FFFFFF',
+
+    inkSolid: '#12161F',
+    onInkSolid: '#FFFFFF',
   },
 } as const;
 

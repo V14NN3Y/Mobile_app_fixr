@@ -13,10 +13,12 @@ import { Tabs, TabList, TabSlot, TabTrigger } from 'expo-router/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { TabBarButton, useHideTabBar } from '@/components/navigation/TabBar';
+import { useUnreadMessagesCount } from '@/features/messages/hooks';
 
 export default function TabsLayout() {
   const hidden = useHideTabBar();
   const insets = useSafeAreaInsets();
+  const unreadMessages = useUnreadMessagesCount();
 
   return (
     <Tabs style={{ flex: 1 }}>
@@ -39,7 +41,7 @@ export default function TabsLayout() {
           <TabBarButton icon="calendar" label="Réservations" badge={1} />
         </TabTrigger>
         <TabTrigger name="messages" href="/messages" asChild>
-          <TabBarButton icon="message" label="Messages" badge={2} />
+          <TabBarButton icon="message" label="Messages" badge={unreadMessages.data ?? 0} />
         </TabTrigger>
         <TabTrigger name="profile" href="/profile" asChild>
           <TabBarButton icon="user" label="Profil" />

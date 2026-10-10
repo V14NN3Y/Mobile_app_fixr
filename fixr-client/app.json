@@ -38,6 +38,12 @@
             "imageWidth": 96
           }
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#0B4F6C"
+        }
       ]
     ],
     "experiments": {
