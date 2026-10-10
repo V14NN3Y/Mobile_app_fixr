@@ -1,0 +1,56 @@
+# Parcours Maestro — Suivi de mission → Avis (Lot 7).
+#
+# Écrit comme livrable du dépôt ; non exécuté dans cette session (pas de simulateur iOS/
+# Android disponible ici). Pour l'exécuter sur un appareil/simulateur réel ou en CI :
+#
+#   maestro test .maestro/tracking-review.yaml
+#
+# Sélecteurs en texte visible / accessibilityLabel. Réservation utilisée : FX-24817
+# ("Fuite sous l'évier", statut initial "on_the_way"), la seule du jeu de données mock à la
+# fois en cours et déjà pourvue d'un rapport d'intervention (src/mocks/data.ts). L'écran
+# Mission en direct avance automatiquement d'étape toutes les 5 s
+# (MISSION_TICK_MS, src/features/bookings/constants.ts) tant qu'on y reste : on attend donc
+# simplement que l'étape "Terminée" apparaisse plutôt que de simuler l'avancement nous-mêmes.
+appId: com.fixr.client
+---
+- launchApp
+
+# Connexion par téléphone (onglet par défaut) — le faux client API accepte n'importe quel
+# numéro valide (10 chiffres, préfixe 01) et n'importe quel code à 6 chiffres. Évite l'onglet
+# E-mail dont le champ mot de passe n'a pas de libellé propre (pas de sélecteur texte fiable).
+- assertVisible: "Bon retour parmi nous"
+- tapOn: "Numéro de téléphone"
+- inputText: "0197451236"
+- tapOn: "Recevoir le code"
+- assertVisible: "Entrez le code reçu"
+- inputText: "123456"
+- tapOn: "Vérifier"
+- assertVisible: "Code vérifié"
+- tapOn: "Continuer"
+
+# Réservations → onglet « En cours » → puce d'action de la carte, qui ouvre directement
+# Mission en direct (features/bookings/cta.ts : la puce "Suivre l'arrivée" de la carte
+# pointe vers /bookings/{id}/live, pas vers l'écran de détail).
+- tapOn: "Réservations"
+- tapOn: "En cours"
+- assertVisible: "Fuite sous l’évier"
+- tapOn: "Suivre l'arrivée · 12 min"
+
+# Mission en direct : on attend l'étape finale (le minuteur interne fait progresser
+# automatiquement road → here → work → done), puis on ouvre le rapport.
+- extendedWaitUntil:
+    visible: "Voir le rapport d'intervention"
+    timeout: 45000
+- tapOn: "Voir le rapport d'intervention"
+
+# Rapport d'intervention → confirmer la fin de l'intervention → Évaluation.
+- assertVisible: "Rapport d'intervention"
+- tapOn: "Confirmer la fin de l'intervention"
+
+# Évaluation : note 5 étoiles puis publication.
+- assertVisible: "Touchez une étoile pour noter"
+- tapOn: "5 étoiles"
+- tapOn: "Publier mon avis"
+
+# Écran de remerciement.
+- assertVisible: "Merci pour votre avis !"

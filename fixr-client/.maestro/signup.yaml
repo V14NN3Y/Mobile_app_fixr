@@ -1,0 +1,50 @@
+# Parcours Maestro — Inscription (Lot 7).
+#
+# Écrit comme livrable du dépôt ; non exécuté dans cette session (pas de simulateur iOS/
+# Android disponible ici). Pour l'exécuter sur un appareil/simulateur réel ou en CI :
+#
+#   maestro test .maestro/signup.yaml
+#
+# Sélecteurs en texte visible / accessibilityLabel (pas de testID : non présents de façon
+# fiable sur les écrans (auth), vérifié — voir src/lib/i18n/fr.ts pour le texte source de
+# vérité de chaque libellé utilisé ici).
+#
+# Bienvenue → Onboarding (3 écrans) → Créer un compte → formulaire d'inscription → OTP →
+# Accueil. Le faux client API (src/mocks/api.ts) accepte n'importe quel numéro/mot de passe
+# et n'importe quel code à 6 chiffres — "123456" ci-dessous n'a pas besoin d'être réel.
+appId: com.fixr.client
+---
+- launchApp
+- assertVisible: "Trouver un artisan"
+- tapOn: "Trouver un artisan"
+
+# Onboarding — 3 écrans, "Suivant" jusqu'au dernier, qui propose "Créer mon compte".
+- tapOn: "Suivant"
+- tapOn: "Suivant"
+- assertVisible: "Créer mon compte"
+- tapOn: "Créer mon compte"
+
+# Formulaire d'inscription — design/Signup.dc.html.
+- assertVisible: "Créez votre compte"
+- tapOn: "Prénom"
+- inputText: "Aurore"
+- tapOn: "Nom"
+- inputText: "Tchibozo"
+- tapOn: "Numéro de téléphone"
+- inputText: "0197451236"
+- tapOn: "Adresse e-mail"
+- inputText: "aurore.test@example.com"
+- tapOn: "Mot de passe"
+- inputText: "MotDePasse123!"
+- tapOn: "J'accepte les" # case CGU (TermsCheckbox.tsx) — tap sur le libellé, pas la case elle-même
+- tapOn: "Créer mon compte"
+
+# Vérification OTP — design/Otp.dc.html. Code à 6 chiffres accepté tel quel par le faux API.
+- assertVisible: "Entrez le code reçu"
+- inputText: "123456"
+- tapOn: "Vérifier"
+- assertVisible: "Code vérifié"
+- tapOn: "Continuer"
+
+# Retour à l'accueil, connectée.
+- assertVisible: "De quoi avez-vous besoin aujourd’hui ?"

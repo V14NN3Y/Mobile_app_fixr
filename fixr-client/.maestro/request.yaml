@@ -1,0 +1,54 @@
+# Parcours Maestro — Demande (Lot 7).
+#
+# Écrit comme livrable du dépôt ; non exécuté dans cette session (pas de simulateur iOS/
+# Android disponible ici). Pour l'exécuter sur un appareil/simulateur réel ou en CI :
+#
+#   maestro test .maestro/request.yaml
+#
+# Sélecteurs en texte visible / accessibilityLabel. Le choix du créneau (étape Date) dépend
+# d'une disponibilité pseudo-aléatoire dérivée du jour/créneau — ici on prend le premier
+# créneau encore marqué disponible ("… dispo") via une correspondance partielle plutôt qu'un
+# libellé exact, pour rester robuste à cette variation (voir features/request/availability.ts).
+appId: com.fixr.client
+---
+- launchApp
+
+# Connexion par téléphone (onglet par défaut) — le faux client API accepte n'importe quel
+# numéro valide (10 chiffres, préfixe 01) et n'importe quel code à 6 chiffres. Évite l'onglet
+# E-mail dont le champ mot de passe n'a pas de libellé propre (pas de sélecteur texte fiable).
+- assertVisible: "Bon retour parmi nous"
+- tapOn: "Numéro de téléphone"
+- inputText: "0197451236"
+- tapOn: "Recevoir le code"
+- assertVisible: "Entrez le code reçu"
+- inputText: "123456"
+- tapOn: "Vérifier"
+- assertVisible: "Code vérifié"
+- tapOn: "Continuer"
+
+# Accueil → Décrire mon besoin (étape 1/4 — Besoin).
+- assertVisible: "Décrire mon besoin"
+- tapOn: "Décrire mon besoin"
+- assertVisible: "Expliquez-nous votre problème"
+- tapOn: "Ex. Climatiseur qui ne refroidit plus"
+- inputText: "Climatiseur qui ne refroidit plus"
+- tapOn: "Continuer"
+
+# Étape 2/4 — Adresse : sélectionne la première adresse enregistrée ("Maison").
+- assertVisible: "Où doit intervenir l’artisan ?"
+- tapOn: "Maison"
+- tapOn: "Continuer"
+
+# Étape 3/4 — Date : « Demain » (évite les créneaux déjà passés d’aujourd’hui), puis le
+# premier créneau encore disponible.
+- assertVisible: "Quand souhaitez-vous l’intervention ?"
+- tapOn: "Demain"
+- tapOn: ".*dispo.*"
+- tapOn: "Continuer"
+
+# Étape 4/4 — Confirmation.
+- assertVisible: "Vérifiez votre demande"
+- tapOn: "Confirmer ma demande"
+
+# Succès.
+- assertVisible: "Votre demande a bien été envoyée"
