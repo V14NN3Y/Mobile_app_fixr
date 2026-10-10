@@ -77,7 +77,8 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
 
         <View
           className={cn(
-            'h-input flex-row items-center gap-2.5 rounded-lg border-[1.5px] px-3.5',
+            'flex-row gap-2.5 rounded-lg border-[1.5px] px-3.5',
+            inputProps.multiline ? 'min-h-[104px] items-start py-3' : 'h-input items-center',
             disabled
               ? 'border-surface-muted bg-surface-muted'
               : hasError
@@ -116,6 +117,7 @@ export const TextField = forwardRef<TextInput, TextFieldProps>(function TextFiel
               setFocused(false);
               onBlur?.(e);
             }}
+            textAlignVertical={inputProps.multiline ? 'top' : undefined}
             className={cn(
               'flex-1 p-0 font-body-semibold text-body',
               disabled ? 'text-text-disabled' : 'text-text',

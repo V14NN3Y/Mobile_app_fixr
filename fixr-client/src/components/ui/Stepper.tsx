@@ -10,7 +10,7 @@ import { cn } from '@/lib/cn';
 import { Text } from './Text';
 
 export type StepperProps = {
-  steps: string[];
+  steps: readonly string[];
   /** Index (0-based) de l'étape en cours. */
   currentIndex: number;
   testID?: string;
