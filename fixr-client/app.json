@@ -44,10 +44,24 @@
         {
           "color": "#0B4F6C"
         }
-      ]
+      ],
+      "@sentry/react-native"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c0891142-794a-46e8-9531-f8a67669768d"
+      }
+    },
+    "owner": "vian_ney",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c0891142-794a-46e8-9531-f8a67669768d"
     }
   }
 }
