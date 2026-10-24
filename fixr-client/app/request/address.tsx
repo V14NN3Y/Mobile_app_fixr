@@ -20,6 +20,7 @@ import { useAddresses } from '@/features/addresses/hooks';
 import { AddressMapPreview } from '@/features/request/components/AddressMapPreview';
 import { addressStepSchema } from '@/features/request/schemas';
 import { useRequestStore } from '@/features/request/store';
+import { useAnalytics } from '@/lib/analytics';
 import { fr } from '@/lib/i18n/fr';
 import { useTheme } from '@/theme/useTheme';
 
@@ -36,6 +37,7 @@ export default function RequestAddress() {
   const setField = useRequestStore((s) => s.setField);
   const isDirty = useRequestStore((s) => s.isDirty);
   const reset = useRequestStore((s) => s.reset);
+  const analytics = useAnalytics();
 
   const addressesQuery = useAddresses();
   const [query, setQuery] = useState('');
@@ -246,7 +248,10 @@ export default function RequestAddress() {
               variant="primary"
               disabled={!canContinue}
               icon={canContinue ? 'chevronRight' : undefined}
-              onPress={() => router.push('/request/date')}
+              onPress={() => {
+                analytics.capture('request_step_completed', { step: 'address' });
+                router.push('/request/date');
+              }}
             >
               {canContinue ? t.common.continueCta : t.adresse.continueDisabled}
             </Button>

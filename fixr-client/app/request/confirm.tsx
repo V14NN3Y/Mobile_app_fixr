@@ -20,6 +20,7 @@ import { useArtisan } from '@/features/artisans/hooks';
 import { useCategories } from '@/features/categories/hooks';
 import { useCreateBooking } from '@/features/request/hooks';
 import { useRequestStore } from '@/features/request/store';
+import { useAnalytics } from '@/lib/analytics';
 import { formatFCFA, formatWeekdayDate } from '@/lib/format';
 import { fr } from '@/lib/i18n/fr';
 import { NOW, timeSlots } from '@/mocks/data';
@@ -46,6 +47,7 @@ export default function RequestConfirm() {
   const addressesQuery = useAddresses();
   const artisanQuery = useArtisan(draft.artisanId ?? '', Boolean(draft.artisanId));
   const mutation = useCreateBooking();
+  const analytics = useAnalytics();
 
   const category = categoriesQuery.data?.find((c) => c.id === draft.categoryId);
   const address = addressesQuery.data?.find((a) => a.id === draft.addressId);
@@ -65,8 +67,12 @@ export default function RequestConfirm() {
   function submit() {
     mutation.mutate(draft, {
       onSuccess: (booking) => {
+        analytics.capture('request_submitted', { categoryId: draft.categoryId ?? null, bookingId: booking.id });
         router.replace({ pathname: '/request/success', params: { bookingId: booking.id } });
         reset();
+      },
+      onError: (error) => {
+        analytics.capture('request_failed', { categoryId: draft.categoryId ?? null, message: error.message });
       },
     });
   }

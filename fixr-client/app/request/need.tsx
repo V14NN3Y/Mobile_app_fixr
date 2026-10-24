@@ -20,6 +20,7 @@ import { useArtisan } from '@/features/artisans/hooks';
 import { useCategories } from '@/features/categories/hooks';
 import { needSchema } from '@/features/request/schemas';
 import { useRequestStore } from '@/features/request/store';
+import { useAnalytics } from '@/lib/analytics';
 import { fr } from '@/lib/i18n/fr';
 import type { CategoryId } from '@/theme/tokens';
 import { useTheme } from '@/theme/useTheme';
@@ -43,6 +44,7 @@ export default function RequestNeed() {
   const seedFromCategory = useRequestStore((s) => s.seedFromCategory);
   const isDirty = useRequestStore((s) => s.isDirty);
   const reset = useRequestStore((s) => s.reset);
+  const analytics = useAnalytics();
 
   const categoriesQuery = useCategories();
   const artisanQuery = useArtisan(params.artisanId ?? '', Boolean(params.artisanId));
@@ -336,7 +338,10 @@ export default function RequestNeed() {
               variant="primary"
               disabled={!canContinue}
               icon={canContinue ? 'chevronRight' : undefined}
-              onPress={() => router.push('/request/address')}
+              onPress={() => {
+                analytics.capture('request_step_completed', { step: 'need' });
+                router.push('/request/address');
+              }}
             >
               {canContinue ? t.common.continueCta : t.besoin.continueDisabled}
             </Button>

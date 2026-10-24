@@ -4,7 +4,7 @@
  */
 import * as Clipboard from 'expo-clipboard';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -16,6 +16,7 @@ import { SuccessCheck } from '@/components/ui/SuccessCheck';
 import { Text } from '@/components/ui/Text';
 import { useAddresses } from '@/features/addresses/hooks';
 import { useBooking } from '@/features/bookings/hooks';
+import { useAnalytics } from '@/lib/analytics';
 import { fr } from '@/lib/i18n/fr';
 import { useTheme } from '@/theme/useTheme';
 
@@ -31,6 +32,14 @@ export default function RequestSuccess() {
   const bookingQuery = useBooking(bookingId);
   const addressesQuery = useAddresses();
   const [copied, setCopied] = useState(false);
+  const analytics = useAnalytics();
+
+  // Dernier maillon du tunnel (request_submitted est déjà capturé juste avant la
+  // navigation, dans confirm.tsx) : marque que l'écran de succès a bien été atteint/affiché.
+  useEffect(() => {
+    analytics.capture('request_step_completed', { step: 'success' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- une seule fois au montage, analytics change de référence à chaque rendu
+  }, []);
 
   const booking = bookingQuery.data;
   const address = addressesQuery.data?.find((a) => a.id === booking?.addressId);

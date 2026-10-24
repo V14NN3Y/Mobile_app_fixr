@@ -22,6 +22,7 @@ import {
 } from '@/features/request/availability';
 import { dateStepSchema } from '@/features/request/schemas';
 import { useRequestStore } from '@/features/request/store';
+import { useAnalytics } from '@/lib/analytics';
 import { fr } from '@/lib/i18n/fr';
 import { useAllArtisansForTrades } from '@/features/artisans/hooks';
 import { NOW, timeSlots } from '@/mocks/data';
@@ -55,6 +56,7 @@ export default function RequestDate() {
   const selectSlot = useRequestStore((s) => s.selectSlot);
   const isDirty = useRequestStore((s) => s.isDirty);
   const reset = useRequestStore((s) => s.reset);
+  const analytics = useAnalytics();
   const [confirmAbandon, setConfirmAbandon] = useState(false);
 
   // Liste complète du métier choisi, pour dériver la disponibilité réelle — hook déjà
@@ -272,7 +274,10 @@ export default function RequestDate() {
               variant="primary"
               disabled={!canContinue}
               icon={canContinue ? 'chevronRight' : undefined}
-              onPress={() => router.push('/request/confirm')}
+              onPress={() => {
+                analytics.capture('request_step_completed', { step: 'date' });
+                router.push('/request/confirm');
+              }}
             >
               {canContinue ? t.common.continueCta : t.date.continueDisabled}
             </Button>
