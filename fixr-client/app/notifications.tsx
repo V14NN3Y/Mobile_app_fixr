@@ -18,7 +18,9 @@ import { Text } from '@/components/ui/Text';
 import { groupNotificationsByDate } from '@/features/notifications/grouping';
 import { useMarkAllNotificationsRead, useMarkNotificationRead, useNotifications } from '@/features/notifications/hooks';
 import {
+  DEMO_NOTIFICATIONS_BY_TYPE,
   getNotificationPermissionStatus,
+  registerPushTokenIfPossible,
   requestNotificationPermission,
   scheduleDemoNotification,
 } from '@/features/notifications/push';
@@ -47,11 +49,9 @@ export default function Notifications() {
     const status = await requestNotificationPermission();
     setPermissionStatus(status);
     if (status === 'granted') {
-      void scheduleDemoNotification(
-        'L’artisan est en route',
-        'Koffi arrive dans 12 min pour « Fuite sous l’évier ».',
-        'fixr://bookings/FX-24817/live',
-      );
+      void registerPushTokenIfPossible();
+      const demo = DEMO_NOTIFICATIONS_BY_TYPE.on_the_way;
+      void scheduleDemoNotification(demo.title, demo.body, demo.deepLink);
     }
   }
 
@@ -160,6 +160,24 @@ export default function Notifications() {
               <Button variant="tertiary" size="sm" onPress={() => setPromptDismissed(true)}>
                 {t.permissionPrompt.dismiss}
               </Button>
+            </View>
+          </View>
+        ) : null}
+
+        {__DEV__ ? (
+          <View className="mx-5 mt-4 gap-2.5 rounded-2xl border border-border-subtle bg-surface p-4">
+            <Text variant="label" className="font-body-extrabold">
+              {t.devTest.title}
+            </Text>
+            <Text variant="caption" tone="secondary">
+              {t.devTest.hint}
+            </Text>
+            <View className="flex-row flex-wrap gap-2">
+              {Object.entries(DEMO_NOTIFICATIONS_BY_TYPE).map(([type, demo]) => (
+                <Chip key={type} onPress={() => void scheduleDemoNotification(demo.title, demo.body, demo.deepLink)}>
+                  {type}
+                </Chip>
+              ))}
             </View>
           </View>
         ) : null}
