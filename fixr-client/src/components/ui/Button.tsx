@@ -8,7 +8,7 @@
 import * as Haptics from 'expo-haptics';
 import { useCallback } from 'react';
 import type { GestureResponderEvent } from 'react-native';
-import { AccessibilityInfo } from 'react-native';
+import { AccessibilityInfo, View } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { AnimatedPressable } from '@/lib/animated';
@@ -172,6 +172,14 @@ export function Button(props: ButtonProps) {
   );
 
   return (
+    // `style` (animation Reanimated) et `className` (NativeWind) ne doivent jamais viser le
+    // même composant cssInterop-wrapped : sur natif (jamais vu sur web, d'où le bug passé
+    // inaperçu jusqu'à la toute première vraie build Android du Lot 9), Reanimated réduit le
+    // prop `style` à ses seules valeurs animées et écrase silencieusement le style déjà résolu
+    // par NativeWind — fond/rayon/padding du bouton disparaissent, seuls le texte et l'icône
+    // (couleur résolue en JS, jamais via une classe) restent visibles. Fix : `AnimatedPressable`
+    // ne porte plus que `style={animatedStyle}` (le scale au press) ; tout le reste de la boîte
+    // (fond, rayon, padding, mise en page) passe sur une `View` interne non animée.
     <AnimatedPressable
       testID={testID}
       onPress={handlePress}
@@ -183,14 +191,17 @@ export function Button(props: ButtonProps) {
       accessibilityState={{ disabled: isDisabled, busy: loading }}
       hitSlop={iconOnly ? undefined : 4}
       style={animatedStyle}
-      className={cn(
-        'flex-row items-center justify-center',
-        iconOnly ? squareSizeClass[size] : sizeClass[size],
-        isDisabled ? disabledVariantClass[variant] : variantClass[variant],
-        className,
-      )}
     >
-      {content}
+      <View
+        className={cn(
+          'flex-row items-center justify-center',
+          iconOnly ? squareSizeClass[size] : sizeClass[size],
+          isDisabled ? disabledVariantClass[variant] : variantClass[variant],
+          className,
+        )}
+      >
+        {content}
+      </View>
     </AnimatedPressable>
   );
 }

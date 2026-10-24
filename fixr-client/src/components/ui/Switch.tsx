@@ -6,8 +6,8 @@ import { Pressable } from 'react-native';
 import { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
 
 import { AnimatedView } from '@/lib/animated';
-import { cn } from '@/lib/cn';
 import { motion } from '@/theme/tokens';
+import { useTheme } from '@/theme/useTheme';
 
 export type SwitchProps = {
   value: boolean;
@@ -27,13 +27,16 @@ export function Switch({
   accessibilityLabel,
   testID,
 }: SwitchProps) {
+  const { colors } = useTheme();
   const progress = useDerivedValue(
     () => withTiming(value ? 1 : 0, { duration: motion.duration.base }),
     [value],
   );
 
+  // Pas de className sur un élément animé (voir Button.tsx) — couleurs résolues en JS.
   const trackStyle = useAnimatedStyle(() => ({
     opacity: disabled ? 0.4 : 1,
+    backgroundColor: value ? colors.primary : colors.borderStrong,
   }));
 
   const knobStyle = useAnimatedStyle(() => ({
@@ -59,15 +62,19 @@ export function Switch({
       hitSlop={8}
     >
       <AnimatedView
-        style={trackStyle}
-        className={cn(
-          'h-7 w-12 justify-center rounded-full',
-          value ? 'bg-primary' : 'bg-border-strong',
-        )}
+        style={[trackStyle, { height: 28, width: 48, justifyContent: 'center', borderRadius: 999 }]}
       >
         <AnimatedView
-          style={knobStyle}
-          className="absolute h-[22px] w-[22px] rounded-full bg-surface"
+          style={[
+            knobStyle,
+            {
+              position: 'absolute',
+              height: 22,
+              width: 22,
+              borderRadius: 999,
+              backgroundColor: colors.surface,
+            },
+          ]}
         />
       </AnimatedView>
     </Pressable>

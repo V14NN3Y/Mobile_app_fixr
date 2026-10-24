@@ -10,6 +10,8 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 import { AnimatedView } from '@/lib/animated';
+import { elevation } from '@/theme/tokens';
+import { useTheme } from '@/theme/useTheme';
 
 const HANDLE_SIZE = 26;
 const MIN_GAP_PX = HANDLE_SIZE;
@@ -35,6 +37,7 @@ export function RangeSlider({
   maximumLabel = 'Prix maximum',
   testID,
 }: RangeSliderProps) {
+  const { colors } = useTheme();
   const [trackWidth, setTrackWidth] = useState(0);
   const usableWidth = Math.max(trackWidth - HANDLE_SIZE, 1);
 
@@ -94,6 +97,8 @@ export function RangeSlider({
       runOnJS(emitChange)(pxToValue(minPx.value), pxToValue(next));
     });
 
+  // Couleurs/rayon/bordure passés en style (pas en className) sur ces 3 éléments animés — voir
+  // Button.tsx : Reanimated écraserait silencieusement le style NativeWind sur natif.
   const minHandleStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: minPx.value }],
   }));
@@ -103,7 +108,21 @@ export function RangeSlider({
   const activeTrackStyle = useAnimatedStyle(() => ({
     left: minPx.value + HANDLE_SIZE / 2,
     right: usableWidth - maxPx.value + HANDLE_SIZE / 2,
+    height: 4,
+    borderRadius: 999,
+    backgroundColor: colors.primary,
   }));
+  const handleBoxStyle = {
+    position: 'absolute' as const,
+    top: 9,
+    height: HANDLE_SIZE,
+    width: HANDLE_SIZE,
+    borderRadius: HANDLE_SIZE / 2,
+    borderWidth: 2,
+    borderColor: colors.primary,
+    backgroundColor: colors.surface,
+    ...elevation.e1,
+  };
 
   // Garde la position visuelle synchronisée si `value` change depuis l'extérieur
   // (ex. réinitialisation des filtres) sans que l'utilisateur ait bougé un curseur.
@@ -117,24 +136,22 @@ export function RangeSlider({
   return (
     <View testID={testID} onLayout={onLayout} className="h-11 justify-center">
       <View className="absolute left-0 right-0 h-1 rounded-full bg-border" />
-      <AnimatedView style={activeTrackStyle} className="absolute h-1 rounded-full bg-primary" />
+      <AnimatedView style={[activeTrackStyle, { position: 'absolute' }]} />
 
       <GestureDetector gesture={minGesture}>
         <AnimatedView
-          style={minHandleStyle}
+          style={[minHandleStyle, handleBoxStyle]}
           accessibilityRole="adjustable"
           accessibilityLabel={minimumLabel}
           accessibilityValue={{ min, max, now: value[0] }}
-          className="absolute left-0 top-[9px] h-[26px] w-[26px] rounded-full border-2 border-primary bg-surface shadow-sm"
         />
       </GestureDetector>
       <GestureDetector gesture={maxGesture}>
         <AnimatedView
-          style={maxHandleStyle}
+          style={[maxHandleStyle, handleBoxStyle]}
           accessibilityRole="adjustable"
           accessibilityLabel={maximumLabel}
           accessibilityValue={{ min, max, now: value[1] }}
-          className="absolute left-0 top-[9px] h-[26px] w-[26px] rounded-full border-2 border-primary bg-surface shadow-sm"
         />
       </GestureDetector>
     </View>

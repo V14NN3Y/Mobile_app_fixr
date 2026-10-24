@@ -9,6 +9,7 @@ import { AccessibilityInfo, View } from 'react-native';
 import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
 import { AnimatedView } from '@/lib/animated';
+import { useTheme } from '@/theme/useTheme';
 
 export type IndeterminateBarProps = {
   /** Défaut 3 (valeur de la maquette). */
@@ -17,6 +18,7 @@ export type IndeterminateBarProps = {
 };
 
 export function IndeterminateBar({ height = 3, testID }: IndeterminateBarProps) {
+  const { colors } = useTheme();
   const progress = useSharedValue(0.08);
 
   useEffect(() => {
@@ -43,7 +45,9 @@ export function IndeterminateBar({ height = 3, testID }: IndeterminateBarProps) 
       style={{ height }}
       className="w-full overflow-hidden bg-primary-soft"
     >
-      <AnimatedView style={barStyle} className="h-full bg-primary" />
+      {/* Pas de className sur un élément animé (voir Button.tsx) — Reanimated écraserait le
+          style NativeWind sur natif. */}
+      <AnimatedView style={[barStyle, { height: '100%', backgroundColor: colors.primary }]} />
     </View>
   );
 }

@@ -25,6 +25,7 @@ export type MissionTimelineProps = {
 };
 
 function CurrentDot() {
+  const { colors } = useTheme();
   const [reduceMotion, setReduceMotion] = useState(false);
   const pulse = useSharedValue(0);
 
@@ -47,10 +48,15 @@ function CurrentDot() {
 
   return (
     <View className="h-7 w-7 items-center justify-center">
+      {/* Pas de className sur un élément animé (voir Button.tsx) : Reanimated écraserait
+          silencieusement le style déjà résolu par NativeWind sur natif — couleur passée
+          directement via style, comme déjà fait pour le texte/l'icône de Button. */}
       <AnimatedView
         pointerEvents="none"
-        style={[haloStyle, { position: 'absolute', width: 28, height: 28, borderRadius: 14 }]}
-        className="bg-primary"
+        style={[
+          haloStyle,
+          { position: 'absolute', width: 28, height: 28, borderRadius: 14, backgroundColor: colors.primary },
+        ]}
       />
       <View className="h-3.5 w-3.5 rounded-full bg-primary" />
     </View>

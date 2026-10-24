@@ -74,29 +74,51 @@ export function SuccessCheck({ size = 104, testID }: SuccessCheckProps) {
       style={{ width: size * 1.3, height: size * 1.3 }}
       className="items-center justify-center"
     >
+      {/* Pas de className sur un élément animé (voir Button.tsx). */}
       {!reduceMotion ? (
         <>
           <AnimatedView
             pointerEvents="none"
             style={[
               ring1Style,
-              { position: 'absolute', width: size, height: size, borderRadius: size / 2 },
+              {
+                position: 'absolute',
+                width: size,
+                height: size,
+                borderRadius: size / 2,
+                borderWidth: 2,
+                borderColor: colors.success,
+              },
             ]}
-            className="border-2 border-success"
           />
           <AnimatedView
             pointerEvents="none"
             style={[
               ring2Style,
-              { position: 'absolute', width: size, height: size, borderRadius: size / 2 },
+              {
+                position: 'absolute',
+                width: size,
+                height: size,
+                borderRadius: size / 2,
+                borderWidth: 2,
+                borderColor: colors.success,
+              },
             ]}
-            className="border-2 border-success"
           />
         </>
       ) : null}
       <AnimatedView
-        style={[circleStyle, { width: size, height: size, borderRadius: size / 2 }]}
-        className="items-center justify-center bg-success"
+        style={[
+          circleStyle,
+          {
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: colors.success,
+          },
+        ]}
       >
         <AnimatedView style={checkStyle}>
           <Icon name="check" size={size * 0.42} color={colors.onSuccess} strokeWidth={2.6} />

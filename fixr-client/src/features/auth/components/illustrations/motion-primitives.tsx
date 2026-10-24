@@ -86,7 +86,11 @@ export function PulsingDot({
   }));
 
   return (
-    <AnimatedView style={{ width: size, height: size }} className="items-center justify-center">
+    // Pas de className sur un élément animé (voir Button.tsx) — centrage en style, inutile ici
+    // de toute façon puisque anneau et point font déjà exactement la taille du conteneur.
+    <AnimatedView
+      style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}
+    >
       {!reduceMotion ? (
         <AnimatedView
           style={[

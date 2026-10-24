@@ -18,6 +18,7 @@ import { AnimatedView } from '@/lib/animated';
 import { cn } from '@/lib/cn';
 import { useReduceMotion } from '@/lib/motion';
 import { radius } from '@/theme/tokens';
+import { useTheme } from '@/theme/useTheme';
 
 import { Text } from './Text';
 
@@ -47,6 +48,7 @@ export const OtpInput = forwardRef<TextInput, OtpInputProps>(function OtpInput(
   },
   ref,
 ) {
+  const { colors } = useTheme();
   const localRef = useRef<TextInput>(null);
   const [focused, setFocused] = useState(false);
   const reduceMotion = useReduceMotion();
@@ -113,9 +115,12 @@ export const OtpInput = forwardRef<TextInput, OtpInputProps>(function OtpInput(
                       {digit}
                     </Text>
                   ) : isActive ? (
+                    // Pas de className sur un élément animé (voir Button.tsx).
                     <AnimatedView
-                      style={caretStyle}
-                      className="h-[26px] w-0.5 rounded-full bg-primary"
+                      style={[
+                        caretStyle,
+                        { height: 26, width: 2, borderRadius: 999, backgroundColor: colors.primary },
+                      ]}
                     />
                   ) : null}
                 </View>

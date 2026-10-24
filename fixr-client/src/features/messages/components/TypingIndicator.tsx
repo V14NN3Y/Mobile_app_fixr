@@ -10,8 +10,10 @@ import { useAnimatedStyle, useSharedValue, withDelay, withRepeat, withTiming } f
 import { AnimatedView } from '@/lib/animated';
 import { fr } from '@/lib/i18n/fr';
 import { useReduceMotion } from '@/lib/motion';
+import { useTheme } from '@/theme/useTheme';
 
 function Dot({ delay, reduceMotion }: { delay: number; reduceMotion: boolean }) {
+  const { colors } = useTheme();
   const bounce = useSharedValue(0);
 
   useEffect(() => {
@@ -23,7 +25,12 @@ function Dot({ delay, reduceMotion }: { delay: number; reduceMotion: boolean }) 
     opacity: reduceMotion ? 0.6 : 0.5 + 0.5 * bounce.value,
   }));
 
-  return <AnimatedView style={style} className="h-1.5 w-1.5 rounded-full bg-text-tertiary" />;
+  // Pas de className sur un élément animé (voir Button.tsx).
+  return (
+    <AnimatedView
+      style={[style, { height: 6, width: 6, borderRadius: 999, backgroundColor: colors.textTertiary }]}
+    />
+  );
 }
 
 export type TypingIndicatorProps = { artisanFirstName: string };

@@ -9,6 +9,7 @@ import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reani
 import { AnimatedView } from '@/lib/animated';
 
 import { motion } from '@/theme/tokens';
+import { useTheme } from '@/theme/useTheme';
 
 import { Text } from './Text';
 
@@ -22,6 +23,7 @@ export type TabsProps<T extends string> = {
 };
 
 export function Tabs<T extends string>({ options, value, onChange, testID }: TabsProps<T>) {
+  const { colors } = useTheme();
   const [width, setWidth] = useState(0);
   const index = Math.max(
     0,
@@ -43,14 +45,23 @@ export function Tabs<T extends string>({ options, value, onChange, testID }: Tab
       accessibilityRole="tablist"
       className="relative flex-row border-b border-border"
     >
+      {/* Pas de className sur un élément animé (voir Button.tsx). */}
       {tabWidth > 0 ? (
         <AnimatedView
           pointerEvents="none"
           style={[
             indicatorStyle,
-            { position: 'absolute', bottom: -1, left: 0, width: tabWidth, height: 3 },
+            {
+              position: 'absolute',
+              bottom: -1,
+              left: 0,
+              width: tabWidth,
+              height: 3,
+              borderTopLeftRadius: 3,
+              borderTopRightRadius: 3,
+              backgroundColor: colors.primary,
+            },
           ]}
-          className="rounded-t-[3px] bg-primary"
         />
       ) : null}
       {options.map((option) => {

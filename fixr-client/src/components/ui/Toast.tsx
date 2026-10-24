@@ -86,32 +86,36 @@ function ToastCard({ item, onDone }: { item: ToastItem; onDone: () => void }) {
   }));
 
   return (
-    <AnimatedView
-      style={[style, elevation.e2, { backgroundColor: colors.toastBg }]}
-      className="mx-5 flex-row items-center gap-2.5 rounded-2xl px-4 py-3.5"
-    >
-      {item.icon ? <Icon name={item.icon} size={18} color={colors.toastSuccess} /> : null}
-      <Text
-        tone="inherit"
-        style={{ color: colors.toastText }}
-        className="flex-1 font-body-bold text-label"
+    // Pas de className sur l'AnimatedView (voir Button.tsx) : la mise en page/le fond passent
+    // sur une View interne non animée, l'AnimatedView ne porte plus que l'opacité/translateY.
+    <AnimatedView style={style}>
+      <View
+        style={[elevation.e2, { backgroundColor: colors.toastBg }]}
+        className="mx-5 flex-row items-center gap-2.5 rounded-2xl px-4 py-3.5"
       >
-        {item.message}
-      </Text>
-      {item.action ? (
-        <Pressable
-          onPress={() => {
-            item.action?.onPress();
-            onDone();
-          }}
-          hitSlop={8}
-          accessibilityRole="button"
+        {item.icon ? <Icon name={item.icon} size={18} color={colors.toastSuccess} /> : null}
+        <Text
+          tone="inherit"
+          style={{ color: colors.toastText }}
+          className="flex-1 font-body-bold text-label"
         >
-          <Text style={{ color: colors.toastAction }} className="font-body-extrabold text-label">
-            {item.action.label}
-          </Text>
-        </Pressable>
-      ) : null}
+          {item.message}
+        </Text>
+        {item.action ? (
+          <Pressable
+            onPress={() => {
+              item.action?.onPress();
+              onDone();
+            }}
+            hitSlop={8}
+            accessibilityRole="button"
+          >
+            <Text style={{ color: colors.toastAction }} className="font-body-extrabold text-label">
+              {item.action.label}
+            </Text>
+          </Pressable>
+        ) : null}
+      </View>
     </AnimatedView>
   );
 }

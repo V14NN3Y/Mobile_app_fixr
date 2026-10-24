@@ -9,6 +9,7 @@ import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reani
 import { AnimatedView } from '@/lib/animated';
 
 import { elevation, motion } from '@/theme/tokens';
+import { useTheme } from '@/theme/useTheme';
 
 import { Text } from './Text';
 
@@ -27,6 +28,7 @@ export function Segmented<T extends string>({
   onChange,
   testID,
 }: SegmentedProps<T>) {
+  const { colors } = useTheme();
   const [width, setWidth] = useState(0);
   const index = Math.max(
     0,
@@ -51,15 +53,23 @@ export function Segmented<T extends string>({
       accessibilityRole="tablist"
       className="flex-row gap-1 rounded-lg bg-border-subtle p-1"
     >
+      {/* Pas de className sur un élément animé (voir Button.tsx). */}
       {segmentWidth > 0 ? (
         <AnimatedView
           pointerEvents="none"
           style={[
             pillStyle,
             elevation.e1,
-            { position: 'absolute', top: 4, bottom: 4, left: 4, width: segmentWidth - 4 },
+            {
+              position: 'absolute',
+              top: 4,
+              bottom: 4,
+              left: 4,
+              width: segmentWidth - 4,
+              borderRadius: 10,
+              backgroundColor: colors.surface,
+            },
           ]}
-          className="rounded-[10px] bg-surface"
         />
       ) : null}
       {options.map((option) => {
