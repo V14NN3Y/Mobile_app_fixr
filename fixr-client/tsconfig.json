@@ -13,5 +13,7 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "nativewind-env.d.ts"],
-  "exclude": ["node_modules", "design", "docs"]
+  // supabase/functions : runtime Deno séparé (npm:/.ts specifiers, global Deno) — pas
+  // vérifié par ce tsc d'app, qui ne connaît que Node/React Native.
+  "exclude": ["node_modules", "design", "docs", "supabase/functions"]
 }

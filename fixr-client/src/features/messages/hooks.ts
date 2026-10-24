@@ -1,7 +1,34 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
+
+import { USE_MOCKS } from '@/lib/env';
+import { useIsConnected } from '@/lib/netinfo';
+import { supabase } from '@/lib/supabase';
 
 import * as messagesApi from './api';
 import type { SendMessageInput } from './api';
+import { useOutboxStore } from './outbox';
+
+/**
+ * Abonnement Realtime (mode réel uniquement) — remplace le rafraîchissement par
+ * invalidation manuelle : un nouveau message/une mise à jour (delivered_at/read_at) sur la
+ * table `table`, filtrée par `filter`, invalide `queryKey`. RLS filtre déjà côté serveur ce
+ * que ce client reçoit — aucun filtre client-side supplémentaire nécessaire.
+ */
+function useRealtimeInvalidate(table: string, filter: string | undefined, queryKey: unknown[]) {
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (USE_MOCKS) return;
+    const channel = supabase
+      .channel(`${table}:${filter ?? 'all'}`)
+      .on('postgres_changes', { event: '*', schema: 'public', table, filter }, () => {
+        void queryClient.invalidateQueries({ queryKey });
+      })
+      .subscribe();
+    return () => void supabase.removeChannel(channel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- queryClient stable, queryKey recréé à chaque rendu (comparé par valeur ailleurs, pas ici)
+  }, [table, filter]);
+}
 
 /**
  * `networkMode: 'always'` partout dans ce fichier (requêtes ET mutations) : par défaut,
@@ -18,6 +45,7 @@ import type { SendMessageInput } from './api';
 const ALWAYS = { networkMode: 'always' as const };
 
 export function useConversations() {
+  useRealtimeInvalidate('messages', undefined, ['messages', 'conversations']);
   return useQuery({ ...ALWAYS, queryKey: ['messages', 'conversations'], queryFn: messagesApi.getConversations });
 }
 
@@ -42,6 +70,11 @@ export function useConversation(id: string) {
 }
 
 export function useMessages(conversationId: string) {
+  useRealtimeInvalidate('messages', `conversation_id=eq.${conversationId}`, [
+    'messages',
+    'thread',
+    conversationId,
+  ]);
   return useQuery({
     ...ALWAYS,
     queryKey: ['messages', 'thread', conversationId],
@@ -115,4 +148,23 @@ export function useMarkConversationRead() {
       void queryClient.invalidateQueries({ queryKey: ['messages'] });
     },
   });
+}
+
+/**
+ * Lot 8, mode réel uniquement — reprise globale de la file hors-ligne au retour du réseau,
+ * pas seulement pour le fil actuellement ouvert (limite déjà connue du mécanisme par écran
+ * du Chat, conservé tel quel pour le fil ouvert). Montée une fois dans app/_layout.tsx.
+ */
+export function useGlobalOutboxDrain(): void {
+  const isConnected = useIsConnected();
+  const wasConnected = useRef(isConnected);
+
+  useEffect(() => {
+    if (USE_MOCKS) return;
+    if (!wasConnected.current && isConnected) {
+      const conversationIds = [...new Set(useOutboxStore.getState().entries.map((e) => e.conversationId))];
+      conversationIds.forEach((id) => void messagesApi.retryQueuedMessages(id));
+    }
+    wasConnected.current = isConnected;
+  }, [isConnected]);
 }

@@ -81,3 +81,15 @@ jest.mock('react-native-mmkv', () => {
   }
   return { createMMKV: () => new FakeMMKV() };
 });
+
+// Lot 8 : src/lib/queryClient.ts appelle NetInfo.addEventListener() au chargement du module
+// (branchement onlineManager, Platform.OS !== 'web') — la mécanique interne de reachability
+// du vrai module plante sous Jest (pas de pont natif). Jusqu'ici jamais déclenché par un
+// test (rien n'importait queryClient.ts transitivement) ; features/messages/outbox.ts
+// (Lot 8) l'importe désormais. useNetInfo() (src/lib/netinfo.ts) reste utilisable par les
+// autres tests, toujours "connecté".
+jest.mock('@react-native-community/netinfo', () => ({
+  __esModule: true,
+  default: { addEventListener: jest.fn(() => () => {}), fetch: jest.fn().mockResolvedValue({ isConnected: true }) },
+  useNetInfo: jest.fn(() => ({ isConnected: true })),
+}));

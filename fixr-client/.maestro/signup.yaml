@@ -10,8 +10,11 @@
 # vérité de chaque libellé utilisé ici).
 #
 # Bienvenue → Onboarding (3 écrans) → Créer un compte → formulaire d'inscription → OTP →
-# Accueil. Le faux client API (src/mocks/api.ts) accepte n'importe quel numéro/mot de passe
-# et n'importe quel code à 6 chiffres — "123456" ci-dessous n'a pas besoin d'être réel.
+# Accueil. Numéro "0199988776" choisi volontairement absent de supabase/seed.sql : un
+# parcours d'INSCRIPTION doit créer un compte réellement nouveau, pas se reconnecter à
+# celui déjà seedé (u_aurore, +2290197451236) — même prénom/nom pour rester lisible, mais
+# un numéro distinct. Code "123456" : fixe pour ce numéro via auth.sms.test_otp
+# (supabase/config.toml), aucun SMS réel envoyé en local.
 appId: com.fixr.client
 ---
 - launchApp
@@ -31,7 +34,7 @@ appId: com.fixr.client
 - tapOn: "Nom"
 - inputText: "Tchibozo"
 - tapOn: "Numéro de téléphone"
-- inputText: "0197451236"
+- inputText: "0199988776"
 - tapOn: "Adresse e-mail"
 - inputText: "aurore.test@example.com"
 - tapOn: "Mot de passe"

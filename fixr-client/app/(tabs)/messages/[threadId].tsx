@@ -143,7 +143,13 @@ export default function Chat() {
     );
   }
 
-  if (conversationQuery.isError || !conversationQuery.data || !messagesQuery.data) {
+  // `isError` volontairement absent de cette garde (Lot 8) : une conversation déjà chargée
+  // ne doit pas se replier sur cet écran bloquant juste parce qu'un refetch en arrière-plan
+  // échoue hors connexion (React Query garde `data` du dernier succès, mais marque aussi
+  // `isError` vrai pour cette tentative) — sinon impossible de composer/mettre en file un
+  // message hors connexion, ce qui casse justement le critère que ce mécanisme doit servir.
+  // `!data` seul couvre déjà le vrai cas d'échec (jamais chargé du tout).
+  if (!conversationQuery.data || !messagesQuery.data) {
     return (
       <View className="flex-1 items-center justify-center gap-4 bg-bg px-5" style={{ paddingTop: insets.top }}>
         <Stack.Screen options={{ headerShown: true, title: fr.messages.title }} />

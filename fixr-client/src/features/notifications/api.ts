@@ -1,23 +1,11 @@
-import { ApiError, simulateRequest } from '@/mocks/api';
-import { notifications } from '@/mocks/data';
-import type { AppNotification } from '@/types/domain';
+import { USE_MOCKS } from '@/lib/env';
 
-export async function getNotifications(): Promise<AppNotification[]> {
-  return simulateRequest(() => notifications);
-}
+import * as mock from './api.mock';
+import * as real from './api.supabase';
 
-export async function markNotificationRead(id: string): Promise<AppNotification> {
-  return simulateRequest(() => {
-    const notification = notifications.find((n) => n.id === id);
-    if (!notification) throw new ApiError('Notification introuvable', 404);
-    notification.read = true;
-    return notification;
-  });
-}
+const impl = USE_MOCKS ? mock : real;
 
-export async function markAllNotificationsRead(): Promise<AppNotification[]> {
-  return simulateRequest(() => {
-    for (const notification of notifications) notification.read = true;
-    return notifications;
-  });
-}
+export const getNotifications = impl.getNotifications;
+export const markNotificationRead = impl.markNotificationRead;
+export const markAllNotificationsRead = impl.markAllNotificationsRead;
+export const registerPushToken = impl.registerPushToken;

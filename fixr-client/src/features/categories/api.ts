@@ -1,7 +1,8 @@
-import { simulateRequest } from '@/mocks/api';
-import { categories } from '@/mocks/data';
-import type { Category } from '@/types/domain';
+import { USE_MOCKS } from '@/lib/env';
 
-export async function getCategories(): Promise<Category[]> {
-  return simulateRequest(() => categories);
-}
+import * as mock from './api.mock';
+import * as real from './api.supabase';
+
+const impl = USE_MOCKS ? mock : real;
+
+export const getCategories = impl.getCategories;

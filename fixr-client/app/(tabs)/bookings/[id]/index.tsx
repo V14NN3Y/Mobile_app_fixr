@@ -17,10 +17,10 @@ import { Skeleton } from '@/components/ui/Skeleton';
 import { Text } from '@/components/ui/Text';
 import { useToast } from '@/components/ui/Toast';
 import { useAddresses } from '@/features/addresses/hooks';
-import { useArtisan } from '@/features/artisans/hooks';
+import { useAllArtisansForTrades, useArtisan } from '@/features/artisans/hooks';
 import { CANCELLATION_FEE_FCFA } from '@/features/bookings/constants';
 import { CancelBookingSheet, type CancelBookingSheetRef, type CancelReason } from '@/features/bookings/components/CancelBookingSheet';
-import { useBooking, useCancelBooking, useQuotesForBooking, useRestoreBooking } from '@/features/bookings/hooks';
+import { useAcceptQuote, useBooking, useCancelBooking, useQuotesForBooking, useRestoreBooking } from '@/features/bookings/hooks';
 import { deriveTimelineSteps } from '@/features/bookings/timeline';
 import { useCurrentUser } from '@/features/profile/hooks';
 import { formatFCFA, formatFCFARange, formatPhoneMasked, formatWeekdayDateTime, getInitials } from '@/lib/format';
@@ -40,9 +40,11 @@ export default function BookingDetail() {
   const addressesQuery = useAddresses();
   const userQuery = useCurrentUser();
   const quotesQuery = useQuotesForBooking(id, bookingQuery.data?.status === 'quotes');
+  const artisansQuery = useAllArtisansForTrades([]);
 
   const cancelMutation = useCancelBooking();
   const restoreMutation = useRestoreBooking();
+  const acceptQuoteMutation = useAcceptQuote();
   const sheetRef = useRef<CancelBookingSheetRef>(null);
   const [preCancelStatus, setPreCancelStatus] = useState<BookingStatus | null>(null);
 
@@ -126,18 +128,38 @@ export default function BookingDetail() {
           <Text variant="title3" className="font-display">
             {t.detail.quotesReceived}
           </Text>
-          {quotesQuery.data.map((quote) => (
-            <View key={quote.id} className="flex-row items-center justify-between rounded-xl border border-border-subtle bg-surface p-3.5">
-              <Text variant="label" className="font-body-bold">
-                {formatFCFA(quote.amount)}
-              </Text>
-              {quote.message ? (
-                <Text variant="caption" tone="secondary" numberOfLines={1} className="flex-1 pl-3 text-right">
-                  {quote.message}
-                </Text>
-              ) : null}
-            </View>
-          ))}
+          {quotesQuery.data.map((quote) => {
+            const quoteArtisan = artisansQuery.data?.items.find((a) => a.id === quote.artisanId);
+            return (
+              <View key={quote.id} className="gap-2.5 rounded-xl border border-border-subtle bg-surface p-3.5">
+                <View className="flex-row items-center justify-between">
+                  <Text variant="label" className="font-body-bold">
+                    {formatFCFA(quote.amount)}
+                  </Text>
+                  {quote.message ? (
+                    <Text variant="caption" tone="secondary" numberOfLines={1} className="flex-1 pl-3 text-right">
+                      {quote.message}
+                    </Text>
+                  ) : null}
+                </View>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  loading={acceptQuoteMutation.isPending}
+                  onPress={() =>
+                    acceptQuoteMutation.mutate(
+                      { bookingId: id, quoteId: quote.id },
+                      {
+                        onSuccess: () => toast.show(t.detail.quoteAccepted(quoteArtisan?.firstName ?? "l'artisan")),
+                      },
+                    )
+                  }
+                >
+                  {t.detail.acceptQuote}
+                </Button>
+              </View>
+            );
+          })}
         </View>
       ) : null}
 

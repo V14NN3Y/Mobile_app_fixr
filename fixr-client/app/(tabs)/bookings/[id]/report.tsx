@@ -15,7 +15,7 @@ import { Segmented } from '@/components/ui/Segmented';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Text } from '@/components/ui/Text';
 import { useArtisan } from '@/features/artisans/hooks';
-import { useBooking, useReportForBooking } from '@/features/bookings/hooks';
+import { useBooking, useReportForBooking, useValidateReport } from '@/features/bookings/hooks';
 import { formatFCFA, formatWeekdayDateTime } from '@/lib/format';
 import { fr } from '@/lib/i18n/fr';
 import { useTheme } from '@/theme/useTheme';
@@ -30,6 +30,7 @@ export default function Report() {
   const bookingQuery = useBooking(id);
   const reportQuery = useReportForBooking(id);
   const artisanQuery = useArtisan(bookingQuery.data?.artisanId ?? '', Boolean(bookingQuery.data?.artisanId));
+  const validateReportMutation = useValidateReport();
 
   const isLoading = bookingQuery.isLoading || reportQuery.isLoading;
 
@@ -273,7 +274,15 @@ export default function Report() {
       </View>
 
       <View className="gap-2.5 px-5 pt-6">
-        <Button variant="primary" onPress={() => router.push(`/bookings/${id}/review`)}>
+        <Button
+          variant="primary"
+          loading={validateReportMutation.isPending}
+          onPress={() =>
+            validateReportMutation.mutate(id, {
+              onSuccess: () => router.push(`/bookings/${id}/review`),
+            })
+          }
+        >
           {t.confirmCta}
         </Button>
         <View className="flex-row gap-2.5">

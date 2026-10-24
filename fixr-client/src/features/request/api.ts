@@ -1,21 +1,8 @@
-import { ApiError, simulateRequest } from '@/mocks/api';
-import { bookings, NOW } from '@/mocks/data';
-import type { Booking } from '@/types/domain';
+import { USE_MOCKS } from '@/lib/env';
 
-import { buildBooking } from './buildBooking';
-import { fullRequestSchema } from './schemas';
-import type { RequestDraft } from './store';
+import * as mock from './api.mock';
+import * as real from './api.supabase';
 
-export async function createBooking(draft: RequestDraft): Promise<Booking> {
-  return simulateRequest(() => {
-    const parsed = fullRequestSchema.safeParse(draft);
-    if (!parsed.success) throw new ApiError('Demande incomplète', 400);
+const impl = USE_MOCKS ? mock : real;
 
-    const booking = buildBooking(draft, bookings, new Date(NOW));
-
-    // Mutation directe du tableau mock partagé (couche features/*, jamais depuis un écran) :
-    // c'est ce qui permet au Lot 5 de voir la nouvelle réservation sans rien changer ici.
-    bookings.unshift(booking);
-    return booking;
-  });
-}
+export const createBooking = impl.createBooking;

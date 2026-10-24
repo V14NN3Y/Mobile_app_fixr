@@ -23,20 +23,35 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { PostHogProvider } from 'posthog-react-native';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { OfflineBannerProvider } from '@/components/ui/OfflineBanner';
 import { ToastProvider } from '@/components/ui/Toast';
+import { useSessionBridge } from '@/features/auth/sessionBridge';
 import { useSessionStore } from '@/features/auth/store';
+import { useSyncFavorites } from '@/features/favorites/hooks';
+import { useGlobalOutboxDrain } from '@/features/messages/hooks';
 import { useNotificationResponseRouter } from '@/features/notifications/push';
 import { queryClient } from '@/lib/queryClient';
+import { POSTHOG_API_KEY, posthogOptions } from '@/lib/posthog';
+import { initSentry, Sentry } from '@/lib/sentry';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 
 void SplashScreen.preventAutoHideAsync();
+initSentry();
 
-export default function RootLayout() {
+// useSyncFavorites() a besoin de QueryClientProvider comme ancêtre — impossible à appeler
+// directement dans RootLayout (qui RENDS ce provider, mais n'est pas lui-même son
+// descendant). Petit composant sans rendu, monté juste à l'intérieur.
+function FavoritesSync() {
+  useSyncFavorites();
+  return null;
+}
+
+function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     BricolageGrotesque_600SemiBold,
     BricolageGrotesque_700Bold,
@@ -46,7 +61,9 @@ export default function RootLayout() {
     Manrope_800ExtraBold,
   });
   const hasSession = useSessionStore((s) => s.session !== null);
+  useSessionBridge();
   useNotificationResponseRouter();
+  useGlobalOutboxDrain();
 
   const ready = fontsLoaded || Boolean(fontError);
 
@@ -59,34 +76,39 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <SafeAreaProvider>
-          <ThemeProvider>
-            <BottomSheetModalProvider>
-              <ToastProvider>
-                <OfflineBannerProvider>
-                  <Stack screenOptions={{ headerShown: false }}>
-                    <Stack.Protected guard={!hasSession}>
-                      <Stack.Screen name="(auth)" />
-                    </Stack.Protected>
+      <PostHogProvider apiKey={POSTHOG_API_KEY} options={posthogOptions}>
+        <QueryClientProvider client={queryClient}>
+          <SafeAreaProvider>
+            <ThemeProvider>
+              <BottomSheetModalProvider>
+                <ToastProvider>
+                  <OfflineBannerProvider>
+                    <FavoritesSync />
+                    <Stack screenOptions={{ headerShown: false }}>
+                      <Stack.Protected guard={!hasSession}>
+                        <Stack.Screen name="(auth)" />
+                      </Stack.Protected>
 
-                    <Stack.Protected guard={hasSession}>
-                      <Stack.Screen name="(tabs)" />
-                      <Stack.Screen name="request" options={{ presentation: 'modal' }} />
-                      <Stack.Screen name="artisan/[id]" options={{ headerShown: true }} />
-                      <Stack.Screen
-                        name="filters"
-                        options={{ presentation: 'formSheet', headerShown: true }}
-                      />
-                      <Stack.Screen name="notifications" options={{ headerShown: true }} />
-                    </Stack.Protected>
-                  </Stack>
-                </OfflineBannerProvider>
-              </ToastProvider>
-            </BottomSheetModalProvider>
-          </ThemeProvider>
-        </SafeAreaProvider>
-      </QueryClientProvider>
+                      <Stack.Protected guard={hasSession}>
+                        <Stack.Screen name="(tabs)" />
+                        <Stack.Screen name="request" options={{ presentation: 'modal' }} />
+                        <Stack.Screen name="artisan/[id]" options={{ headerShown: true }} />
+                        <Stack.Screen
+                          name="filters"
+                          options={{ presentation: 'formSheet', headerShown: true }}
+                        />
+                        <Stack.Screen name="notifications" options={{ headerShown: true }} />
+                      </Stack.Protected>
+                    </Stack>
+                  </OfflineBannerProvider>
+                </ToastProvider>
+              </BottomSheetModalProvider>
+            </ThemeProvider>
+          </SafeAreaProvider>
+        </QueryClientProvider>
+      </PostHogProvider>
     </GestureHandlerRootView>
   );
 }
+
+export default Sentry.wrap(RootLayout);

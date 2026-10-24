@@ -29,7 +29,6 @@ export default function Messages() {
   const artisansQuery = useAllArtisansForTrades([]);
 
   const isLoading = conversationsQuery.isLoading || artisansQuery.isLoading;
-  const isError = conversationsQuery.isError || artisansQuery.isError;
 
   if (isLoading) {
     return (
@@ -43,7 +42,11 @@ export default function Messages() {
     );
   }
 
-  if (isError || !conversationsQuery.data) {
+  // Lot 8 : conversationsQuery garde networkMode:'always' (features/messages/hooks.ts) pour
+  // que l'envoi fonctionne hors connexion — mais ça veut aussi dire qu'un refetch en arrière
+  // plan tente et échoue hors connexion même avec une liste déjà en cache. On ne bloque donc
+  // plus sur `isError`, seulement sur l'absence totale de données (jamais chargé).
+  if (!conversationsQuery.data) {
     return (
       <View className="flex-1 items-center justify-center gap-4 bg-bg px-5" style={{ paddingTop: insets.top }}>
         <Banner tone="error">{t.error.title}</Banner>

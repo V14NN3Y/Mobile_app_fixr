@@ -1,14 +1,9 @@
-import { simulateRequest } from '@/mocks/api';
-import { user } from '@/mocks/data';
-import type { User } from '@/types/domain';
+import { USE_MOCKS } from '@/lib/env';
 
-export async function getCurrentUser(): Promise<User> {
-  return simulateRequest(() => user);
-}
+import * as mock from './api.mock';
+import * as real from './api.supabase';
 
-/** Lot 7 : suppression de compte simulée — aucune suppression réelle avant le backend
- * (Lot 8/Supabase), mais passe par simulateRequest comme toute autre action destructive de
- * l'app (annulation de réservation…) plutôt qu'un raccourci instantané. */
-export async function deleteAccount(): Promise<void> {
-  return simulateRequest(() => undefined);
-}
+const impl = USE_MOCKS ? mock : real;
+
+export const getCurrentUser = impl.getCurrentUser;
+export const deleteAccount = impl.deleteAccount;

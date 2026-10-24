@@ -536,6 +536,8 @@ export const fr = {
       title: (id: string) => `Réservation ${id}`,
       suivi: 'Suivi',
       quotesReceived: 'Devis reçus',
+      acceptQuote: 'Accepter ce devis',
+      quoteAccepted: (name: string) => `Devis accepté · ${name} a été confirmé.`,
       // MissionTimeline (Lot 7 : déplacé hors du composant) — 7 types réels de
       // BookingEvent['type'] + 'cancelled' (les réservations annulées affichent cet état
       // dans leur propre timeline, voir features/bookings/timeline.ts).
@@ -708,6 +710,14 @@ export const fr = {
       description: 'Soyez prévenu dès qu’un artisan répond, arrive ou termine une intervention.',
       cta: 'Activer les notifications',
       dismiss: 'Plus tard',
+    },
+    // Lot 9 — section visible seulement en __DEV__ (app/notifications.tsx) : la capture de
+    // jeton + l'envoi serveur réel ne peuvent pas être vérifiés sans compte EAS, donc on
+    // vérifie ici que chacun des 9 types déclenche bien une notification locale avec le bon
+    // lien profond (tap → bon écran), comme demandé par le lot.
+    devTest: {
+      title: 'Test local (dev) — 9 types',
+      hint: 'Déclenche une notification locale pour vérifier le lien profond de chaque type.',
     },
   },
 

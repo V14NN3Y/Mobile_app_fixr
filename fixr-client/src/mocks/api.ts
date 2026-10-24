@@ -4,6 +4,11 @@
  * getArtisanById…) vivent dans features/<domaine>/api.ts et s'appuient sur
  * simulateRequest() ; ce fichier ne porte que la plomberie commune.
  */
+import { ApiError } from '@/lib/apiError';
+
+// Déplacée vers src/lib/apiError.ts (Lot 8) : partagée avec chaque api.supabase.ts,
+// ré-exportée ici pour ne pas changer tous les imports existants (`from '@/mocks/api'`).
+export { ApiError };
 
 export const MIN_DELAY_MS = 300;
 export const MAX_DELAY_MS = 900;
@@ -21,16 +26,6 @@ export const apiConfig = {
 /** Règle apiConfig.errorRate (borné 0–1). */
 export function setErrorRate(rate: number): void {
   apiConfig.errorRate = Math.min(1, Math.max(0, rate));
-}
-
-export class ApiError extends Error {
-  constructor(
-    message = 'Une erreur est survenue. Réessayez.',
-    readonly status?: number,
-  ) {
-    super(message);
-    this.name = 'ApiError';
-  }
 }
 
 function randomDelay(): number {
